@@ -67,8 +67,6 @@ function f_ajax(url, data) {
 
   data[csrfName] = csrfHash
 
-  console.log(data)
-
   $.ajax({
     url: url,
     type: 'POST',

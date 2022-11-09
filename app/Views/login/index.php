@@ -52,7 +52,7 @@
                 </div>
               </div>
               <div class="row mb-3 px-3 my-3 d-flex justify-content-end">
-                <button type="submit" class="btn cur-p btn-primary btn-color">Login</button>
+                <button type="submit" class="btn btn-primary btn-color fs-5">Login</button>
               </div>
             </div>
           </form>
