@@ -23,9 +23,12 @@ defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
  | The path that Composer's autoload file is expected to live. By default,
  | the vendor folder is in the Root directory, but you can customize that here.
  */
-$prefix_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-$prefix_url .= "://" . $_SERVER['HTTP_HOST'];
-$prefix_url .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+$prefix_url = '';
+if (!empty($_SERVER['HTTP_HOST'])) {
+  $prefix_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+  $prefix_url .= "://" . $_SERVER['HTTP_HOST'];
+  $prefix_url .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+}
 defined('BASE') || define('BASE', $prefix_url);
 defined('COMPOSER_PATH') || define('COMPOSER_PATH', ROOTPATH . 'vendor/autoload.php');
 
