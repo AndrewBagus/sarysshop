@@ -24,7 +24,7 @@ class App extends BaseConfig
    *
    * @var string
    */
-  public $baseURL = BASE === null ? 'http://localhost:8000/' : BASE;
+  public $baseURL = BASE === '' ? 'http://localhost:8000/' : BASE;
 
   /**
    * --------------------------------------------------------------------------
