@@ -4,13 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KategoriPelanggan extends Model
+class BankModel extends Model
 {
-  protected $table            = 'm_kategori_pelanggan';
+  protected $table            = 'm_bank';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
+    'no_rekening',
+    'atas_nama',
     'name',
-    'is_active',
+    'code',
+    'image',
+    'atas_nama',
     'created_by',
     'updated_at'
   ];

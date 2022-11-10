@@ -4,16 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdukVarianImage extends Model
+class UserModel extends Model
 {
-  protected $table            = 'm_produk_varian_image';
+  protected $table            = 'm_user';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'produk_varian_id',
-    'image',
+    'role_id',
+    'email',
+    'phone',
+    'password',
     'is_active',
     'created_by',
-    'updated_at',
-    'updated_by',
+    'updated_at'
   ];
 }

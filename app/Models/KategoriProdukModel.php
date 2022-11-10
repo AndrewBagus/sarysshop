@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class JenisProduk extends Model
+class KategoriProdukModel extends Model
 {
-  protected $table            = 'm_jenis_produk';
+  protected $table            = 'm_kategori_produk';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
     'name',

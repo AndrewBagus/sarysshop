@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Kelurahan extends Model
+class KelurahanModel extends Model
 {
   protected $table            = 'm_kelurahan_desa';
   protected $primaryKey       = 'id';

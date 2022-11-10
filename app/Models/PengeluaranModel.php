@@ -4,14 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdukVarianHarga extends Model
+class PengeluaranModel extends Model
 {
-  protected $table            = 'm_produk_varian_harga';
+  protected $table            = 't_pengeluaran';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'produk_varian_id',
-    'kategori_pelanggan_id',
-    'harga',
+    'name',
+    'date',
+    'biaya',
+    'jumlah',
+    'total',
+    'keterangan',
     'is_active',
     'created_by',
     'updated_at',

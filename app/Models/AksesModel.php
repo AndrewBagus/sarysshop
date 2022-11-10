@@ -4,15 +4,13 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class User extends Model
+class AksesModel extends Model
 {
-  protected $table            = 'm_user';
+  protected $table            = 't_akses';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'role_id',
-    'email',
-    'phone',
-    'password',
+    'user_id',
+    'feature_id',
     'is_active',
     'created_by',
     'updated_at'

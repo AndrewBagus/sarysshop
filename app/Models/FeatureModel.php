@@ -4,13 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Role extends Model
+class FeatureModel extends Model
 {
-  protected $table            = 'm_role';
+  protected $table            = 'm_feature';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
     'name',
-    'description',
+    'link',
+    'parent',
+    'icon',
+    'order',
     'is_active',
     'created_by',
     'updated_at'

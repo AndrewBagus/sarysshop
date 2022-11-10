@@ -4,13 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Akses extends Model
+class KategoriPelangganModel extends Model
 {
-  protected $table            = 't_akses';
+  protected $table            = 'm_kategori_pelanggan';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'user_id',
-    'feature_id',
+    'name',
     'is_active',
     'created_by',
     'updated_at'

@@ -4,21 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Supplier extends Model
+class PelangganModel extends Model
 {
-  protected $table            = 'm_supplier';
+  protected $table            = 'm_pelanggan';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
+    'kategori_pelanggan_id',
+    'kelurahan_id',
     'name',
     'code',
-    'kelurahan_id',
     'kode_pos',
     'no_telpon',
     'email',
     'alamat',
     'is_active',
     'created_by',
-    'update_at',
-    'updated_by',
+    'updated_at'
   ];
 }

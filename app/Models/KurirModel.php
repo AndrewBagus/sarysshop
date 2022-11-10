@@ -4,17 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Bank extends Model
+class KurirModel extends Model
 {
-  protected $table            = 'm_bank';
+  protected $table            = 'm_kurir';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'no_rekening',
-    'atas_nama',
     'name',
-    'code',
+    'kategori',
     'image',
-    'atas_nama',
+    'is_active',
     'created_by',
     'updated_at'
   ];
