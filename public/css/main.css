@@ -1,3 +1,17 @@
+body {
+  color: #212529;
+}
+
+.sidebar-menu li a {
+  color: #343a40;
+}
+
+.sidebar-menu li a:focus,
+.sidebar-menu li a:hover,
+.sidebar-menu li.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 body.swal2-height-auto {
   height: 100% !important;
 }

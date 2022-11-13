@@ -40,7 +40,7 @@ $(function () {
         password: password,
       }
 
-      f_ajax(base_uri + '/login/login', data, function (response) {
+      f_ajax(`${base_uri}/login/login`, data, function (response) {
         if (response.status) {
           newalert('success', response.message)
           setTimeout(() => {

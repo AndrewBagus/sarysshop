@@ -21,32 +21,37 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
-    /**
-     * Instance of the main Request object.
-     *
-     * @var CLIRequest|IncomingRequest
-     */
-    protected $request;
+  /**
+   * Instance of the main Request object.
+   *
+   * @var CLIRequest|IncomingRequest
+   */
+  protected $request;
 
-    /**
-     * An array of helpers to be loaded automatically upon
-     * class instantiation. These helpers will be available
-     * to all other controllers that extend BaseController.
-     *
-     * @var array
-     */
-    protected $helpers = ['global'];
+  /**
+   * An array of helpers to be loaded automatically upon
+   * class instantiation. These helpers will be available
+   * to all other controllers that extend BaseController.
+   *
+   * @var array
+   */
+  protected $helpers = ['global'];
 
-    /**
-     * Constructor.
-     */
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-    {
-        // Do Not Edit This Line
-        parent::initController($request, $response, $logger);
+  /**
+   * @var object - Holds the session instance
+   */
+  protected $session;
 
-        // Preload any models, libraries, etc, here.
+  /**
+   * Constructor.
+   */
+  public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+  {
+    // Do Not Edit This Line
+    parent::initController($request, $response, $logger);
 
-        // E.g.: $this->session = \Config\Services::session();
-    }
+    // Preload any models, libraries, etc, here.
+
+    $this->session = \Config\Services::session();
+  }
 }

@@ -36,6 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // $routes->get('login', 'LoginController::index');
+// $routes->post('user/getByUserId', 'UserController::getByUserId');
 $routes->group(
   '',
   ['filter' => 'guest'],
@@ -49,7 +50,7 @@ $routes->group(
   '',
   ['filter' => 'auth'],
   static function ($routes) {
-    $routes->get('/', 'Home::index');
+    $routes->get('/', 'HomeController::index');
   }
 );
 

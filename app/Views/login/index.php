@@ -15,8 +15,6 @@
 </head>
 
 <body>
-  <!-- CSRF token -->
-  <?= csrf_field() ?>
   <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
     <div class="card card0 border-0">
       <div class="row d-flex">
@@ -32,6 +30,8 @@
         </div>
         <div class="col-lg-6 d-flex align-items-center">
           <form id="form-data" autocomplete="off">
+            <!-- CSRF token -->
+            <?= csrf_field() ?>
             <div class="card2 card border-0 px-4 py-5">
               <div class="form-group">
                 <label class="mb-1">

@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Services\User\IUserService;
+use App\Services\User\UserService;
 use CodeIgniter\Config\BaseService;
 
 /**
@@ -19,7 +21,7 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-    /*
+  /*
      * public static function example($getShared = true)
      * {
      *     if ($getShared) {
@@ -29,4 +31,13 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+  public static function userService($getShared = true): IUserService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('userService');
+    }
+
+    return new UserService;
+  }
 }
