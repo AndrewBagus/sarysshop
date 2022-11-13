@@ -5,7 +5,7 @@
         <div class="peer peer-greed"><a class="sidebar-link td-n" href="<?= base_url() ?>">
             <div class="peers ai-c fxw-nw">
               <div class="peer">
-                <div class="logo"><img src="<?= base_url(); ?>/assets/images/web-logo.png" alt="logo" style="width: 200px; height: 100px; scale: 0.85;"></div>
+                <div class="logo"><img src="<?= base_url(); ?>/assets/images/web-logo.png" alt="logo" style="width: 175px; height: 65px; scale: 0.85;"></div>
               </div>
             </div>
           </a></div>
