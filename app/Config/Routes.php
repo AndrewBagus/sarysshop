@@ -51,6 +51,7 @@ $routes->group(
   ['filter' => 'auth'],
   static function ($routes) {
     $routes->get('/', 'HomeController::index');
+    $routes->get('/logout', 'LoginController::logout');
   }
 );
 

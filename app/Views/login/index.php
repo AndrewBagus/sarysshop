@@ -68,7 +68,7 @@
 
   <script defer="defer" src="<?= base_url(); ?>/assets/js/main.js"></script>
   <script defer="defer" src="<?= base_url(); ?>/assets/vendors/jquery/jquery.min.js"></script>
-  <script defer="defer" src="<?= base_url(); ?>/assets/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+  <script defer="defer" src="<?= base_url(); ?>/assets/vendors/jquery-validation/jquery.validate.min.js"></script>
   <script defer="defer" src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script defer="defer" src="<?= base_url(); ?>/js/core/global.js?v<?= rand() ?>"></script>
 

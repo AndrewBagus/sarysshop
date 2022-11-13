@@ -2,15 +2,15 @@
 
 namespace App\Controllers;
 
-use App\Services\Login\LoginService;
+use Config\Services;
 
 class LoginController extends BaseController
 {
-  private $userService;
+  private $loginService;
 
   public function __construct()
   {
-    $this->userService = new LoginService();
+    $this->loginService = Services::loginService();
   }
 
   public function index()
@@ -24,7 +24,13 @@ class LoginController extends BaseController
     $email = $data['email'];
     $password = $data['password'];
 
-    $response = $this->userService->checkLogin($email, $password);
+    $response = $this->loginService->checkLogin($email, $password);
     return json_encode($response);
+  }
+
+  public function logout()
+  {
+    $this->session->destroy();
+    return redirect()->to('login');
   }
 }
