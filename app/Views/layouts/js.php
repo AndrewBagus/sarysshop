@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/jquery/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/450de19a46.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/momentjs/moment-with-locales.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/tempusdominus/js/tempusdominus-bootstrap-4.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/jquery-validation/jquery.validate.min.js"></script>
@@ -12,6 +13,6 @@
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/datatables/responsive/js/responsive.bootstrap5.min.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/datatables/theme/js/dataTables.bootstrap5.min.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/js/main.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>/js/core/global.js?v=<?= rand()?>"></script>
-<script type="text/javascript" src="<?= base_url() ?>/js/core/init.js?v=<?= rand()?>"></script>
-<script type="text/javascript" src="<?= base_url() ?>/js/core/terbilang.js?v=<?= rand()?>"></script>
+<script type="text/javascript" src="<?= base_url() ?>/js/core/global.js?v=<?= rand() ?>"></script>
+<script type="text/javascript" src="<?= base_url() ?>/js/core/init.js?v=<?= rand() ?>"></script>
+<script type="text/javascript" src="<?= base_url() ?>/js/core/terbilang.js?v=<?= rand() ?>"></script>

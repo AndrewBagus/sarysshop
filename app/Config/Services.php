@@ -2,6 +2,10 @@
 
 namespace Config;
 
+use App\Services\Feature\FeatureService;
+use App\Services\Feature\IFeatureService;
+use App\Services\Login\ILoginService;
+use App\Services\Login\LoginService;
 use App\Services\User\IUserService;
 use App\Services\User\UserService;
 use CodeIgniter\Config\BaseService;
@@ -21,17 +25,6 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-  /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
-
   public static function userService($getShared = true): IUserService
   {
     if ($getShared) {
@@ -39,5 +32,23 @@ class Services extends BaseService
     }
 
     return new UserService;
+  }
+  
+  public static function loginService($getShared = true): ILoginService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('loginService');
+    }
+
+    return new LoginService;
+  }
+
+  public static function featureService($getShared = true): IFeatureService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('featureService');
+    }
+
+    return new FeatureService;
   }
 }

@@ -35,7 +35,7 @@ abstract class BaseController extends Controller
    *
    * @var array
    */
-  protected $helpers = ['global'];
+  protected $helpers = ['My'];
 
   /**
    * @var object - Holds the session instance

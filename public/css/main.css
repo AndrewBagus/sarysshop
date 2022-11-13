@@ -4,12 +4,17 @@ body {
 
 .sidebar-menu li a {
   color: #343a40;
+  font-size: 16px;
 }
 
 .sidebar-menu li a:focus,
 .sidebar-menu li a:hover,
 .sidebar-menu li.active {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+ul.dropdown-menu > li > a:hover {
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 body.swal2-height-auto {
