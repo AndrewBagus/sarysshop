@@ -22,13 +22,12 @@
         $marginClass = $i === 0 ? 'mT-30' : '';
         $parentActive = '';
         $linkClass = 'dropdown-toggle';
-        $link = 'javascript:;';
+        $link = empty($feature['link']) ? 'javascript:void(0);' : base_url($feature['link']);
         if ($feature['name'] === $title) {
           $parentActive = 'active';
           $linkClass = 'sidebar-link';
-          $link = base_url($feature['link']);
         } else if ($feature['name'] == $parent) {
-          $parentActive = 'dropdown open active';
+          $parentActive = 'dropdown open';
         } else if ($hasChild > 0) {
           $parentActive = 'dropdown';
         }
@@ -49,22 +48,24 @@
             <?php endif ?>
           </a>
           <?php if ($hasChild > 0) : ?>
-            <ul class="dropdown-menu">
-              <?php foreach ($feature['child'] as $item) : ?>
-              <li>
-                <a class="sidebar-link" href="<?= base_url($item['link']); ?>">
-                  <span class="icon-holder">
-                    <i class="<?= $item['icon']; ?>"></i>
-                  </span>
-                  <?= $item['name']; ?>
-                </a>
-              </li>
+            <ul class="dropdown-menu" style="padding-left: 0;">
+              <?php foreach ($feature['child'] as $item) :
+                $childActive = $item['name'] === $title ? 'active' : '';
+              ?>
+                <li class="pL-25 <?= $childActive; ?>">
+                  <a class="sidebar-link" href="<?= base_url($item['link']); ?>">
+                    <span class="icon-holder">
+                      <i class="<?= $item['icon']; ?>"></i>
+                    </span>
+                    <?= $item['name']; ?>
+                  </a>
+                </li>
               <?php endforeach ?>
             </ul>
           <?php endif ?>
         </li>
       <?php endforeach ?>
-      
+
     </ul>
   </div>
 </div>
