@@ -52,6 +52,11 @@ $routes->group(
   static function ($routes) {
     $routes->get('/', 'HomeController::index');
     $routes->get('/logout', 'LoginController::logout');
+
+    $routes->get('/kategori-produk', 'KategoriProdukController::index');
+    $routes->post('/kategoriProduk/getDataTable', 'KategoriProdukController::getDataTable');
+    $routes->post('/kategoriProduk/saveData', 'KategoriProdukController::saveData');
+    $routes->post('/kategoriProduk/removeData', 'KategoriProdukController::removeData');
   }
 );
 
