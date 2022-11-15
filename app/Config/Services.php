@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Services\Bank\BankService;
+use App\Services\Bank\IBankService;
 use App\Services\Feature\FeatureService;
 use App\Services\Feature\IFeatureService;
 use App\Services\JenisBank\IJenisBankService;
@@ -66,6 +68,7 @@ class Services extends BaseService
 
     return new JenisBankService;
   }
+
   public static function kategoriProdukService($getShared = true): IKategoriProdukService
   {
     if ($getShared) {
@@ -74,6 +77,7 @@ class Services extends BaseService
 
     return new KategoriProdukService;
   }
+
   public static function kategoriPelangganService($getShared = true): IKategoriPelangganService
   {
     if ($getShared) {
@@ -81,5 +85,14 @@ class Services extends BaseService
     }
 
     return new KategoriPelangganService;
+  }
+
+  public static function bankService($getShared = true): IBankService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('bankService');
+    }
+
+    return new BankService;
   }
 }

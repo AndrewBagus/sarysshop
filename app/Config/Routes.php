@@ -70,6 +70,12 @@ $routes->group(
     $routes->post('/kategoriPelanggan/getKategoriPelanggan', 'KategoriPelangganController::getKategoriPelanggan');
     $routes->post('/kategoriPelanggan/saveData', 'KategoriPelangganController::saveData');
     $routes->post('/kategoriPelanggan/removeData', 'KategoriPelangganController::removeData');
+
+    $routes->get('/bank', 'BankController::index');
+    $routes->post('/bank/getDataTable', 'BankController::getDataTable');
+    $routes->post('/bank/getBank', 'BankController::getBank');
+    $routes->post('/bank/saveData', 'BankController::saveData');
+    $routes->post('/bank/removeData', 'BankController::removeData');
   }
 );
 

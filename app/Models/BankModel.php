@@ -10,9 +10,9 @@ class BankModel extends Model
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
     'jenis_bank_id',
-    'no_rekening',
+    'rekening',
     'atas_nama',
-    'nama',
+    'cabang',
     'code',
     'image',
     'atas_nama',
