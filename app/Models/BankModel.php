@@ -9,6 +9,7 @@ class BankModel extends Model
   protected $table            = 'm_bank';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
+    'jenis_bank_id',
     'no_rekening',
     'atas_nama',
     'nama',
