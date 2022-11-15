@@ -1,11 +1,11 @@
 $(function () {
-  $('.select2bs4').select2({
-    theme: 'bootstrap5',
+  $('.select2bs5').select2({
+    theme: 'bootstrap-5',
     allowClear: true,
   })
 
-  $('.select2bs4-nonclear').select2({
-    theme: 'bootstrap5',
+  $('.select2bs5-nonclear').select2({
+    theme: 'bootstrap-5',
   })
 
   $(document).on('blur', 'input[data-toggle=datetimepicker]', function () {
