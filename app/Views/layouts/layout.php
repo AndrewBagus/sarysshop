@@ -23,6 +23,8 @@
       <div class="page-container">
         <?= $this->include('layouts/navbar') ?>
         <main class="main-content bgc-grey-100">
+          <!-- CSRF token -->
+          <?= csrf_field() ?>
           <div id="mainContent">
             <?= $this->renderSection('page-header') ?>
             <?= $this->renderSection('page-content') ?>
