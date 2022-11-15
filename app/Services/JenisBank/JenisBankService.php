@@ -64,7 +64,7 @@ class JenisBankService implements IJenisBankService
 
   public function getJenisBank()
   {
-    return $this->JenisBankRepo->getActive();
+    return $this->JenisBankRepo->getActive()->get()->getResult();
   }
 
   public function saveData($data)

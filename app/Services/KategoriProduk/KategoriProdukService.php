@@ -64,7 +64,7 @@ class KategoriProdukService implements IKategoriProdukService
 
   public function getKategoriProduk()
   {
-    return $this->kategoriProdukRepo->getActive();
+    return $this->kategoriProdukRepo->getActive()->get()->getResult();
   }
 
   public function saveData($data)
@@ -72,6 +72,9 @@ class KategoriProdukService implements IKategoriProdukService
     $message = 'Data berhasil disimpan';
     if ((int)$data['id'] > 0) {
       $message = 'Data berhasil diubah';
+      $data['updated_at'] = date('Y-m-d H:i:s');
+    } else {
+      $data['created_by'] = session()->get('user_id');
     }
     $this->kategoriProdukRepo->save($data);
 

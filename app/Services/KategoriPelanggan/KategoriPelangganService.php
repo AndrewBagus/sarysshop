@@ -64,15 +64,18 @@ class KategoriPelangganService implements IKategoriPelangganService
 
   public function getKategoriPelanggan()
   {
-    return $this->kategoriPelangganRepo->getActive(); 
+    return $this->kategoriPelangganRepo->getActive()->get()->getResult();
   }
 
   public function saveData($data)
   {
     $message = 'Data berhasil disimpan';
-    if((int)$data['id'] > 0){
+    if ((int)$data['id'] > 0) {
       $message = 'Data berhasil diubah';
-    } 
+      $data['updated_at'] = date('Y-m-d H:i:s');
+    } else {
+      $data['created_by'] = session()->get('user_id');
+    }
     $this->kategoriPelangganRepo->save($data);
 
     $response = [
