@@ -38,7 +38,7 @@ class LoginService implements ILoginService
     $session = [
       'user_id' => $user->id,
       'role_id' => $user->role_id,
-      'fullname' => $user->name,
+      'fullname' => $user->nama,
     ];
     Services::session()->set($session);
 
