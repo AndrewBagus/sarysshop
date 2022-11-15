@@ -3,14 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Services\KategoriPelanggan\KategoriPelangganService;
+use Config\Services;
 
 class KategoriPelangganController extends BaseController
 {
   private $kategoriPelangganService;
   public function __construct()
   {
-    $this->kategoriPelangganService = new KategoriPelangganService();
+    $this->kategoriPelangganService = Services::kategoriPelangganService();
   }
 
   public function index()
@@ -31,6 +31,13 @@ class KategoriPelangganController extends BaseController
     echo json_encode($response);
   }
 
+  public function getKategoriPelanggan()
+  {
+    $response = $this->kategoriPelangganService->getKategoriPelanggan();
+
+    echo json_encode($response);
+  }
+
   public function saveData()
   {
     $post = $this->request->getVar();
@@ -45,4 +52,5 @@ class KategoriPelangganController extends BaseController
     $response = $this->kategoriPelangganService->removeData($post);
 
     echo json_encode($response);
-  }}
+  }
+}

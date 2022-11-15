@@ -3,14 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Services\KategoriProduk\KategoriProdukService;
+use Config\Services;
 
 class KategoriProdukController extends BaseController
 {
   private $kategoriProdukService;
   public function __construct()
   {
-    $this->kategoriProdukService = new KategoriProdukService();
+    $this->kategoriProdukService = Services::kategoriProdukService();
   }
 
   public function index()
@@ -27,6 +27,13 @@ class KategoriProdukController extends BaseController
   {
     $post = (object)$this->request->getVar();
     $response = $this->kategoriProdukService->getDataTable($post);
+
+    echo json_encode($response);
+  }
+
+  public function getKategoriProduk()
+  {
+    $response = $this->kategoriProdukService->getKategoriProduk();
 
     echo json_encode($response);
   }
