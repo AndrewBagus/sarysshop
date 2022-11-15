@@ -24,7 +24,7 @@
               <img src="<?= base_url(); ?>/assets/images/web-logo.png" class="logo" style="transform: scale(.85);">
             </div>
             <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-              <img src="https://i.imgur.com/uNGdWHi.png" class="image">
+              <img src="<?= base_url('/assets/images/bg-login.png') ?>" class="image">
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
           <form id="form-data" autocomplete="off">
             <!-- CSRF token -->
             <?= csrf_field() ?>
-            <div class="card2 card border-0 px-4 py-5">
+            <div class="card2 card border-0 px-4 py-5" style="box-shadow: none;">
               <div class="form-group">
                 <label class="mb-1">
                   <h6 class="mb-0">Email</h6>
