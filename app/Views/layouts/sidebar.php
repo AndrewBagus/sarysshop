@@ -23,10 +23,10 @@
         $parentActive = '';
         $linkClass = 'dropdown-toggle';
         $link = empty($feature['link']) ? 'javascript:void(0);' : base_url($feature['link']);
-        if ($feature['name'] === $title) {
+        if ($feature['nama'] === $title) {
           $parentActive = 'active';
           $linkClass = 'sidebar-link';
-        } else if ($feature['name'] == $parent) {
+        } else if ($feature['nama'] == $parent) {
           $parentActive = 'dropdown open';
         } else if ($hasChild > 0) {
           $parentActive = 'dropdown';
@@ -42,7 +42,7 @@
             <span class="icon-holder">
               <i class="<?= $feature['icon']; ?>"></i>
             </span>
-            <span class="title"><?= $feature['name']; ?></span>
+            <span class="title"><?= $feature['nama']; ?></span>
             <?php if ($hasChild > 0) : ?>
               <span class="arrow"><i class="ti-angle-right"></i></span>
             <?php endif ?>
@@ -50,14 +50,14 @@
           <?php if ($hasChild > 0) : ?>
             <ul class="dropdown-menu" style="padding-left: 0;">
               <?php foreach ($feature['child'] as $item) :
-                $childActive = $item['name'] === $title ? 'active' : '';
+                $childActive = $item['nama'] === $title ? 'active' : '';
               ?>
                 <li class="pL-25 <?= $childActive; ?>">
                   <a class="sidebar-link" href="<?= base_url($item['link']); ?>">
                     <span class="icon-holder">
                       <i class="<?= $item['icon']; ?>"></i>
                     </span>
-                    <?= $item['name']; ?>
+                    <?= $item['nama']; ?>
                   </a>
                 </li>
               <?php endforeach ?>
