@@ -1,6 +1,6 @@
 <div class="card d-none" id="card-form">
   <div class="card-header">
-    <h1><span id="title-form"></span> Kategori Pelanggan</h1>
+    <h1><span id="title-form"></span> Kategori Produk</h1>
   </div>
   <form id="form-data" autocomplete="off">
     <div class="card-body">

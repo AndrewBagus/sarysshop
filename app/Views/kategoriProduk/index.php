@@ -3,7 +3,7 @@
 <?= $this->section('page-content') ?>
 <div class="card" id="card-table">
   <div class="card-header">
-    <h1>Kategori Pelanggan</h1>
+    <h1>Kategori Produk</h1>
     <div class="card-tools">
       <button type="button" class="btn btn-outline-primary" id="btn-new" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
         <i class="fa fa-plus"></i> Tambah Data
