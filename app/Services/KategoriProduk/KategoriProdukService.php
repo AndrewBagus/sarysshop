@@ -62,12 +62,17 @@ class KategoriProdukService implements IKategoriProdukService
     return $response;
   }
 
+  public function getKategoriProduk()
+  {
+    return $this->kategoriProdukRepo->getActive();
+  }
+
   public function saveData($data)
   {
     $message = 'Data berhasil disimpan';
-    if((int)$data['id'] > 0){
+    if ((int)$data['id'] > 0) {
       $message = 'Data berhasil diubah';
-    } 
+    }
     $this->kategoriProdukRepo->save($data);
 
     $response = [
