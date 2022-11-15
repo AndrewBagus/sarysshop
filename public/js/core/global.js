@@ -183,24 +183,17 @@ function strToUpperCase(str) {
 }
 
 function getFormData($form) {
-  var unindexed_array = $form.serializeArray()
-  var indexed_array = {}
+  const unindexed_array = $form.serializeArray()
+  const indexed_array = {}
 
-  $.map(unindexed_array, function (n, i) {
-    indexed_array[n['name']] = n['value']
+  $.map(unindexed_array, function (n, _) {
+    indexed_array[n['name']] = n['value'].trim()
   })
 
   return indexed_array
 }
 
 function getOptionData(usage, uri, id, filters, parent_id) {
-  const csrfName = $('[name=app_token_name]').attr('name') // CSRF Token name
-  const csrfHash = $('[name=app_token_name]').val() // CSRF hash
-
-  const data = {
-    [csrfName]: csrfHash,
-  }
-
   if (parent_id != undefined) {
     data['parent_id'] = parent_id
   }
