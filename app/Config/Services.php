@@ -4,6 +4,12 @@ namespace Config;
 
 use App\Services\Feature\FeatureService;
 use App\Services\Feature\IFeatureService;
+use App\Services\JenisBank\IJenisBankService;
+use App\Services\JenisBank\JenisBankService;
+use App\Services\KategoriPelanggan\IKategoriPelangganService;
+use App\Services\KategoriPelanggan\KategoriPelangganService;
+use App\Services\KategoriProduk\IKategoriProdukService;
+use App\Services\KategoriProduk\KategoriProdukService;
 use App\Services\Login\ILoginService;
 use App\Services\Login\LoginService;
 use App\Services\User\IUserService;
@@ -33,7 +39,7 @@ class Services extends BaseService
 
     return new UserService;
   }
-  
+
   public static function loginService($getShared = true): ILoginService
   {
     if ($getShared) {
@@ -50,5 +56,30 @@ class Services extends BaseService
     }
 
     return new FeatureService;
+  }
+
+  public static function jenisBankService($getShared = true): IJenisBankService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('jenisBankService');
+    }
+
+    return new JenisBankService;
+  }
+  public static function kategoriProdukService($getShared = true): IKategoriProdukService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('kategoriProdukService');
+    }
+
+    return new KategoriProdukService;
+  }
+  public static function kategoriPelangganService($getShared = true): IKategoriPelangganService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('kategoriPelangganService');
+    }
+
+    return new KategoriPelangganService;
   }
 }
