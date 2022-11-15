@@ -53,13 +53,21 @@ $routes->group(
     $routes->get('/', 'HomeController::index');
     $routes->get('/logout', 'LoginController::logout');
 
+    $routes->get('/jenis-bank', 'JenisBankController::index');
+    $routes->post('/jenisBank/getDataTable', 'JenisBankController::getDataTable');
+    $routes->post('/jenisBank/getJenisBank', 'JenisBankController::getJenisBank');
+    $routes->post('/jenisBank/saveData', 'JenisBankController::saveData');
+    $routes->post('/jenisBank/removeData', 'JenisBankController::removeData');
+
     $routes->get('/kategori-produk', 'KategoriProdukController::index');
     $routes->post('/kategoriProduk/getDataTable', 'KategoriProdukController::getDataTable');
+    $routes->post('/kategoriProduk/getKategoriProduk', 'KategoriProdukController::getKategoriProduk');
     $routes->post('/kategoriProduk/saveData', 'KategoriProdukController::saveData');
     $routes->post('/kategoriProduk/removeData', 'KategoriProdukController::removeData');
 
     $routes->get('/kategori-pelanggan', 'KategoriPelangganController::index');
     $routes->post('/kategoriPelanggan/getDataTable', 'KategoriPelangganController::getDataTable');
+    $routes->post('/kategoriPelanggan/getKategoriPelanggan', 'KategoriPelangganController::getKategoriPelanggan');
     $routes->post('/kategoriPelanggan/saveData', 'KategoriPelangganController::saveData');
     $routes->post('/kategoriPelanggan/removeData', 'KategoriPelangganController::removeData');
   }
