@@ -32,7 +32,7 @@ class FeatureRepository implements IFeatureRepository
         'a.role_id' =>  $role_id
       ])
       ->groupEnd()
-      ->select('m_feature.id, m_feature.name, m_feature.link, m_feature.icon')
+      ->select('m_feature.id, m_feature.nama, m_feature.link, m_feature.icon')
       ->orderBy('m_feature.order')
       ->get()
       ->getResultArray();
@@ -45,7 +45,7 @@ class FeatureRepository implements IFeatureRepository
     return $this->model
       ->join('t_akses', 'm_feature.id = t_akses.feature_id')
       ->where(['m_feature.is_active' => true, 'm_feature.parent' => $parent_id, 't_akses.role_id' => $role_id])
-      ->select('m_feature.id, m_feature.name, m_feature.link, m_feature.icon, (select name from m_feature where id=' . $parent_id . ') as parent')
+      ->select('m_feature.id, m_feature.nama, m_feature.link, m_feature.icon, (select nama from m_feature where id=' . $parent_id . ') as parent')
       ->orderBy('m_feature.order')
       ->get()
       ->getResultArray();
