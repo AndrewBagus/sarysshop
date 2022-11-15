@@ -1,5 +1,18 @@
-body {
-  color: #212529;
+.btn {
+  font-size: 1.02rem !important;
+}
+
+.btn-danger,
+.btn-primary,
+.btn-info {
+  color: #fff;
+}
+
+.card-footer {
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sidebar-menu li a {
@@ -17,9 +30,34 @@ ul.dropdown-menu > li:hover {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
+.card {
+  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+
+.card-header {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 6px 0 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: transparent;
+}
+
+body {
+  color: #212529;
+  font-size: 16px;
+}
+
 body.swal2-height-auto {
   height: 100% !important;
 }
+
 #loader {
   transition: all 0.3s ease-in-out;
   opacity: 1;
