@@ -57,6 +57,11 @@ $routes->group(
     $routes->post('/kategoriProduk/getDataTable', 'KategoriProdukController::getDataTable');
     $routes->post('/kategoriProduk/saveData', 'KategoriProdukController::saveData');
     $routes->post('/kategoriProduk/removeData', 'KategoriProdukController::removeData');
+
+    $routes->get('/kategori-pelanggan', 'KategoriPelangganController::index');
+    $routes->post('/kategoriPelanggan/getDataTable', 'KategoriPelangganController::getDataTable');
+    $routes->post('/kategoriPelanggan/saveData', 'KategoriPelangganController::saveData');
+    $routes->post('/kategoriPelanggan/removeData', 'KategoriPelangganController::removeData');
   }
 );
 
