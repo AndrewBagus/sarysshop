@@ -199,7 +199,7 @@ function getOptionData(usage, uri, id, filters, parent_id) {
   }
 
   $(usage).empty()
-  f_ajax(base_uri + uri, data, function (response) {
+  f_ajax(base_uri + uri, {}, function (response) {
     if (filters !== undefined) {
       response = response.filter(function (e) {
         return filters.indexOf(e.id) === -1
@@ -209,23 +209,17 @@ function getOptionData(usage, uri, id, filters, parent_id) {
     let options = '<option></option>'
     $.each(response, function (_, v) {
       let selected = ''
-      let nama = ''
 
       if (v.id == id) {
         selected = 'selected'
       }
 
-      if (v.nomor_pembelian !== undefined) {
-        nama = v.nomor_pembelian
-      } else if (v.nomor_penjualan !== undefined) {
-        nama = v.nomor_penjualan
-      } else {
-        nama = v.nama
-      }
-
       options +=
-        '<option value="' + v.id + '" ' + selected + '>' + nama + '</option>'
+        '<option value="' + v.id + '" ' + selected + '>' + v.nama + '</option>'
     })
+    if (uri === '/jenisBank/getJenisBank') {
+      options += '<option value="0">Bank Lain</option>'
+    }
     $(usage).html(options)
   })
 }
