@@ -9,7 +9,7 @@ class SupplierModel extends Model
   protected $table            = 'm_supplier';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'name',
+    'nama',
     'code',
     'kelurahan_id',
     'kode_pos',

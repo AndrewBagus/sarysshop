@@ -10,7 +10,7 @@ class OrderStatusModel extends Model
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
     'code',
-    'name',
+    'nama',
     'is_active',
     'created_by',
     'updated_at'

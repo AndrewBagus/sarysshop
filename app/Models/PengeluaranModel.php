@@ -9,7 +9,7 @@ class PengeluaranModel extends Model
   protected $table            = 't_pengeluaran';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'name',
+    'nama',
     'date',
     'biaya',
     'jumlah',

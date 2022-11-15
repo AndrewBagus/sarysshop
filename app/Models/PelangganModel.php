@@ -11,7 +11,7 @@ class PelangganModel extends Model
   protected $allowedFields    = [
     'kategori_pelanggan_id',
     'kelurahan_id',
-    'name',
+    'nama',
     'code',
     'kode_pos',
     'no_telpon',

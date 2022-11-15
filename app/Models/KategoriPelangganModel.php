@@ -9,7 +9,7 @@ class KategoriPelangganModel extends Model
   protected $table            = 'm_kategori_pelanggan';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'name',
+    'nama',
     'is_active',
     'created_by',
     'updated_at'

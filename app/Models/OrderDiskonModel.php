@@ -10,7 +10,7 @@ class OrderDiskonModel extends Model
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
     'order_id',
-    'name',
+    'nama',
     'tipe_diskon',
     'diskon_persen',
     'diskon_nominal'

@@ -9,7 +9,7 @@ class FeatureModel extends Model
   protected $table            = 'm_feature';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'name',
+    'nama',
     'link',
     'parent',
     'icon',

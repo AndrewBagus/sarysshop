@@ -9,7 +9,7 @@ class KurirModel extends Model
   protected $table            = 'm_kurir';
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
-    'name',
+    'nama',
     'kategori',
     'image',
     'is_active',

@@ -11,7 +11,7 @@ class BankModel extends Model
   protected $allowedFields    = [
     'no_rekening',
     'atas_nama',
-    'name',
+    'nama',
     'code',
     'image',
     'atas_nama',

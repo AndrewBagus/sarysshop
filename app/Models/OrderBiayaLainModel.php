@@ -10,7 +10,7 @@ class OrderBiayaLainModel extends Model
   protected $primaryKey       = 'id';
   protected $allowedFields    = [
     'order_id',
-    'name',
+    'nama',
     'tipe_biaya',
     'biaya_persen',
     'biaya_nominal'
