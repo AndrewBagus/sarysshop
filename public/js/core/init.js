@@ -1,4 +1,4 @@
-$(function (w, d) {
+$(function () {
   $('.select2bs4').select2({
     theme: 'bootstrap-5',
     allowClear: true,
