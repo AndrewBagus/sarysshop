@@ -25,6 +25,10 @@ class KelurahanRepository implements IKelurahanRepository
 
   public function getKelurahanById($kelurahan_id)
   {
-    return $this->model->where('id', $kelurahan_id)->get()->getRow();
+    return $this->model
+      ->select("id, kode_pos, CONCAT(nama_kecamatan, ', ', jenis_kabupaten_kota, ' ', nama_kabupaten_kota, ', ', nama_propinsi) AS kecamatan")
+      ->where('id', $kelurahan_id)
+      ->get()
+      ->getRow();
   }
 }
