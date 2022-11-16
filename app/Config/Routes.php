@@ -53,7 +53,7 @@ $routes->group(
     $routes->get('/', 'HomeController::index');
     $routes->get('/logout', 'LoginController::logout');
 
-    $routes->get('/user/getUsers', 'UserBankController::getUsers');
+    $routes->post('/user/getUsers', 'UserController::getUsers');
 
     $routes->get('/jenis-bank', 'JenisBankController::index');
     $routes->post('/jenisBank/getDataTable', 'JenisBankController::getDataTable');
