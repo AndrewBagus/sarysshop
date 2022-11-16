@@ -1,7 +1,7 @@
 $(function () {
   getOptionData(
     '#kategori-pelanggan-filter',
-    '/kategoriPelanggan/getKategoriPelanggan'
+    '/kategoriPelanggan/getKategoriPelanggans'
   )
 
   $(document).on('click', '#btn-filter', function (e) {

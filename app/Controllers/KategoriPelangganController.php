@@ -31,9 +31,9 @@ class KategoriPelangganController extends BaseController
     echo json_encode($response);
   }
 
-  public function getKategoriPelanggan()
+  public function getKategoriPelanggans()
   {
-    $response = $this->kategoriPelangganService->getKategoriPelanggan();
+    $response = $this->kategoriPelangganService->getKategoriPelanggans();
 
     echo json_encode($response);
   }

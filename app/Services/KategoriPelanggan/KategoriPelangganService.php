@@ -62,9 +62,12 @@ class KategoriPelangganService implements IKategoriPelangganService
     return $response;
   }
 
-  public function getKategoriPelanggan()
+  public function getKategoriPelanggans()
   {
-    return $this->kategoriPelangganRepo->getActive()->get()->getResult();
+    return $this->kategoriPelangganRepo
+      ->getActive()
+      ->get()
+      ->getResult();
   }
 
   public function saveData($data)

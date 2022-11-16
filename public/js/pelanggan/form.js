@@ -2,7 +2,7 @@ $(function () {
   getKelurahanDesa('#kelurahan')
   getOptionData(
     '#kategori-pelanggan',
-    '/kategoriPelanggan/getKategoriPelanggan',
+    '/kategoriPelanggan/getKategoriPelanggans',
     false
   )
 
