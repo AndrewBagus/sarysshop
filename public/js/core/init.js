@@ -16,6 +16,10 @@ $(function () {
     format: date_format,
   })
 
+  $(document).on('click', '*[data-bs-toggle="tooltip"]', function () {
+    $(this).tooltip('hide')
+  })
+
   $(document).on('click', '#dropdownMenuLink', function (e) {
     e.preventDefault()
     if ($(this).hasClass('show')) {
