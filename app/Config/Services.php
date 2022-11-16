@@ -18,6 +18,8 @@ use App\Services\Login\ILoginService;
 use App\Services\Login\LoginService;
 use App\Services\Pelanggan\IPelangganService;
 use App\Services\Pelanggan\PelangganService;
+use App\Services\Supplier\ISupplierService;
+use App\Services\Supplier\SupplierService;
 use App\Services\User\IUserService;
 use App\Services\User\UserService;
 use CodeIgniter\Config\BaseService;
@@ -116,5 +118,14 @@ class Services extends BaseService
     }
 
     return new PelangganService;
+  }
+
+  public static function supplierService($getShared = true): ISupplierService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('supplierService');
+    }
+
+    return new SupplierService;
   }
 }

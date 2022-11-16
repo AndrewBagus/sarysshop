@@ -77,14 +77,20 @@ $routes->group(
     $routes->post('/bank/saveData', 'BankController::saveData');
     $routes->post('/bank/removeData', 'BankController::removeData');
 
+    $routes->post('/kelurahan/getKelurahan', 'KelurahanController::getKelurahan');
+    $routes->post('/kelurahan/getKelurahanById', 'KelurahanController::getKelurahanById');
+
     $routes->get('/pelanggan', 'PelangganController::index');
     $routes->post('/pelanggan/getDataTable', 'PelangganController::getDataTable');
     $routes->post('/pelanggan/getPelanggan', 'PelangganController::getPelanggan');
     $routes->post('/pelanggan/saveData', 'PelangganController::saveData');
     $routes->post('/pelanggan/removeData', 'PelangganController::removeData');
 
-    $routes->post('/kelurahan/getKelurahan', 'KelurahanController::getKelurahan');
-    $routes->post('/kelurahan/getKelurahanById', 'KelurahanController::getKelurahanById');
+    $routes->get('/supplier', 'SupplierController::index');
+    $routes->post('/supplier/getDataTable', 'SupplierController::getDataTable');
+    $routes->post('/supplier/getSupplier', 'SupplierController::getSupplier');
+    $routes->post('/supplier/saveData', 'SupplierController::saveData');
+    $routes->post('/supplier/removeData', 'SupplierController::removeData');
   }
 );
 
