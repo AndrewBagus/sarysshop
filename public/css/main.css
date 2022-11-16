@@ -34,8 +34,13 @@ ul.dropdown-menu > li:hover {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
-.card {
+.card,
+.modal-content {
   box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+
+.modal-footer {
+  justify-content: space-between !important;
 }
 
 .card-header {
