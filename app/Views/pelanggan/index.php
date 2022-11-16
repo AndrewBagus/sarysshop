@@ -9,7 +9,7 @@
         <i class="fa fa-search"></i> Filter Data
       </button>
 
-      <button type="button" class="btn btn-outline-primary" id="btn-new" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
+      <button type="button" class="btn btn-outline-primary mt-1 mt-lg-0" id="btn-new" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
         <i class="fa fa-plus"></i> Tambah Data
       </button>
     </div>
