@@ -17,7 +17,7 @@
 
 .sidebar-menu li a {
   color: #343a40;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .sidebar-menu li a:focus,
@@ -51,7 +51,7 @@ ul.dropdown-menu > li:hover {
 
 body {
   color: #212529;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 body.swal2-height-auto {
