@@ -17,7 +17,7 @@ class PelangganRepository implements IPelangganRepository
     return $this->model
       ->join('m_kategori_pelanggan kp', 'm_pelanggan.kategori_pelanggan_id = kp.id', 'left')
       ->join('m_kelurahan_desa kb', 'm_pelanggan.kelurahan_id = kb.id', 'left')
-      ->select("m_pelanggan.*, kp.nama as kategori_pelanggan, , CONCAT(kb.nama_kecamatan, ', ', kb.jenis_kabupaten_kota, ' ', kb.nama_kabupaten_kota, ', ', kb.nama_propinsi) AS kecamatan")
+      ->select("m_pelanggan.*, kp.nama as kategori_pelanggan , CONCAT(kb.nama_kecamatan, ', ', kb.jenis_kabupaten_kota, ' ', kb.nama_kabupaten_kota, ', ', kb.nama_propinsi) AS kecamatan")
       ->where('m_pelanggan.is_active', true);
   }
 
