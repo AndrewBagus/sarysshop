@@ -1,6 +1,7 @@
 let tableList
 $(function () {
   tableList = $('#table-list').DataTable({
+    responsive: true,
     deferRender: true,
     processing: true,
     serverSide: true,

@@ -2,6 +2,7 @@ let tableList
 $(function () {
   getOptionData('#jenis-bank', '/jenisBank/getJenisBank')
   tableList = $('#table-list').DataTable({
+    responsive: true,
     deferRender: true,
     processing: true,
     serverSide: true,
