@@ -4,7 +4,7 @@
   </div>
   <form id="form-data" autocomplete="off">
     <div class="card-body">
-      <input type="text" class="form-control" id="id" name="id" value="" readonly>
+      <input type="hidden" class="form-control" id="id" name="id" value="" readonly>
       <div class="row" style="padding-left: 0; padding-right: 0;">
         <div class="col-md-4">
           <div class="form-group">
