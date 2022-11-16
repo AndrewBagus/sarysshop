@@ -26,11 +26,11 @@ $(function () {
       $(this).parents('li').find('ul.dropdown-menu').addClass('show')
     }
   })
+})
 
-  window.addEventListener('load', function () {
-    const t = document.getElementById('loader')
-    setTimeout(function () {
-      t.classList.add('fadeOut')
-    }, 300)
-  })
+window.addEventListener('load', function () {
+  const t = document.getElementById('loader')
+  setTimeout(function () {
+    t.classList.add('fadeOut')
+  }, 300)
 })

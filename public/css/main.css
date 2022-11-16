@@ -1,3 +1,7 @@
+.header .header-container .nav-right .dropdown-menu {
+  right: 7px;
+}
+
 .btn {
   font-size: 1.02rem !important;
 }
