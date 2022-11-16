@@ -31,9 +31,9 @@ class BankController extends BaseController
     echo json_encode($response);
   }
 
-  public function getBank()
+  public function getBanks()
   {
-    $response = $this->bankService->getBank();
+    $response = $this->bankService->getBanks();
 
     echo json_encode($response);
   }

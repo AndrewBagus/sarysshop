@@ -69,7 +69,7 @@ class BankService implements IBankService
     return $response;
   }
 
-  public function getBank()
+  public function getBanks()
   {
     return $this->bankRepo->getActive();
   }
@@ -84,7 +84,7 @@ class BankService implements IBankService
       $data['created_by'] = session()->get('user_id');
     }
 
-    if((int)$data['jenis_bank_id'] === 0){
+    if ((int)$data['jenis_bank_id'] === 0) {
       $data['jenis_bank_id'] = null;
     }
 
