@@ -76,6 +76,15 @@ $routes->group(
     $routes->post('/bank/getBank', 'BankController::getBank');
     $routes->post('/bank/saveData', 'BankController::saveData');
     $routes->post('/bank/removeData', 'BankController::removeData');
+
+    $routes->get('/pelanggan', 'PelangganController::index');
+    $routes->post('/pelanggan/getDataTable', 'PelangganController::getDataTable');
+    $routes->post('/pelanggan/getPelanggan', 'PelangganController::getPelanggan');
+    $routes->post('/pelanggan/saveData', 'PelangganController::saveData');
+    $routes->post('/pelanggan/removeData', 'PelangganController::removeData');
+
+    $routes->post('/kelurahan/getKelurahan', 'KelurahanController::getKelurahan');
+    $routes->post('/kelurahan/getKelurahanById', 'KelurahanController::getKelurahanById');
   }
 );
 

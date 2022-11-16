@@ -12,8 +12,12 @@ use App\Services\KategoriPelanggan\IKategoriPelangganService;
 use App\Services\KategoriPelanggan\KategoriPelangganService;
 use App\Services\KategoriProduk\IKategoriProdukService;
 use App\Services\KategoriProduk\KategoriProdukService;
+use App\Services\Kelurahan\IKelurahanService;
+use App\Services\Kelurahan\KelurahanService;
 use App\Services\Login\ILoginService;
 use App\Services\Login\LoginService;
+use App\Services\Pelanggan\IPelangganService;
+use App\Services\Pelanggan\PelangganService;
 use App\Services\User\IUserService;
 use App\Services\User\UserService;
 use CodeIgniter\Config\BaseService;
@@ -33,6 +37,15 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
+  public static function kelurahanService($getShared = true): IKelurahanService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('kelurahanService');
+    }
+
+    return new KelurahanService;
+  }
+
   public static function userService($getShared = true): IUserService
   {
     if ($getShared) {
@@ -94,5 +107,14 @@ class Services extends BaseService
     }
 
     return new BankService;
+  }
+
+  public static function pelangganService($getShared = true): IPelangganService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('pelangganService');
+    }
+
+    return new PelangganService;
   }
 }
