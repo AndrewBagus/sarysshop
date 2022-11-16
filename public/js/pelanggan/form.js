@@ -69,7 +69,7 @@ $(function () {
         required: 'Alamat harus di isi',
       },
       email: {
-        email: 'Format email harus sesuai',
+        email: 'Format email tidak sesuai',
       },
     },
     errorElement: 'span',
