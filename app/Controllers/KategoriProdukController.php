@@ -31,9 +31,9 @@ class KategoriProdukController extends BaseController
     echo json_encode($response);
   }
 
-  public function getKategoriProduk()
+  public function getKategoriProduks()
   {
-    $response = $this->kategoriProdukService->getKategoriProduk();
+    $response = $this->kategoriProdukService->getKategoriProduks();
 
     echo json_encode($response);
   }

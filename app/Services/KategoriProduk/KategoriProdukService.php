@@ -62,9 +62,12 @@ class KategoriProdukService implements IKategoriProdukService
     return $response;
   }
 
-  public function getKategoriProduk()
+  public function getKategoriProduks()
   {
-    return $this->kategoriProdukRepo->getActive()->get()->getResult();
+    return $this->kategoriProdukRepo
+      ->getActive()
+      ->get()
+      ->getResult();
   }
 
   public function saveData($data)
