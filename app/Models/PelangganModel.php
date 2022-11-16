@@ -14,7 +14,7 @@ class PelangganModel extends Model
     'nama',
     'code',
     'kode_pos',
-    'no_telpon',
+    'telp',
     'email',
     'alamat',
     'is_active',
