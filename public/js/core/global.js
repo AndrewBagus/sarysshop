@@ -193,21 +193,11 @@ function getFormData($form) {
   return indexed_array
 }
 
-function getOptionData(usage, uri, id, filters, parent_id) {
-  if (parent_id != undefined) {
-    data['parent_id'] = parent_id
-  }
-
+function getOptionData(usage, uri, showPlaceholder = true) {
   $(usage).empty()
   f_ajax(base_uri + uri, {}, function (response) {
-    if (filters !== undefined) {
-      response = response.filter(function (e) {
-        return filters.indexOf(e.id) === -1
-      })
-    }
-
     let options = '<option></option>'
-    $.each(response, function (_, v) {
+    $.each(response, function (i, v) {
       let selected = ''
 
       if (v.id == id) {
@@ -216,10 +206,76 @@ function getOptionData(usage, uri, id, filters, parent_id) {
 
       options +=
         '<option value="' + v.id + '" ' + selected + '>' + v.nama + '</option>'
+      if (!showPlaceholder && i === 0)
+        options =
+          '<option value="' + v.id + '" selected>' + v.nama + '</option>'
     })
     if (uri === '/jenisBank/getJenisBank') {
       options += '<option value="0">Bank Lain</option>'
     }
     $(usage).html(options)
+  })
+}
+
+function getKelurahanDesa(usage) {
+  $(usage).select2({
+    theme: 'bootstrap-5',
+    ajax: {
+      url: base_uri + '/kelurahan/getKelurahan',
+      type: 'POST',
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+        const csrfName = $('[name=app_token_name]').attr('name') // CSRF Token name
+        const csrfHash = $('[name=app_token_name]').val() // CSRF hash
+
+        return {
+          [csrfName]: csrfHash,
+          search_data: params.term,
+        }
+      },
+      processResults: function (data, params) {
+        $(usage).html('<option></option>')
+        for (const item in data) {
+          const x = data[item]
+          $(usage).append(
+            '<option value="' +
+              x.id +
+              '" data-pos="' +
+              x.kode_pos +
+              '">' +
+              x.kecamatan +
+              '</option'
+          )
+        }
+        return {
+          results: $.map(data, function (obj) {
+            return { id: obj.id, text: obj.kecamatan }
+          }),
+        }
+      },
+      cache: true,
+    },
+    minimumInputLength: 3,
+    placeholder: 'Cari Kota/kecamatan',
+    language: {
+      inputTooShort: function (args) {
+        var remainingChars = args.minimum - args.input.length
+
+        var message = 'Masukan ' + remainingChars + ' atau lebih karakter'
+
+        return message
+      },
+      noResults: function () {
+        return 'Data tidak ditemukan'
+      },
+      searching: function () {
+        return 'Mencari...'
+      },
+    },
+  })
+
+  $(document).on('select2:open', usage, function () {
+    document.querySelector('.select2-search__field').focus()
   })
 }
