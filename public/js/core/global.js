@@ -217,6 +217,83 @@ function getOptionData(usage, uri, showPlaceholder = true) {
   })
 }
 
+function initDateTime(usage) {
+  $(usage).datetimepicker('destroy')
+  $(usage).datetimepicker({
+    format: date_format,
+    useCurrent: false,
+    autoclose: true,
+  })
+}
+
+function initValidateForm(usage, rules, messages, callback) {
+  $(usage).validate({
+    rules: rules,
+    messages: messages,
+    errorElement: 'span',
+    ignore: ':hidden:not(.summernote),.note-editable.card-block',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback')
+      if (
+        element.hasClass('select2bs5') ||
+        element.hasClass('select2bs5-nonclear')
+      ) {
+        element.parents('.form-group').append(error)
+      } else if (element.hasClass('summernote')) {
+        $(error).insertAfter(element.siblings('.note-editor'))
+      } else if (element.parent('.input-group').length === 0) {
+        $(error).insertAfter(element)
+      } else {
+        element.closest('.input-group').append(error)
+      }
+    },
+    highlight: function (element) {
+      $(element).addClass('is-invalid')
+    },
+    unhighlight: function (element) {
+      $(element).removeClass('is-invalid')
+    },
+    submitHandler: function (_, event) {
+      event.preventDefault()
+      if (callback !== undefined) {
+        callback()
+      }
+    },
+  })
+}
+
+function inFormAlert(usage, type, message) {
+  $(usage).hide()
+  $(usage).empty()
+  $(usage).append(
+    $(
+      "<div class='alert alert-" +
+        type +
+        " alert-dismissable alert-message' role='alert' style='margin-bottom:0;'><span> " +
+        message +
+        " </span> <button type='button' class='close' data-dismiss='alert' aria-label='Close'> \
+    <span aria-hidden='true'>&times;</span> \
+  </button></div>"
+    )
+  )
+  $(usage).fadeIn('slow')
+  $('.alert-message')
+    .delay(5000)
+    .fadeOut('slow', function () {
+      $(this).remove()
+      $(usage).hide()
+    })
+}
+
+function generateRandomIntegerInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+function refreshTable(table, data) {
+  table.clear().draw()
+  table.rows.add(data).draw()
+}
+
 function getKelurahanDesa(usage) {
   $(usage).select2({
     theme: 'bootstrap-5',
