@@ -31,9 +31,9 @@ class SupplierController extends BaseController
     echo json_encode($response);
   }
 
-  public function getSupplier()
+  public function getSuppliers()
   {
-    $response = $this->supplierService->getSupplier();
+    $response = $this->supplierService->getSuppliers();
 
     echo json_encode($response);
   }
