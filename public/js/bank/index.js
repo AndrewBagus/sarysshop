@@ -82,8 +82,9 @@ $(function () {
   $(document).on('click', '.btn-edit', function (e) {
     e.preventDefault()
     const data = tableList.row($(this).parents('tr')).data()
+    const jenisBank = data.jenis_bank_id === null ? 0 : data.jenis_bank_id
     $('#id').val(data.id)
-    $('#jenis-bank').val(data.jenis_bank_id).trigger('change')
+    $('#jenis-bank').val(jenisBank).trigger('change')
     $('#cabang').val(data.cabang)
     $('#rekening').val(data.rekening)
     $('#atas_nama').val(data.atas_nama)
