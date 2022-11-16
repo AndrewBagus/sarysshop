@@ -13,7 +13,7 @@ class SupplierModel extends Model
     'code',
     'kelurahan_id',
     'kode_pos',
-    'no_telpon',
+    'telp',
     'email',
     'alamat',
     'is_active',
