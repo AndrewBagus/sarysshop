@@ -53,6 +53,8 @@ $routes->group(
     $routes->get('/', 'HomeController::index');
     $routes->get('/logout', 'LoginController::logout');
 
+    $routes->get('/user/getUsers', 'UserBankController::getUsers');
+
     $routes->get('/jenis-bank', 'JenisBankController::index');
     $routes->post('/jenisBank/getDataTable', 'JenisBankController::getDataTable');
     $routes->post('/jenisBank/getJenisBank', 'JenisBankController::getJenisBank');
@@ -61,19 +63,19 @@ $routes->group(
 
     $routes->get('/kategori-produk', 'KategoriProdukController::index');
     $routes->post('/kategoriProduk/getDataTable', 'KategoriProdukController::getDataTable');
-    $routes->post('/kategoriProduk/getKategoriProduk', 'KategoriProdukController::getKategoriProduk');
+    $routes->post('/kategoriProduk/getKategoriProduks', 'KategoriProdukController::getKategoriProduks');
     $routes->post('/kategoriProduk/saveData', 'KategoriProdukController::saveData');
     $routes->post('/kategoriProduk/removeData', 'KategoriProdukController::removeData');
 
     $routes->get('/kategori-pelanggan', 'KategoriPelangganController::index');
     $routes->post('/kategoriPelanggan/getDataTable', 'KategoriPelangganController::getDataTable');
-    $routes->post('/kategoriPelanggan/getKategoriPelanggan', 'KategoriPelangganController::getKategoriPelanggan');
+    $routes->post('/kategoriPelanggan/getKategoriPelanggans', 'KategoriPelangganController::getKategoriPelanggans');
     $routes->post('/kategoriPelanggan/saveData', 'KategoriPelangganController::saveData');
     $routes->post('/kategoriPelanggan/removeData', 'KategoriPelangganController::removeData');
 
     $routes->get('/bank', 'BankController::index');
     $routes->post('/bank/getDataTable', 'BankController::getDataTable');
-    $routes->post('/bank/getBank', 'BankController::getBank');
+    $routes->post('/bank/getBanks', 'BankController::getBanks');
     $routes->post('/bank/saveData', 'BankController::saveData');
     $routes->post('/bank/removeData', 'BankController::removeData');
 
@@ -82,13 +84,13 @@ $routes->group(
 
     $routes->get('/pelanggan', 'PelangganController::index');
     $routes->post('/pelanggan/getDataTable', 'PelangganController::getDataTable');
-    $routes->post('/pelanggan/getPelanggan', 'PelangganController::getPelanggan');
+    $routes->post('/pelanggan/getPelanggans', 'PelangganController::getPelanggans');
     $routes->post('/pelanggan/saveData', 'PelangganController::saveData');
     $routes->post('/pelanggan/removeData', 'PelangganController::removeData');
 
     $routes->get('/supplier', 'SupplierController::index');
     $routes->post('/supplier/getDataTable', 'SupplierController::getDataTable');
-    $routes->post('/supplier/getSupplier', 'SupplierController::getSupplier');
+    $routes->post('/supplier/getSuppliers', 'SupplierController::getSuppliers');
     $routes->post('/supplier/saveData', 'SupplierController::saveData');
     $routes->post('/supplier/removeData', 'SupplierController::removeData');
 
