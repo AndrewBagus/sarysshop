@@ -6,6 +6,8 @@ use App\Services\Bank\BankService;
 use App\Services\Bank\IBankService;
 use App\Services\Feature\FeatureService;
 use App\Services\Feature\IFeatureService;
+use App\Services\Gudang\GudangService;
+use App\Services\Gudang\IGudangService;
 use App\Services\JenisBank\IJenisBankService;
 use App\Services\JenisBank\JenisBankService;
 use App\Services\KategoriPelanggan\IKategoriPelangganService;
@@ -127,5 +129,14 @@ class Services extends BaseService
     }
 
     return new SupplierService;
+  }
+
+  public static function gudangService($getShared = true): IGudangService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('gudangService');
+    }
+
+    return new GudangService;
   }
 }

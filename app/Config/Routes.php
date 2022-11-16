@@ -91,6 +91,12 @@ $routes->group(
     $routes->post('/supplier/getSupplier', 'SupplierController::getSupplier');
     $routes->post('/supplier/saveData', 'SupplierController::saveData');
     $routes->post('/supplier/removeData', 'SupplierController::removeData');
+
+    $routes->get('/gudang', 'GudangController::index');
+    $routes->post('/gudang/getDataTable', 'GudangController::getDataTable');
+    $routes->post('/gudang/getGudang', 'GudangController::getGudang');
+    $routes->post('/gudang/saveData', 'GudangController::saveData');
+    $routes->post('/gudang/removeData', 'GudangController::removeData');
   }
 );
 
