@@ -7,18 +7,17 @@ use Config\Services;
 
 class UserController extends BaseController
 {
-
-  public function index()
+  private $userService;
+  public function __construct()
   {
-    $data = $this->userRepository->getByUserId(1);
-
-    return json_decode($data);
+    $this->userService = Services::userService();
   }
 
-  public function getByUserId()
+  public function getUsers()
   {
-    $data = Services::showUser()->showUserById(1);
+    $post = (object)$this->request->getVar();
+    $response = $this->userService->getUsers($post);
 
-    return json_encode($data);
+    echo json_encode($response);
   }
 }
