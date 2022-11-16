@@ -31,9 +31,9 @@ class PelangganController extends BaseController
     echo json_encode($response);
   }
 
-  public function getPelanggan()
+  public function getPelanggans()
   {
-    $response = $this->pelangganService->getPelanggan();
+    $response = $this->pelangganService->getPelanggans();
 
     echo json_encode($response);
   }

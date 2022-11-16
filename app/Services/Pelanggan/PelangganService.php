@@ -50,7 +50,7 @@ class PelangganService implements IPelangganService
 
     $query = $this->pelangganRepo->getActive();
 
-    if(!empty($kategori_pelanggan_id)) 
+    if (!empty($kategori_pelanggan_id))
       $query = $query->where('kategori_pelanggan_id', $kategori_pelanggan_id);
 
     $query = $this->_queryDataTable($query, $search, $order);
@@ -81,7 +81,7 @@ class PelangganService implements IPelangganService
     return $response;
   }
 
-  public function getPelanggan()
+  public function getPelanggans()
   {
     return $this->pelangganRepo->getActive();
   }
