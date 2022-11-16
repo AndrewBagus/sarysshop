@@ -24,7 +24,7 @@
             <th> Kategori </th>
             <th> Telepon </th>
             <th> Alamat </th>
-            <th> Aksi </th>
+            <th data-priority="1"> Aksi </th>
           </tr>
         </thead>
       </table>

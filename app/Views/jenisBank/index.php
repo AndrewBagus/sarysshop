@@ -17,7 +17,7 @@
           <tr>
             <th> No </th>
             <th> Nama </th>
-            <th> Aksi </th>
+            <th data-priority="1"> Aksi </th>
           </tr>
         </thead>
       </table>

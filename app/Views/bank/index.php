@@ -20,7 +20,7 @@
             <th> Rekening </th>
             <th> Cabang </th>
             <th> Atas Nama </th>
-            <th> Aksi </th>
+            <th data-priority="1"> Aksi </th>
           </tr>
         </thead>
       </table>
