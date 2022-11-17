@@ -6,6 +6,7 @@
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/tempusdominus/js/tempusdominus-bootstrap-4.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/jquery-validation/additional-methods.min.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>/assets/vendors/jquery-mask/jquery.mask.min.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/toastr/toastr.min.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/sweetalert2/sweetalert2@11.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/assets/vendors/summernote/summernote-bs4.js"></script>

@@ -8,8 +8,11 @@ $(function () {
     theme: 'bootstrap-5',
   })
 
+  $('.thousand').mask('000,000,000,000,000,000', { reverse: true })
+
   $(document).on('blur', 'input[data-toggle=datetimepicker]', function () {
-    $(this).data('datetimepicker').hide()
+    if ($(this).data('datetimepicker') !== undefined)
+      $(this).data('datetimepicker').hide()
   })
 
   $('input[data-toggle=datetimepicker]').datetimepicker({
