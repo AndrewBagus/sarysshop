@@ -13,7 +13,7 @@ class PelangganController extends BaseController
     $this->pelangganService = Services::pelangganService();
   }
 
-  public function index()
+  public function index(): string
   {
     $data = [
       'title' => 'Pelanggan',
@@ -23,7 +23,7 @@ class PelangganController extends BaseController
     return view('pelanggan/index', $data);
   }
 
-  public function getDataTable()
+  public function getDataTable(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->pelangganService->getDataTable($post);
@@ -31,14 +31,14 @@ class PelangganController extends BaseController
     echo json_encode($response);
   }
 
-  public function getPelanggans()
+  public function getPelanggans(): void
   {
     $response = $this->pelangganService->getPelanggans();
 
     echo json_encode($response);
   }
 
-  public function saveData()
+  public function saveData(): void
   {
     $post = $this->request->getVar();
     $response = $this->pelangganService->saveData($post);
@@ -46,7 +46,7 @@ class PelangganController extends BaseController
     echo json_encode($response);
   }
 
-  public function removeData()
+  public function removeData(): void
   {
     $post = $this->request->getVar();
     $response = $this->pelangganService->removeData($post);

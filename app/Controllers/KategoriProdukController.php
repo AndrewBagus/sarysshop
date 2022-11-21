@@ -13,7 +13,7 @@ class KategoriProdukController extends BaseController
     $this->kategoriProdukService = Services::kategoriProdukService();
   }
 
-  public function index()
+  public function index(): string
   {
     $data = [
       'title' => 'Kategori Produk',
@@ -23,7 +23,7 @@ class KategoriProdukController extends BaseController
     return view('kategoriProduk/index', $data);
   }
 
-  public function getDataTable()
+  public function getDataTable(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->kategoriProdukService->getDataTable($post);
@@ -31,14 +31,14 @@ class KategoriProdukController extends BaseController
     echo json_encode($response);
   }
 
-  public function getKategoriProduks()
+  public function getKategoriProduks(): void
   {
     $response = $this->kategoriProdukService->getKategoriProduks();
 
     echo json_encode($response);
   }
 
-  public function saveData()
+  public function saveData(): void
   {
     $post = $this->request->getVar();
     $response = $this->kategoriProdukService->saveData($post);
@@ -46,7 +46,7 @@ class KategoriProdukController extends BaseController
     echo json_encode($response);
   }
 
-  public function removeData()
+  public function removeData(): void
   {
     $post = $this->request->getVar();
     $response = $this->kategoriProdukService->removeData($post);

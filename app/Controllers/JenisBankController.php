@@ -13,7 +13,7 @@ class JenisBankController extends BaseController
     $this->jenisBankService = Services::jenisBankService();
   }
 
-  public function index()
+  public function index(): string
   {
     $data = [
       'title' => 'Jenis Bank',
@@ -23,7 +23,7 @@ class JenisBankController extends BaseController
     return view('jenisBank/index', $data);
   }
 
-  public function getDataTable()
+  public function getDataTable(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->jenisBankService->getDataTable($post);
@@ -31,14 +31,14 @@ class JenisBankController extends BaseController
     echo json_encode($response);
   }
 
-  public function getJenisBank()
+  public function getJenisBank(): void
   {
     $response = $this->jenisBankService->getjenisBank();
 
     echo json_encode($response);
   }
 
-  public function saveData()
+  public function saveData(): void
   {
     $post = $this->request->getVar();
     $response = $this->jenisBankService->saveData($post);
@@ -46,7 +46,7 @@ class JenisBankController extends BaseController
     echo json_encode($response);
   }
 
-  public function removeData()
+  public function removeData(): void
   {
     $post = $this->request->getVar();
     $response = $this->jenisBankService->removeData($post);

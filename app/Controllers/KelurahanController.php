@@ -13,7 +13,7 @@ class KelurahanController extends BaseController
     $this->kelurahanService = Services::kelurahanService();
   }
 
-  public function getKelurahan()
+  public function getKelurahan(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->kelurahanService->getKelurahan($post);
@@ -21,7 +21,7 @@ class KelurahanController extends BaseController
     echo json_encode($response);
   }
 
-  public function getKelurahanById()
+  public function getKelurahanById(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->kelurahanService->getKelurahanById($post);

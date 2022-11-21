@@ -13,7 +13,7 @@ class KategoriPelangganController extends BaseController
     $this->kategoriPelangganService = Services::kategoriPelangganService();
   }
 
-  public function index()
+  public function index(): string
   {
     $data = [
       'title' => 'Kategori Pelanggan',
@@ -23,7 +23,7 @@ class KategoriPelangganController extends BaseController
     return view('kategoriPelanggan/index', $data);
   }
 
-  public function getDataTable()
+  public function getDataTable(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->kategoriPelangganService->getDataTable($post);
@@ -31,14 +31,14 @@ class KategoriPelangganController extends BaseController
     echo json_encode($response);
   }
 
-  public function getKategoriPelanggans()
+  public function getKategoriPelanggans(): void
   {
     $response = $this->kategoriPelangganService->getKategoriPelanggans();
 
     echo json_encode($response);
   }
 
-  public function saveData()
+  public function saveData(): void
   {
     $post = $this->request->getVar();
     $response = $this->kategoriPelangganService->saveData($post);
@@ -46,7 +46,7 @@ class KategoriPelangganController extends BaseController
     echo json_encode($response);
   }
 
-  public function removeData()
+  public function removeData(): void
   {
     $post = $this->request->getVar();
     $response = $this->kategoriPelangganService->removeData($post);

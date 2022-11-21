@@ -13,7 +13,7 @@ class UserController extends BaseController
     $this->userService = Services::userService();
   }
 
-  public function getUsers()
+  public function getUsers(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->userService->getUsers($post);

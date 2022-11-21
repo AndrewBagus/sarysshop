@@ -10,10 +10,10 @@ class GudangController extends BaseController
   private $gudangService;
   public function __construct()
   {
-    $this->gudangService = Services::GudangService();
+    $this->gudangService = Services::gudangService();
   }
 
-  public function index()
+  public function index(): string
   {
     $data = [
       'title' => 'Gudang',
@@ -23,7 +23,7 @@ class GudangController extends BaseController
     return view('gudang/index', $data);
   }
 
-  public function getDataTable()
+  public function getDataTable(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->gudangService->getDataTable($post);
@@ -31,14 +31,14 @@ class GudangController extends BaseController
     echo json_encode($response);
   }
 
-  public function getGudang()
+  public function getGudang(): void
   {
     $response = $this->gudangService->getGudang();
 
     echo json_encode($response);
   }
 
-  public function saveData()
+  public function saveData(): void
   {
     $post = $this->request->getVar();
     $response = $this->gudangService->saveData($post);
@@ -46,7 +46,7 @@ class GudangController extends BaseController
     echo json_encode($response);
   }
 
-  public function removeData()
+  public function removeData(): void
   {
     $post = $this->request->getVar();
     $response = $this->gudangService->removeData($post);

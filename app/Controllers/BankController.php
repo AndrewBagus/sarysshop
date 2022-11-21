@@ -10,10 +10,10 @@ class BankController extends BaseController
   private $bankService;
   public function __construct()
   {
-    $this->bankService = Services::BankService();
+    $this->bankService = Services::bankService();
   }
 
-  public function index()
+  public function index(): string
   {
     $data = [
       'title' => 'Bank',
@@ -23,7 +23,7 @@ class BankController extends BaseController
     return view('bank/index', $data);
   }
 
-  public function getDataTable()
+  public function getDataTable(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->bankService->getDataTable($post);
@@ -31,14 +31,14 @@ class BankController extends BaseController
     echo json_encode($response);
   }
 
-  public function getBanks()
+  public function getBanks(): void
   {
     $response = $this->bankService->getBanks();
 
     echo json_encode($response);
   }
 
-  public function saveData()
+  public function saveData(): void
   {
     $post = $this->request->getVar();
     $response = $this->bankService->saveData($post);
@@ -46,7 +46,7 @@ class BankController extends BaseController
     echo json_encode($response);
   }
 
-  public function removeData()
+  public function removeData(): void
   {
     $post = $this->request->getVar();
     $response = $this->bankService->removeData($post);

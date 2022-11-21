@@ -13,7 +13,7 @@ class SupplierController extends BaseController
     $this->supplierService = Services::supplierService();
   }
 
-  public function index()
+  public function index(): string
   {
     $data = [
       'title' => 'Supplier',
@@ -23,7 +23,7 @@ class SupplierController extends BaseController
     return view('supplier/index', $data);
   }
 
-  public function getDataTable()
+  public function getDataTable(): void
   {
     $post = (object)$this->request->getVar();
     $response = $this->supplierService->getDataTable($post);
@@ -31,14 +31,14 @@ class SupplierController extends BaseController
     echo json_encode($response);
   }
 
-  public function getSuppliers()
+  public function getSuppliers(): void
   {
     $response = $this->supplierService->getSuppliers();
 
     echo json_encode($response);
   }
 
-  public function saveData()
+  public function saveData(): void
   {
     $post = $this->request->getVar();
     $response = $this->supplierService->saveData($post);
@@ -46,7 +46,7 @@ class SupplierController extends BaseController
     echo json_encode($response);
   }
 
-  public function removeData()
+  public function removeData(): void
   {
     $post = $this->request->getVar();
     $response = $this->supplierService->removeData($post);
