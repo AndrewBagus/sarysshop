@@ -99,6 +99,12 @@ $routes->group(
     $routes->post('/gudang/getGudang', 'GudangController::getGudang');
     $routes->post('/gudang/saveData', 'GudangController::saveData');
     $routes->post('/gudang/removeData', 'GudangController::removeData');
+
+    $routes->get('/produk', 'ProdukController::index');
+    $routes->post('/produk/getDataTable', 'ProdukController::getDataTable');
+    $routes->post('/produk/getProduk', 'ProdukController::getProduk');
+    $routes->post('/produk/saveData', 'ProdukController::saveData');
+    $routes->post('/produk/removeData', 'ProdukController::removeData');
   }
 );
 
