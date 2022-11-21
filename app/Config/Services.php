@@ -20,6 +20,8 @@ use App\Services\Login\ILoginService;
 use App\Services\Login\LoginService;
 use App\Services\Pelanggan\IPelangganService;
 use App\Services\Pelanggan\PelangganService;
+use App\Services\Produk\IProdukService;
+use App\Services\Produk\ProdukService;
 use App\Services\Supplier\ISupplierService;
 use App\Services\Supplier\SupplierService;
 use App\Services\User\IUserService;
@@ -138,5 +140,14 @@ class Services extends BaseService
     }
 
     return new GudangService;
+  }
+
+  public static function produkService($getShared = true): IProdukService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('produkService');
+    }
+
+    return new ProdukService;
   }
 }
