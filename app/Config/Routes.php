@@ -57,9 +57,15 @@ $routes->group(
 
     $routes->get('/jenis-bank', 'JenisBankController::index');
     $routes->post('/jenisBank/getDataTable', 'JenisBankController::getDataTable');
-    $routes->post('/jenisBank/getJenisBank', 'JenisBankController::getJenisBank');
+    $routes->post('/jenisBank/getJenisBanks', 'JenisBankController::getJenisBanks');
     $routes->post('/jenisBank/saveData', 'JenisBankController::saveData');
     $routes->post('/jenisBank/removeData', 'JenisBankController::removeData');
+
+    $routes->get('/jenis-produk', 'JenisProdukController::index');
+    $routes->post('/jenisProduk/getDataTable', 'JenisProdukController::getDataTable');
+    $routes->post('/jenisProduk/getJenisProduks', 'JenisProdukController::getJenisProduks');
+    $routes->post('/jenisProduk/saveData', 'JenisProdukController::saveData');
+    $routes->post('/jenisProduk/removeData', 'JenisProdukController::removeData');
 
     $routes->get('/kategori-produk', 'KategoriProdukController::index');
     $routes->post('/kategoriProduk/getDataTable', 'KategoriProdukController::getDataTable');

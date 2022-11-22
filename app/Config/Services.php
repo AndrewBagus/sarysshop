@@ -10,6 +10,8 @@ use App\Services\Gudang\GudangService;
 use App\Services\Gudang\IGudangService;
 use App\Services\JenisBank\IJenisBankService;
 use App\Services\JenisBank\JenisBankService;
+use App\Services\JenisProduk\IJenisProdukService;
+use App\Services\JenisProduk\JenisProdukService;
 use App\Services\KategoriPelanggan\IKategoriPelangganService;
 use App\Services\KategoriPelanggan\KategoriPelangganService;
 use App\Services\KategoriProduk\IKategoriProdukService;
@@ -86,6 +88,15 @@ class Services extends BaseService
     }
 
     return new JenisBankService;
+  }
+
+  public static function jenisProdukService($getShared = true): IJenisProdukService
+  {
+    if ($getShared) {
+      return static::getSharedInstance('jenisProdukService');
+    }
+
+    return new JenisProdukService;
   }
 
   public static function kategoriProdukService($getShared = true): IKategoriProdukService
