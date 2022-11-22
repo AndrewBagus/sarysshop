@@ -294,6 +294,17 @@ function refreshTable(table, data) {
   table.rows.add(data).draw()
 }
 
+function generate_code() {
+  let text = ''
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  for (let i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+
+  return text
+}
+
 function getKelurahanDesa(usage) {
   $(usage).select2({
     theme: 'bootstrap-5',
