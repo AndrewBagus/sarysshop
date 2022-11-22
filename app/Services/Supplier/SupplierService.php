@@ -93,11 +93,12 @@ class SupplierService implements ISupplierService
       $data['created_by'] = session()->get('user_id');
     }
 
-    $this->supplierRepo->save($data);
+    $supplier_id = $this->supplierRepo->save($data);
 
     $response = [
       'status' => true,
-      'message' => $message
+      'message' => $message,
+      'supplier_id' => $supplier_id
     ];
 
     return $response;
