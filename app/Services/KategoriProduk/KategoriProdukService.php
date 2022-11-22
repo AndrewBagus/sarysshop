@@ -79,11 +79,12 @@ class KategoriProdukService implements IKategoriProdukService
     } else {
       $data['created_by'] = session()->get('user_id');
     }
-    $this->kategoriProdukRepo->save($data);
+    $kategori_id = $this->kategoriProdukRepo->save($data);
 
     $response = [
       'status' => true,
-      'message' => $message
+      'message' => $message,
+      'kategori_id' => $kategori_id
     ];
 
     return $response;

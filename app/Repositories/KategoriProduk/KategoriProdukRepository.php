@@ -24,7 +24,7 @@ class KategoriProdukRepository implements IKategoriProdukRepository
 
   public function save($data)
   {
-    return $this->model->save($data);
+    $this->model->save($data);
+    return  $this->model->getInsertID();
   }
-
 }
