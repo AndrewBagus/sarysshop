@@ -94,11 +94,12 @@ class GudangService implements IGudangService
       $data['created_by'] = session()->get('user_id');
     }
 
-    $this->gudangRepo->save($data);
+    $gudang_id = $this->gudangRepo->save($data);
 
     $response = [
       'status' => true,
-      'message' => $message
+      'message' => $message,
+      'gudang_id' => $gudang_id
     ];
 
     return $response;
