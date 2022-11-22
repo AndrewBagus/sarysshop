@@ -31,7 +31,7 @@ class GudangController extends BaseController
     echo json_encode($response);
   }
 
-  public function getGudang(): void
+  public function getGudangs(): void
   {
     $response = $this->gudangService->getGudang();
 

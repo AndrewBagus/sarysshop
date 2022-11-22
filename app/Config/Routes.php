@@ -96,13 +96,13 @@ $routes->group(
 
     $routes->get('/gudang', 'GudangController::index');
     $routes->post('/gudang/getDataTable', 'GudangController::getDataTable');
-    $routes->post('/gudang/getGudang', 'GudangController::getGudang');
+    $routes->post('/gudang/getGudangs', 'GudangController::getGudangs');
     $routes->post('/gudang/saveData', 'GudangController::saveData');
     $routes->post('/gudang/removeData', 'GudangController::removeData');
 
     $routes->get('/produk', 'ProdukController::index');
     $routes->post('/produk/getDataTable', 'ProdukController::getDataTable');
-    $routes->post('/produk/getProduk', 'ProdukController::getProduk');
+    $routes->post('/produk/getProduks', 'ProdukController::getProduks');
     $routes->post('/produk/saveData', 'ProdukController::saveData');
     $routes->post('/produk/removeData', 'ProdukController::removeData');
   }
