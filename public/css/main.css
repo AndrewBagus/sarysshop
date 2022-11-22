@@ -10,6 +10,17 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+.image-thumbnail {
+  width: 120px;
+  height: 120px;
+  border-radius: 20%;
+  cursor: pointer;
+  border-style: dashed;
+  padding: 2px;
+  margin-bottom: 5px;
+  object-fit: fill;
+}
+
 .header .header-container .nav-right .dropdown-menu {
   right: 7px;
 }
