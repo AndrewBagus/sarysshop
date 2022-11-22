@@ -1,6 +1,6 @@
 let tableList
 $(function () {
-  getOptionData('#jenis-bank', '/jenisBank/getJenisBank')
+  getOptionData('#jenis-bank', '/jenisBank/getJenisBanks')
   tableList = $('#table-list').DataTable({
     responsive: true,
     deferRender: true,

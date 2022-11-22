@@ -31,9 +31,9 @@ class JenisBankController extends BaseController
     echo json_encode($response);
   }
 
-  public function getJenisBank(): void
+  public function getJenisBanks(): void
   {
-    $response = $this->jenisBankService->getjenisBank();
+    $response = $this->jenisBankService->getjenisBanks();
 
     echo json_encode($response);
   }

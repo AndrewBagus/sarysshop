@@ -210,7 +210,7 @@ function getOptionData(usage, uri, showPlaceholder = true) {
         options =
           '<option value="' + v.id + '" selected>' + v.nama + '</option>'
     })
-    if (uri === '/jenisBank/getJenisBank') {
+    if (uri === '/jenisBank/getJenisBanks') {
       options += '<option value="0">Bank Lain</option>'
     }
     $(usage).html(options)
