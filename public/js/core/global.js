@@ -158,6 +158,10 @@ function isNumber(evt) {
   return true
 }
 
+function initThousand() {
+  $('.thousand').mask('#,##0', { reverse: true })
+}
+
 function thousandMark(usage) {
   $(usage).val(
     $(usage)
