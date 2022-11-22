@@ -78,7 +78,7 @@ class SupplierService implements ISupplierService
 
   public function getSuppliers()
   {
-    return $this->supplierRepo->getActive();
+    return $this->supplierRepo->getActive()->get()->getResult();
   }
 
   public function saveData($data)
