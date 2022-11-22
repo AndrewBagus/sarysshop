@@ -172,7 +172,7 @@ function thousandMark(usage) {
 }
 
 function thousandFormat(value) {
-  return value.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+  return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
 }
 
 function thousandUnFormat(value) {
@@ -197,7 +197,7 @@ function getFormData($form) {
   return indexed_array
 }
 
-function getOptionData(usage, uri, showPlaceholder = true) {
+function getOptionData(usage, uri, showPlaceholder = true, id) {
   $(usage).empty()
   f_ajax(base_uri + uri, {}, function (response) {
     let options = '<option></option>'
@@ -298,7 +298,7 @@ function refreshTable(table, data) {
   table.rows.add(data).draw()
 }
 
-function generate_code() {
+function generateCode() {
   let text = ''
   const possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -368,6 +368,7 @@ function getKelurahanDesa(usage) {
   })
 
   $(document).on('select2:open', usage, function () {
+    // $(this).parents('.form-group').find
     document.querySelector('.select2-search__field').focus()
   })
 }
