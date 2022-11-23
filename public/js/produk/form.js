@@ -85,8 +85,8 @@ $(function () {
       f_ajax_file(`${base_uri}/produk/saveData`, data, function (response) {
         if (response.status) {
           notification('success', 'Information', response.message)
-          // tableList.ajax.reload(null, false)
-          // $('#btn-back').click()
+          tableList.ajax.reload(null, false)
+          $('#btn-back').click()
         } else {
           newalert('info', 'Information', response.message)
         }
