@@ -12,6 +12,7 @@ class ProdukModel extends Model
     'kategori_produk_id',
     'jenis_produk_id',
     'supplier_id',
+    'gudang_id',
     'nama',
     'keterangan',
     'image',

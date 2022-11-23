@@ -11,7 +11,7 @@ class ProdukVarianModel extends Model
   protected $allowedFields    = [
     'produk_id',
     'code',
-    'warn',
+    'warna',
     'ukuran',
     'berat',
     'satuan',
@@ -19,6 +19,7 @@ class ProdukVarianModel extends Model
     'stok',
     'is_active',
     'created_by',
-    'updated_at'
+    'updated_at',
+    'updated_by',
   ];
 }
