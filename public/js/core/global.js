@@ -197,6 +197,17 @@ function getFormData($form) {
   return indexed_array
 }
 
+function getFormDataFile($form) {
+  const data = new FormData()
+  const unindexed_array = $form.serializeArray()
+
+  $.map(unindexed_array, function (n, _) {
+    data.append(n['name'], n['value'].trim())
+  })
+
+  return data
+}
+
 function getOptionData(usage, uri, showPlaceholder = true, id) {
   $(usage).empty()
   f_ajax(base_uri + uri, {}, function (response) {
