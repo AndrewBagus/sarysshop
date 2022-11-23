@@ -1,4 +1,10 @@
 <?php
+function dump($content)
+{
+  echo '<pre>';
+  print_r($content);
+  echo '</pre>';
+}
 
 function dump_die($content)
 {
