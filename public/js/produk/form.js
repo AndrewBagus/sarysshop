@@ -10,6 +10,7 @@ $(function () {
     $('#gudang')
       .val($($('#gudang option')[0]).val())
       .trigger('change')
+    $('#image-display').prop('src', `${base_uri}/assets/images/add-image.png`)
     destroyVarianTable()
     toggleShow('#card-table', '#card-form')
   })
