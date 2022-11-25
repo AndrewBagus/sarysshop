@@ -93,8 +93,8 @@ function createVarianForm(title, idForm, nameForm) {
           </div>`
 }
 
-function initVarianTable(uri, callback) {
-  f_ajax(uri, {}, function (response) {
+function initVarianTable(uri, parameters, callback) {
+  f_ajax(uri, parameters, function (response) {
     const kategoris = response.kategoris
     let columns = [
       {

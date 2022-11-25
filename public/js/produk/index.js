@@ -113,6 +113,7 @@ $(function () {
     $('#title-form').html('Tambah')
     initVarianTable(
       `${base_uri}/kategoriPelanggan/getKategoriPelanggans`,
+      {},
       function () {
         toggleShow('#card-form', '#card-table')
         $('#nama').focus()
@@ -123,6 +124,15 @@ $(function () {
   $(document).on('click', '.btn-edit', function (e) {
     e.preventDefault()
     const data = tableList.row($(this).parents('tr')).data()
+
+    initVarianTable(
+      `${base_uri}/kategoriPelanggan/getKategoriPelanggans`,
+      { produk_id: id },
+      function () {
+        toggleShow('#card-form', '#card-table')
+        $('#nama').focus()
+      }
+    )
     for (const item in data) {
       const field = $(`[name=${item}]`)
       if (field.length > 0 && item !== 'image')
@@ -133,15 +143,6 @@ $(function () {
           `${base_uri}/uploads/produk/${data[item]}`
         )
     }
-
-    if (data.image !== null) {
-    }
-    // const jenisproduk = data.jenis_produk_id === null ? 0 : data.jenis_produk_id
-    // $('#id').val(data.id)
-    // $('#jenis-produk').val(jenisproduk).trigger('change')
-    // $('#cabang').val(data.cabang)
-    // $('#rekening').val(data.rekening)
-    // $('#atas_nama').val(data.atas_nama)
 
     $('.tooltip').tooltip('hide')
     $('#title-form').html('Ubah')
