@@ -6,5 +6,6 @@ interface IKategoriPelangganRepository
 {
   public function getActive();
   public function getById($id);
+  public function getInProduk($produks);
   public function save($data);
 }

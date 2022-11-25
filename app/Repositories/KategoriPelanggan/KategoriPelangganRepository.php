@@ -27,4 +27,8 @@ class KategoriPelangganRepository implements IKategoriPelangganRepository
     return $this->model->save($data);
   }
 
+  public function getInProduk($produks)
+  {
+    return $this->model->whereIn('id', $produks);
+  }
 }
