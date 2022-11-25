@@ -126,29 +126,30 @@ $(function () {
     const data = tableList.row($(this).parents('tr')).data()
 
     initVarianTable(
-      `${base_uri}/kategoriPelanggan/getKategoriPelanggans`,
-      { produk_id: id },
-      function () {
-        toggleShow('#card-form', '#card-table')
+      `${base_uri}/produk/getProdukVarians`,
+      { produk_id: data.id },
+      function (response) {
+        for (const item in data) {
+          const field = $(`[name=${item}]`)
+          if (field.length > 0 && item !== 'image')
+            field.val(data[item]).trigger('change')
+          else if (item === 'image' && data[item] !== null)
+            $('#image-display').prop(
+              'src',
+              `${base_uri}/uploads/produk/${data[item]}`
+            )
+        }
+
+        tableVarian.clear().draw()
+        tableVarian.rows.add(response.varians).draw()
+        $('.tooltip').tooltip('hide')
+        $('#title-form').html('Ubah')
+
+        toggleShow('#card-form', '#card-table', '#nama')
+        tableVarian.columns.adjust()
         $('#nama').focus()
       }
     )
-    for (const item in data) {
-      const field = $(`[name=${item}]`)
-      if (field.length > 0 && item !== 'image')
-        field.val(data[item]).trigger('change')
-      else if (item === 'image' && data[item] !== null)
-        $('#image-display').prop(
-          'src',
-          `${base_uri}/uploads/produk/${data[item]}`
-        )
-    }
-
-    $('.tooltip').tooltip('hide')
-    $('#title-form').html('Ubah')
-
-    toggleShow('#card-form', '#card-table', '#nama')
-    $('#nama').focus()
   })
 
   $(document).on('click', '.btn-delete', function (e) {

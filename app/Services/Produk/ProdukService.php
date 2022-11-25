@@ -222,4 +222,41 @@ class ProdukService implements IProdukService
 
     return $response;
   }
+
+  public function getProdukVarians($request)
+  {
+    $varians = $this->produkVarianRepo
+      ->getByProduk($request->produk_id)
+      ->get()
+      ->getResult();
+    $varianIds = array_column($varians, 'id');
+    $varianHargas = $this->produkVarianHargaRepo->getInVarians($varianIds)
+      ->get()
+      ->getResult();
+    foreach ($varians as $i => $varian) {
+      $varian = (array)$varian;
+      $hargas = array_filter($varianHargas, function ($obj) use ($varian) {
+        if ($obj->produk_varian_id === $varian['id']) return true;
+      });
+      foreach ($hargas as $harga) {
+        $varian[$harga->pelanggan_id] = $harga->harga;
+      }
+      $varians[$i] = $varian;
+    }
+    $kategoris = [];
+    foreach ($varianHargas as $item) {
+      if (!in_array($item->pelanggan_id, array_column($kategoris, 'id')))
+        array_push($kategoris, [
+          'id' => $item->pelanggan_id,
+          'nama' => $item->nama
+        ]);
+    }
+
+    $response = [
+      'kategoris' => $kategoris,
+      'varians' => $varians
+    ];
+
+    return $response;
+  }
 }

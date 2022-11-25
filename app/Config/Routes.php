@@ -107,8 +107,9 @@ $routes->group(
     $routes->post('/gudang/removeData', 'GudangController::removeData');
 
     $routes->get('/produk', 'ProdukController::index');
-    $routes->post('/produk/getDataTable', 'ProdukController::getDataTable');
     $routes->post('/produk/getProduks', 'ProdukController::getProduks');
+    $routes->post('/produk/getDataTable', 'ProdukController::getDataTable');
+    $routes->post('/produk/getProdukVarians', 'ProdukController::getProdukVarians');
     $routes->post('/produk/saveData', 'ProdukController::saveData');
     $routes->post('/produk/removeData', 'ProdukController::removeData');
   }

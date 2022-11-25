@@ -31,6 +31,14 @@ class ProdukController extends BaseController
     echo json_encode($response);
   }
 
+  public function getProdukVarians(): void
+  {
+    $post = (object)$this->request->getVar();
+    $response = $this->produkService->getProdukVarians($post);
+
+    echo json_encode($response);
+  }
+
   public function saveData(): void
   {
     $post = $this->request->getVar();

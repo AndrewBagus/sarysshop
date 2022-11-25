@@ -33,6 +33,15 @@ class ProdukVarianHargaRepository implements IProdukVarianHargaRepository
     ]);
   }
 
+  public function getInVarians($varians)
+  {
+    $table = 'm_produk_varian_harga';
+    return $this->model
+      ->join('m_kategori_pelanggan kp', $table . '.kategori_pelanggan_id = kp.id')
+      ->whereIn($table . '.produk_varian_id', $varians)
+      ->select($table . '.id, ' . $table . '.harga, ' . $table . '.produk_varian_id, kp.id as pelanggan_id, kp.nama');
+  }
+
   public function getByVarianKategoriPelanggan($varian_id, $kategori_pelanggan_id)
   {
     return $this->model->where([

@@ -172,7 +172,9 @@ function thousandMark(usage) {
 }
 
 function thousandFormat(value) {
-  return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+  if (value === undefined) value = 0
+  if (typeof value === 'number') value = value.toString()
+  return value.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
 }
 
 function thousandUnFormat(value) {

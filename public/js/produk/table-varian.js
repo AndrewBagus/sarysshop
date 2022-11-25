@@ -242,7 +242,6 @@ function initVarianTable(uri, parameters, callback) {
         $('[data-bs-toggle="tooltip"]').tooltip()
       },
     })
-
     if (callback !== undefined) callback(response)
   })
 }

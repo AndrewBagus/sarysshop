@@ -14,7 +14,8 @@ class ProdukVarianRepository implements IProdukVarianRepository
 
   public function getByProduk($produk_id)
   {
-    return $this->model->where([
+    return $this->model->select('id, produk_id, code, warna, ukuran, berat, image, harga_beli, stok')
+      ->where([
       'produk_id' => $produk_id,
       'is_active' => true
     ]);
