@@ -1,7 +1,15 @@
 $(function () {
   $(document).on('click', '#btn-back', function () {
+    $('#id').val(0)
     $('#form-data')[0].reset()
-    $('#jenis-bank').val('').trigger('change')
+    $('#supplier').val('').trigger('change')
+    $('#kategori-produk').val('').trigger('change')
+    $('#jenis-produk')
+      .val($($('#jenis-produk option')[0]).val())
+      .trigger('change')
+    $('#gudang')
+      .val($($('#gudang option')[0]).val())
+      .trigger('change')
     destroyVarianTable()
     toggleShow('#card-table', '#card-form')
   })
