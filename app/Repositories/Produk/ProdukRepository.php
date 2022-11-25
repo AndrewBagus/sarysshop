@@ -27,6 +27,7 @@ class ProdukRepository implements IProdukRepository
       'm_produk.nama',
       'm_produk.image',
       'm_produk.tempo_kedatangan',
+      'm_produk.keterangan',
       'm_produk.is_active',
       'su.nama as supplier',
       'su.alamat as supplier_alamat',
