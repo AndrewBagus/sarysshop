@@ -93,49 +93,45 @@ function createVarianForm(title, idForm, nameForm) {
           </div>`
 }
 
-function initVarianTable(callback) {
-  f_ajax(
-    `${base_uri}/kategoriPelanggan/getKategoriPelanggans`,
-    {},
-    function (response) {
-      $('#id').val(0)
+function initVarianTable(uri, callback) {
+  f_ajax(uri, {}, function (response) {
+    const kategoris = response.kategoris
+    let columns = [
+      {
+        data: null,
+        render: function (_, _, _, meta) {
+          return meta.row + 1
+        },
+      },
+      {
+        data: 'image',
+        render: function (data) {
+          if (data === '' || data === null) {
+            data = base_uri + '/assets/images/add-image.png'
+          } else if (data.indexOf('blob') === -1) {
+            data = base_uri + '/uploads/varian/' + data
+          }
+          return `<img src="${data}" class="image-uploader image-thumbnail" accept="image/png, image/jpg, image/jpeg">`
+        },
+      },
+      {
+        data: 'code',
+      },
+      {
+        data: 'berat',
+      },
+      {
+        data: 'harga_beli',
+        render: function (data) {
+          let content = ''
+          if (data !== '') content = 'Rp. ' + thousandFormat(data)
 
-      let columns = [
-        {
-          data: null,
-          render: function (_, _, _, meta) {
-            return meta.row + 1
-          },
+          return content
         },
-        {
-          data: 'image',
-          render: function (data) {
-            if (data === '' || data === null) {
-              data = base_uri + '/assets/images/add-image.png'
-            } else if (data.indexOf('blob') === -1) {
-              data = base_uri + '/uploads/varian/' + data
-            }
-            return `<img src="${data}" class="image-uploader image-thumbnail" accept="image/png, image/jpg, image/jpeg">`
-          },
-        },
-        {
-          data: 'code',
-        },
-        {
-          data: 'berat',
-        },
-        {
-          data: 'harga_beli',
-          render: function (data) {
-            let content = ''
-            if (data !== '') content = 'Rp. ' + thousandFormat(data)
-
-            return content
-          },
-        },
-      ]
-      const colspan = response.length + 1
-      let headers = `<tr>
+      },
+    ]
+    const colspan = kategoris.length + 1
+    let headers = `<tr>
                         <th rowspan="2" style="vertical-align: middle;"> No </th>
                         <th rowspan="2" style="vertical-align: middle;"> Gambar </th>
                         <th colspan="2" style="text-align: center;"> Spesifikasi </th>
@@ -144,110 +140,109 @@ function initVarianTable(callback) {
                         <th rowspan="2" style="vertical-align: middle;" data-priority="1"> Aksi </th>
                       </tr>`
 
-      headers += '<tr>'
-      headers += '<th style="vertical-align: middle;">SKU</th>'
-      headers += '<th style="vertical-align: middle;">Berat (gram)</th>'
-      headers += '<th style="vertical-align: middle;">Harga Beli</th>'
+    headers += '<tr>'
+    headers += '<th style="vertical-align: middle;">SKU</th>'
+    headers += '<th style="vertical-align: middle;">Berat (gram)</th>'
+    headers += '<th style="vertical-align: middle;">Harga Beli</th>'
 
-      const contentFormHargaBeli = createVarianForm(
-        'Harga Beli',
-        'harga-beli',
-        'harga_beli'
-      )
-      $('#form-varian-left').append(contentFormHargaBeli)
-      $('#harga-beli').rules('add', {
-        required: true,
-        messages: {
-          required: 'Harga Beli harus di isi',
-        },
-      })
+    const contentFormHargaBeli = createVarianForm(
+      'Harga Beli',
+      'harga-beli',
+      'harga_beli'
+    )
+    $('#form-varian-left').append(contentFormHargaBeli)
+    $('#harga-beli').rules('add', {
+      required: true,
+      messages: {
+        required: 'Harga Beli harus di isi',
+      },
+    })
 
-      for (let i = 0; i < response.length; i++) {
-        const item = response[i]
-        const title = `Harga ${item.nama}`
-        const arrayName = item.nama.split(' ')
-        let idForm = item.nama.toLowerCase()
+    for (let i = 0; i < kategoris.length; i++) {
+      const item = kategoris[i]
+      const title = `Harga ${item.nama}`
+      const arrayName = item.nama.split(' ')
+      let idForm = item.nama.toLowerCase()
 
-        if (arrayName.length > 0) {
-          nameForm = arrayName.join('_').toLowerCase()
-          idForm = arrayName.join('-').toLowerCase()
-        }
-
-        headers += `<th>${title}</th>`
-        columns.push({
-          data: item.id,
-          render: function (data) {
-            let content = ''
-            if (data !== '') content = 'Rp. ' + thousandFormat(data)
-
-            return content
-          },
-        })
-
-        const contentForm = createVarianForm(title, idForm, item.id)
-        if (i % 2 === 0) {
-          $('#form-varian-left').append(contentForm)
-        } else {
-          $('#form-varian-right').append(contentForm)
-        }
-
-        $('#' + idForm).rules('add', {
-          required: true,
-          messages: {
-            required: title + ' harus di isi',
-          },
-        })
+      if (arrayName.length > 0) {
+        nameForm = arrayName.join('_').toLowerCase()
+        idForm = arrayName.join('-').toLowerCase()
       }
 
-      headers += '<th style="vertical-align: middle;">Ukuran</th>'
-      headers += '<th style="vertical-align: middle;">Warna</th>'
-      headers += '<th style="vertical-align: middle;">Stok</th>'
-      headers += '</tr>'
-      $('#table-varian-list thead').html(headers)
-      initThousand()
+      headers += `<th>${title}</th>`
+      columns.push({
+        data: item.id,
+        render: function (data) {
+          let content = ''
+          if (data !== '') content = 'Rp. ' + thousandFormat(data)
 
-      columns.push(
-        {
-          data: 'ukuran',
-        },
-        {
-          data: 'warna',
-        },
-        {
-          data: 'stok',
-        },
-        {
-          data: null,
-          render: function () {
-            const btnEdit =
-              '<button type="button" class="btn btn-outline-primary btn-sm btn-edit-varian" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Ubah"><i class="fa fa-edit"></i></button>'
-            const btnDelete =
-              '<button type="button" class="btn btn-outline-danger mt-1 mt-lg-0 btn-sm btn-delete-varian" data-bs-toggle="tooltip" data-bs-title="Hapus"><i class="fa fa-trash"></i></button>'
-
-            const btn = `<center> ${btnEdit} ${btnDelete} </center>`
-
-            return btn
-          },
-        }
-      )
-
-      tableVarian = $('#table-varian-list').DataTable({
-        scrollX: true,
-        columns: columns,
-        language: {
-          oPaginate: {
-            sNext: '<i class="fa fa-angle-right"></i>',
-            sPrevious: '<i class="fa fa-angle-left"></i>',
-          },
-          sEmptyTable: 'Data tidak tersedia',
-        },
-        drawCallback: function (_) {
-          $('select[name=table-varian-list_length]').removeClass('form-select')
-          $('[data-bs-toggle="tooltip"]').tooltip()
+          return content
         },
       })
 
-      if (callback !== undefined) callback()
+      const contentForm = createVarianForm(title, idForm, item.id)
+      if (i % 2 === 0) {
+        $('#form-varian-left').append(contentForm)
+      } else {
+        $('#form-varian-right').append(contentForm)
+      }
+
+      $('#' + idForm).rules('add', {
+        required: true,
+        messages: {
+          required: title + ' harus di isi',
+        },
+      })
     }
-  )
+
+    headers += '<th style="vertical-align: middle;">Ukuran</th>'
+    headers += '<th style="vertical-align: middle;">Warna</th>'
+    headers += '<th style="vertical-align: middle;">Stok</th>'
+    headers += '</tr>'
+    $('#table-varian-list thead').html(headers)
+    initThousand()
+
+    columns.push(
+      {
+        data: 'ukuran',
+      },
+      {
+        data: 'warna',
+      },
+      {
+        data: 'stok',
+      },
+      {
+        data: null,
+        render: function () {
+          const btnEdit =
+            '<button type="button" class="btn btn-outline-primary btn-sm btn-edit-varian" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Ubah"><i class="fa fa-edit"></i></button>'
+          const btnDelete =
+            '<button type="button" class="btn btn-outline-danger mt-1 mt-lg-0 btn-sm btn-delete-varian" data-bs-toggle="tooltip" data-bs-title="Hapus"><i class="fa fa-trash"></i></button>'
+
+          const btn = `<center> ${btnEdit} ${btnDelete} </center>`
+
+          return btn
+        },
+      }
+    )
+
+    tableVarian = $('#table-varian-list').DataTable({
+      scrollX: true,
+      columns: columns,
+      language: {
+        oPaginate: {
+          sNext: '<i class="fa fa-angle-right"></i>',
+          sPrevious: '<i class="fa fa-angle-left"></i>',
+        },
+        sEmptyTable: 'Data tidak tersedia',
+      },
+      drawCallback: function (_) {
+        $('select[name=table-varian-list_length]').removeClass('form-select')
+        $('[data-bs-toggle="tooltip"]').tooltip()
+      },
+    })
+
+    if (callback !== undefined) callback(response)
+  })
 }

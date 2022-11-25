@@ -4,6 +4,7 @@ $(function () {
   getOptionData('#kategori-produk', '/kategoriProduk/getKategoriProduks')
   getOptionData('#gudang', '/gudang/getGudangs', false)
   getOptionData('#jenis-produk', '/jenisProduk/getJenisProduks', false)
+
   tableList = $('#table-list').DataTable({
     responsive: true,
     deferRender: true,
@@ -110,26 +111,43 @@ $(function () {
     e.preventDefault()
     $('.tooltip').tooltip('hide')
     $('#title-form').html('Tambah')
-    initVarianTable(function () {
-      toggleShow('#card-form', '#card-table')
-      $('#nama').focus()
-    })
+    initVarianTable(
+      `${base_uri}/kategoriPelanggan/getKategoriPelanggans`,
+      function () {
+        toggleShow('#card-form', '#card-table')
+        $('#nama').focus()
+      }
+    )
   })
 
   $(document).on('click', '.btn-edit', function (e) {
     e.preventDefault()
     const data = tableList.row($(this).parents('tr')).data()
-    const jenisproduk = data.jenis_produk_id === null ? 0 : data.jenis_produk_id
-    $('#id').val(data.id)
-    $('#jenis-produk').val(jenisproduk).trigger('change')
-    $('#cabang').val(data.cabang)
-    $('#rekening').val(data.rekening)
-    $('#atas_nama').val(data.atas_nama)
+    for (const item in data) {
+      const field = $(`[name=${item}]`)
+      if (field.length > 0 && item !== 'image')
+        field.val(data[item]).trigger('change')
+      else if (item === 'image' && data[item] !== null)
+        $('#image-display').prop(
+          'src',
+          `${base_uri}/uploads/produk/${data[item]}`
+        )
+    }
+
+    if (data.image !== null) {
+    }
+    // const jenisproduk = data.jenis_produk_id === null ? 0 : data.jenis_produk_id
+    // $('#id').val(data.id)
+    // $('#jenis-produk').val(jenisproduk).trigger('change')
+    // $('#cabang').val(data.cabang)
+    // $('#rekening').val(data.rekening)
+    // $('#atas_nama').val(data.atas_nama)
 
     $('.tooltip').tooltip('hide')
     $('#title-form').html('Ubah')
 
     toggleShow('#card-form', '#card-table', '#nama')
+    $('#nama').focus()
   })
 
   $(document).on('click', '.btn-delete', function (e) {
