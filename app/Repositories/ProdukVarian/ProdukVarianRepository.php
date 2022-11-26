@@ -16,9 +16,9 @@ class ProdukVarianRepository implements IProdukVarianRepository
   {
     return $this->model->select('id, produk_id, code, warna, ukuran, berat, image, harga_beli, stok')
       ->where([
-      'produk_id' => $produk_id,
-      'is_active' => true
-    ]);
+        'produk_id' => $produk_id,
+        'is_active' => true
+      ]);
   }
 
   public function checkCode($id, $code)
@@ -38,5 +38,13 @@ class ProdukVarianRepository implements IProdukVarianRepository
   {
     $this->model->save($data);
     return $this->model->getInsertID();
+  }
+
+  public function removeByProduk($produk_id)
+  {
+    return $this->model
+      ->where('produk_id', $produk_id)
+      ->set('is_active', false)
+      ->update();
   }
 }

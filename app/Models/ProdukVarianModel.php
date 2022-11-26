@@ -14,7 +14,7 @@ class ProdukVarianModel extends Model
     'warna',
     'ukuran',
     'berat',
-    'satuan',
+    'image',
     'harga_beli',
     'stok',
     'is_active',

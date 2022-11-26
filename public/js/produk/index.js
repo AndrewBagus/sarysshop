@@ -131,7 +131,7 @@ $(function () {
       function (response) {
         for (const item in data) {
           const field = $(`[name=${item}]`)
-          if (field.length > 0 && item !== 'image')
+          if (field.length > 0 && (item !== 'image' && item !== 'stok') )
             field.val(data[item]).trigger('change')
           else if (item === 'image' && data[item] !== null)
             $('#image-display').prop(

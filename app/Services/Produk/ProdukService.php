@@ -6,6 +6,7 @@ use App\Repositories\KategoriPelanggan\KategoriPelangganRepository;
 use App\Repositories\Produk\ProdukRepository;
 use App\Repositories\ProdukVarian\ProdukVarianRepository;
 use App\Repositories\ProdukVarianHarga\ProdukVarianHargaRepository;
+use Config\Database;
 
 class ProdukService implements IProdukService
 {
@@ -123,6 +124,7 @@ class ProdukService implements IProdukService
       $produkData['created_by'] = session()->get('user_id');
     }
     $produk_id = $this->produkRepo->save($produkData);
+    $produk_id = $produk_id === 0 ? $produkData['id'] : $produk_id;
 
     $varians = json_decode($post['varians']);
     foreach ($varians as $i => $varian) {
@@ -134,7 +136,7 @@ class ProdukService implements IProdukService
         'warna' => $varian['warna'],
         'ukuran' => $varian['ukuran'],
         'berat' => $varian['berat'],
-        'harga_beli' => (int) str_replace(',', '', $varian['code']),
+        'harga_beli' => (int) str_replace(',', '', $varian['harga_beli']),
         'stok' => $varian['stok'],
       ];
 
@@ -146,7 +148,7 @@ class ProdukService implements IProdukService
 
         $new_name = time() . '.' . $ext;
         $path = $upload_location . $new_name;
-        if (move_uploaded_file($_FILES['varianFile_' . $i]['tmp_name'], $path)) {
+        if (move_uploaded_file($file['tmp_name'], $path)) {
           $varianData['image'] = $new_name;
         }
       }
@@ -159,6 +161,7 @@ class ProdukService implements IProdukService
         $varianData['created_by'] = session()->get('user_id');
       }
       $varian_id = $this->produkVarianRepo->save($varianData);
+      $varian_id = $varian_id === 0 ? $varianData['id'] : $varian_id;
       $varians[$i]->id = $varian_id;
 
       $keys = array_keys($varian);
@@ -174,7 +177,7 @@ class ProdukService implements IProdukService
           if (empty($checkHarga)) {
             $hargaData['created_by'] = session()->get('user_id');
           } else {
-            $hargaDatap['id'] = $checkHarga->id;
+            $hargaData['id'] = $checkHarga->id;
             $hargaData['updated_at'] = date('Y-m-d H:i:s');
             $hargaData['updated_by'] = session()->get('user_id');
           }
@@ -213,7 +216,17 @@ class ProdukService implements IProdukService
   public function removeData($data)
   {
     $data['is_active'] = false;
+    $db = Database::connect();
+    $db->transStart();
     $this->produkRepo->save($data);
+    $this->produkVarianRepo->removeByProduk($data['id']);
+
+    $hargas = $this->produkVarianHargaRepo->getByProduk($data['id'])
+      ->get()
+      ->getResult();
+    $hargas = array_column($hargas, 'id');
+    $this->produkVarianHargaRepo->removeByProduk($hargas);
+    $db->transComplete();
 
     $response = [
       'status' => true,

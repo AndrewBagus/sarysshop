@@ -8,4 +8,5 @@ interface IProdukVarianRepository
   public function checkCode($id, $code);
   public function getByProduk($produk_id);
   public function save($data);
+  public function removeByProduk($produk_id);
 }

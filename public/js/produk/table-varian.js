@@ -18,6 +18,42 @@ $(function () {
     $('#sku').val(code)
   })
 
+  $(document).on('click', '.btn-edit-varian', function (e) {
+    e.preventDefault()
+    const row = tableVarian.row($(this).parents('tr'))
+    const index = row.index()
+    const data = row.data()
+
+    $('#varian-id').val(data.id)
+    $('#varian-index').val(index)
+
+    for (const item in data) {
+      const field = $(`[name=${item}]`)
+      if (field.length > 0 && item !== 'image' && item !== 'id')
+        field.val(thousandFormat(data[item]))
+      else if (item === 'image' && data[item] !== null)
+        $('#image-varian-display').prop(
+          'src',
+          `${base_uri}/uploads/varian/${data[item]}`
+        )
+    }
+
+    $('#varian-title').html('Ubah')
+    $('#modal-varian').modal('show')
+    $('#sku').focus()
+  })
+
+  $(document).on('click', '.btn-delete-varian', function (e) {
+    e.preventDefault()
+    const row = tableVarian.row($(this).parents('tr'))
+    const index = row.index()
+    const varians = tableVarian.rows().data().toArray()
+    confirmation(function () {
+      varians.splice(index, 1)
+      refreshTable(tableVarian, varians)
+    })
+  })
+
   initValidateForm(
     '#form-varian',
     {
@@ -59,6 +95,10 @@ $(function () {
         tableData[index] = data
       }
 
+      if ($('#varian-index').val() !== '') {
+        $('#modal-varian').modal('hide')
+      }
+
       clearVarianForm()
       refreshTable(tableVarian, tableData)
       notification('success', 'Information', 'Data berhasil disimpan')
@@ -67,6 +107,8 @@ $(function () {
 
   function clearVarianForm() {
     $('#form-varian')[0].reset()
+    $('#varian-id').val(0)
+    $('#varian-index').val('')
     $('#image-varian-display').prop(
       'src',
       base_uri + '/assets/images/add-image.png'

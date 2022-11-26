@@ -15,7 +15,7 @@ class ProdukRepository implements IProdukRepository
     $getVarian = "(select id from m_produk_varian where produk_id = m_produk.id and is_active = true)";
     $varianQuery = "(select count(pv.id) from m_produk_varian pv join m_produk pr on pv.produk_id = pr.id where pv.produk_id = m_produk.id and pv.is_active = true) as varian";
     $stokQuery = "(select sum(pv.stok) from m_produk_varian pv join m_produk pr on pv.produk_id = pr.id where pv.produk_id = m_produk.id and pv.is_active = true) as stok";
-    $minPriceQuery = "(select min(harga) from m_produk_varian_harga where produk_varian_id in " . $getVarian . ") as min_harga";
+    $minPriceQuery = "(select min(harga) from m_produk_varian_harga where produk_varian_id in " . $getVarian . " and harga > 0) as min_harga";
     $maxPriceQuery = "(select max(harga) from m_produk_varian_harga where produk_varian_id in " . $getVarian . ") as max_harga";
 
     $this->produkSelect = [

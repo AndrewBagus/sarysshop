@@ -3,6 +3,7 @@
 namespace App\Repositories\ProdukVarianHarga;
 
 use App\Models\ProdukVarianHargaModel;
+use Config\Database;
 
 class ProdukVarianHargaRepository implements IProdukVarianHargaRepository
 {
@@ -14,10 +15,11 @@ class ProdukVarianHargaRepository implements IProdukVarianHargaRepository
 
   public function getByProduk($produk_id)
   {
-    return $this->model->where([
-      'produk_id' => $produk_id,
-      'is_active' => true
-    ]);
+    $table = 'm_produk_varian_harga';
+    return $this->model
+      ->join('m_produk_varian pv', $table . '.produk_varian_id = pv.id')
+      ->select($table . '.*')
+      ->where('pv.produk_id', $produk_id);
   }
 
   public function getById($id)
@@ -37,8 +39,9 @@ class ProdukVarianHargaRepository implements IProdukVarianHargaRepository
   {
     $table = 'm_produk_varian_harga';
     return $this->model
-      ->join('m_kategori_pelanggan kp', $table . '.kategori_pelanggan_id = kp.id')
+      ->join('m_kategori_pelanggan kp', $table . '.kategori_pelanggan_id = kp.id', 'right')
       ->whereIn($table . '.produk_varian_id', $varians)
+      ->orWhere('kp.is_active', true)
       ->select($table . '.id, ' . $table . '.harga, ' . $table . '.produk_varian_id, kp.id as pelanggan_id, kp.nama');
   }
 
@@ -54,5 +57,13 @@ class ProdukVarianHargaRepository implements IProdukVarianHargaRepository
   public function save($data)
   {
     return $this->model->save($data);
+  }
+
+  public function removeByProduk($hargas)
+  {
+    return $this->model
+      ->whereIn('id', $hargas)
+      ->set('is_active', false)
+      ->update();
   }
 }
