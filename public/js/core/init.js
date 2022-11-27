@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
   $('.select2bs5').select2({
     theme: 'bootstrap-5',
     allowClear: true,
@@ -10,7 +10,7 @@ $(function () {
 
   initThousand()
 
-  $(document).on('blur', 'input[data-toggle=datetimepicker]', function () {
+  $(document).on('blur', 'input[data-toggle=datetimepicker]', function() {
     if ($(this).data('datetimepicker') !== undefined)
       $(this).data('datetimepicker').hide()
   })
@@ -19,11 +19,11 @@ $(function () {
     format: date_format,
   })
 
-  $(document).on('click', '*[data-bs-toggle="tooltip"]', function () {
+  $(document).on('click', '*[data-bs-toggle="tooltip"]', function() {
     $(this).tooltip('hide')
   })
 
-  $(document).on('click', '#dropdownMenuLink', function (e) {
+  $(document).on('click', '#dropdownMenuLink', function(e) {
     e.preventDefault()
     if ($(this).hasClass('show')) {
       $(this).removeClass('show')
@@ -35,9 +35,9 @@ $(function () {
   })
 })
 
-window.addEventListener('load', function () {
-  const t = document.getElementById('loader')
-  setTimeout(function () {
-    t.classList.add('fadeOut')
-  }, 300)
-})
+// window.addEventListener('load', function () {
+//   const t = document.getElementById('loader')
+//   setTimeout(function () {
+//     t.classList.add('fadeOut')
+//   }, 300)
+// })

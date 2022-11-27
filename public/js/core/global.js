@@ -217,6 +217,9 @@ function getFormDataFile($form) {
 function getOptionData(usage, uri, showPlaceholder = true, id) {
   $(usage).empty()
   f_ajax(base_uri + uri, {}, function (response) {
+    if (uri === '/kategoriPelanggan/getKategoriPelanggans')
+      response = response.kategoris
+
     let options = '<option></option>'
     $.each(response, function (i, v) {
       let selected = ''
