@@ -1,12 +1,12 @@
-<?= $this->extend('layouts/layout'); ?>
+<?php echo $this->extend('layouts/layout'); ?>
 
-<?= $this->section('page-content') ?>
+<?php echo $this->section('page-content') ?>
 <div class="card" id="card-table">
   <div class="card-header">
     <h1>Master Data Kategori Pelanggan</h1>
     <div class="card-tools">
-      <button type="button" class="btn btn-outline-primary" id="btn-new" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
-        <i class="fa fa-plus"></i> Tambah Data
+      <button type="button" class="btn btn-outline-primary" id="btn-new" data-bs-toggle="tooltip" data-bs-title="Tambah Kategori">
+        <i class="fa fa-plus"></i> Tambah Kategori
       </button>
     </div>
   </div>
@@ -25,10 +25,10 @@
   </div>
 </div>
 
-<?= $this->include('kategoriPelanggan/form') ?>
-<?= $this->endSection() ?>
+<?php echo $this->include('kategoriPelanggan/form') ?>
+<?php echo $this->endSection() ?>
 
-<?= $this->section('page-js') ?>
-<script src="<?= base_url() ?>/js/kategoriPelanggan/index.js?v=<?= rand() ?>"></script>
-<script src="<?= base_url() ?>/js/kategoriPelanggan/form.js?v=<?= rand() ?>"></script>
-<?= $this->endSection() ?>
+<?php echo $this->section('page-js') ?>
+<script src="<?php echo base_url() ?>/js/kategoriPelanggan/index.js?v=<?php echo rand() ?>"></script>
+<script src="<?php echo base_url() ?>/js/kategoriPelanggan/form.js?v=<?php echo rand() ?>"></script>
+<?php echo $this->endSection() ?>

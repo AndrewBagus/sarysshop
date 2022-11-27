@@ -2,7 +2,7 @@
   <div class="card-header">
     <h2>Varian Produk</h2>
     <div class="card-tools">
-      <button type="button" class="btn btn-outline-primary" id="btn-new-varian" data-bs-toggle="tooltip" data-bs-title="Tambah Data">
+      <button type="button" class="btn btn-outline-primary" id="btn-new-varian" data-bs-toggle="tooltip" data-bs-title="Tambah Varian">
         <i class="fa fa-plus"></i> Tambah Varian
       </button>
     </div>
