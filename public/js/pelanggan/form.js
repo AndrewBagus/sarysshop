@@ -1,10 +1,6 @@
 $(function () {
   getKelurahanDesa('#kelurahan')
-  getOptionData(
-    '#kategori-pelanggan',
-    '/kategoriPelanggan/getKategoriPelanggans',
-    false
-  )
+  getKategoriPelanggan()
 
   $(document).on('select2:close', '#kelurahan', function () {
     $(this).closest('form').find('#telp')[0].focus()
@@ -99,4 +95,33 @@ $(function () {
       })
     },
   })
+
+  function getKategoriPelanggan() {
+    f_ajax(
+      `${base_uri}/kategoriPelanggan/getKategoriPelanggans`,
+      {},
+      function (response) {
+        let options = '<option></option>'
+        $.each(response.kategoris, function (i, v) {
+          let selected = ''
+
+          if (v.id == id) {
+            selected = 'selected'
+          }
+
+          options +=
+            '<option value="' +
+            v.id +
+            '" ' +
+            selected +
+            '>' +
+            v.nama +
+            '</option>'
+        })
+
+        $('#kategori-pelanggan').html(options)
+        $('#kategori-pelanggan-filter').html(options)
+      }
+    )
+  }
 })

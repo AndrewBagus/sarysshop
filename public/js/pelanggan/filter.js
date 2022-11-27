@@ -1,9 +1,4 @@
 $(function () {
-  getOptionData(
-    '#kategori-pelanggan-filter',
-    '/kategoriPelanggan/getKategoriPelanggans'
-  )
-
   $(document).on('click', '#btn-filter', function (e) {
     e.preventDefault()
     $('#modal-filter').modal('show')
