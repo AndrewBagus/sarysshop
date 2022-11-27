@@ -89,6 +89,11 @@ class ProdukService implements IProdukService
         return $this->produkRepo->getActive();
     }
 
+    public function findProduks($post)
+    {
+        return $this->produkVarianRepo->findByProduk($post->search);
+    }
+
     public function saveData($post)
     {
         $message = 'Data berhasil disimpan';
