@@ -9,9 +9,9 @@
   <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
   <title>Login | SarysShop</title>
-  <link href="<?= base_url(); ?>/assets/css/style.css" rel="stylesheet">
-  <link href="<?= base_url(); ?>/css/login.css" rel="stylesheet">
-  <link href="<?= base_url(); ?>/css/main.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>/css/login.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>/css/main.css" rel="stylesheet">
 </head>
 
 <body>
@@ -21,17 +21,17 @@
         <div class="col-lg-6">
           <div class="card1 pb-5">
             <div class="row">
-              <img src="<?= base_url(); ?>/assets/images/web-logo.png" class="logo" style="transform: scale(.85);">
+              <img src="<?php echo base_url('/assets/images/toko.png'); ?>" class="logo" style="transform: scale(.85);">
             </div>
             <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-              <img src="<?= base_url('/assets/images/bg-login.png') ?>" class="image">
+              <img src="<?php echo base_url('/assets/images/bg-login.png') ?>" class="image">
             </div>
           </div>
         </div>
         <div class="col-lg-6 d-flex align-items-center">
           <form id="form-data" autocomplete="off">
             <!-- CSRF token -->
-            <?= csrf_field() ?>
+            <?php echo csrf_field() ?>
             <div class="card2 card border-0 px-4 py-5" style="box-shadow: none;">
               <div class="form-group">
                 <label class="mb-1">
@@ -66,13 +66,13 @@
     </div>
   </div>
 
-  <script defer="defer" src="<?= base_url(); ?>/assets/js/main.js"></script>
-  <script defer="defer" src="<?= base_url(); ?>/assets/vendors/jquery/jquery.min.js"></script>
-  <script defer="defer" src="<?= base_url(); ?>/assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+  <script defer="defer" src="<?php echo base_url(); ?>/assets/js/main.js"></script>
+  <script defer="defer" src="<?php echo base_url(); ?>/assets/vendors/jquery/jquery.min.js"></script>
+  <script defer="defer" src="<?php echo base_url(); ?>/assets/vendors/jquery-validation/jquery.validate.min.js"></script>
   <script defer="defer" src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script defer="defer" src="<?= base_url(); ?>/js/core/global.js?v<?= rand() ?>"></script>
+  <script defer="defer" src="<?php echo base_url(); ?>/js/core/global.js?v<?php echo rand() ?>"></script>
 
-  <script defer="defer" src="<?= base_url(); ?>/js/login/index.js?v<?= rand() ?>"></script>
+  <script defer="defer" src="<?php echo base_url(); ?>/js/login/index.js?v<?php echo rand() ?>"></script>
 </body>
 
 </html>

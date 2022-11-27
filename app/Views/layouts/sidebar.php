@@ -2,10 +2,10 @@
   <div class="sidebar-inner">
     <div class="sidebar-logo">
       <div class="peers ai-c fxw-nw">
-        <div class="peer peer-greed"><a class="sidebar-link td-n" href="<?= base_url() ?>">
+        <div class="peer peer-greed"><a class="sidebar-link td-n" href="<?php echo base_url() ?>">
             <div class="peers ai-c fxw-nw">
               <div class="peer">
-                <div class="logo"><img src="<?= base_url(); ?>/assets/images/web-logo.png" alt="logo" style="width: 175px; height: 65px; scale: 0.85;"></div>
+                <div class="logo"><img src="<?php echo base_url(); ?>/assets/images/toko.png" alt="logo" style="width: 180px; height: 110px; scale: 0.85;"></div>
               </div>
             </div>
           </a></div>
@@ -37,12 +37,12 @@
           $parentClass = $marginClass . ' ' . $parentActive;
         }
       ?>
-        <li class="nav-item <?= $parentClass ?>">
-          <a class="<?= $linkClass; ?>" href="<?= $link ?>">
+        <li class="nav-item <?php echo $parentClass ?>">
+          <a class="<?php echo $linkClass; ?>" href="<?php echo $link ?>">
             <span class="icon-holder">
-              <i class="<?= $feature['icon']; ?>"></i>
+              <i class="<?php echo $feature['icon']; ?>"></i>
             </span>
-            <span class="title"><?= $feature['nama']; ?></span>
+            <span class="title"><?php echo $feature['nama']; ?></span>
             <?php if ($hasChild > 0) : ?>
               <span class="arrow"><i class="ti-angle-right"></i></span>
             <?php endif ?>
@@ -52,12 +52,12 @@
               <?php foreach ($feature['child'] as $item) :
                 $childActive = $item['nama'] === $title ? 'active' : '';
               ?>
-                <li class="pL-25 <?= $childActive; ?>">
-                  <a class="sidebar-link" href="<?= base_url($item['link']); ?>">
+                <li class="pL-25 <?php echo $childActive; ?>">
+                  <a class="sidebar-link" href="<?php echo base_url($item['link']); ?>">
                     <span class="icon-holder">
-                      <i class="<?= $item['icon']; ?>"></i>
+                      <i class="<?php echo $item['icon']; ?>"></i>
                     </span>
-                    <?= $item['nama']; ?>
+                    <?php echo $item['nama']; ?>
                   </a>
                 </li>
               <?php endforeach ?>
