@@ -48,12 +48,16 @@ function confirmation(statement, statement2, title) {
   })
 }
 
-function newalert(tipe, title, message) {
+function newalert(tipe, title, message, callback) {
   Swal.fire({
     heightAuto: false,
     icon: tipe,
     title: title,
     html: message,
+  }).then(function (result) {
+    if (callback !== undefined) {
+      callback(result)
+    }
   })
 }
 
