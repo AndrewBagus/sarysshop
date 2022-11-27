@@ -116,6 +116,7 @@ $(function () {
       {},
       function () {
         toggleShow('#card-form', '#card-table')
+        tableVarian.columns.adjust()
         $('#nama').focus()
       }
     )
@@ -129,27 +130,28 @@ $(function () {
       `${base_uri}/produk/getProdukVarians`,
       { produk_id: data.id },
       function (response) {
-        for (const item in data) {
-          const field = $(`[name=${item}]`)
-          if (field.length > 0 && (item !== 'image' && item !== 'stok') )
-            field.val(data[item]).trigger('change')
-          else if (item === 'image' && data[item] !== null)
-            $('#image-display').prop(
-              'src',
-              `${base_uri}/uploads/produk/${data[item]}`
-            )
-        }
-
         tableVarian.clear().draw()
         tableVarian.rows.add(response.varians).draw()
-        $('.tooltip').tooltip('hide')
-        $('#title-form').html('Ubah')
-
-        toggleShow('#card-form', '#card-table', '#nama')
-        tableVarian.columns.adjust()
-        $('#nama').focus()
       }
     )
+
+    for (const item in data) {
+      const field = $(`[name=${item}]`)
+      if (field.length > 0 && item !== 'image' && item !== 'stok')
+        field.val(data[item]).trigger('change')
+      else if (item === 'image' && data[item] !== null)
+        $('#image-display').prop(
+          'src',
+          `${base_uri}/uploads/produk/${data[item]}`
+        )
+    }
+
+    $('.tooltip').tooltip('hide')
+    $('#title-form').html('Ubah')
+
+    toggleShow('#card-form', '#card-table', '#nama')
+    tableVarian.columns.adjust()
+    $('#nama').focus()
   })
 
   $(document).on('click', '.btn-delete', function (e) {
