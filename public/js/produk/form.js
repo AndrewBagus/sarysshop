@@ -62,6 +62,8 @@ $(function () {
     errorPlacement: function (error, element) {
       error.addClass('invalid-feedback')
       element.parents('.form-group').append(error)
+      const varians = tableVarian.rows().data().toArray()
+      checkingVarians(varians)
     },
     highlight: function (element, errorClass, validClass) {
       $(element).addClass('is-invalid')
@@ -75,8 +77,7 @@ $(function () {
       const data = getFormDataFile($('#form-data'))
       const varians = tableVarian.rows().data().toArray()
 
-      if (varians.length === 0) {
-        newalert('info', 'Varian produk minimal harus 1', 'Informasi')
+      if (!checkingVarians(varians)) {
         return false
       }
 
@@ -102,4 +103,11 @@ $(function () {
       })
     },
   })
+
+  function checkingVarians(varians) {
+    if (varians.length === 0) {
+      newalert('info', 'Varian produk minimal harus 1', 'Informasi')
+      return false
+    }
+  }
 })
