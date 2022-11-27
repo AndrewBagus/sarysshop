@@ -85,13 +85,14 @@ $(function () {
       const file = $('#image-varian').prop('files')[0]
       data.image = $('#image-varian-display').prop('src')
       data.file = file
-      if (file === undefined) {
+      if (file === undefined && index === '') {
         data.image = ''
       }
 
       if (index === '') {
         tableData.push(data)
       } else {
+        data.image = tableData[index].image
         tableData[index] = data
       }
 
