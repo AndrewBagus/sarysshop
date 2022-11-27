@@ -4,13 +4,13 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KurirModel extends Model
+class PengirimanModel extends Model
 {
-    protected $table            = 'm_kurir';
+    protected $table            = 'm_pengiriman';
     protected $primaryKey       = 'id';
     protected $allowedFields    = [
     'nama',
-    'image',
+    'kurir_id',
     'is_active',
     'created_by',
     'updated_at'

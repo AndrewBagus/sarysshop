@@ -107,7 +107,7 @@ class ProdukService implements IProdukService
             $file = $_FILES['produkFile'];
             $filename = $file['name'];
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            $upload_location = './uploads/produk/';
+            $upload_location = './uploads/kurir/';
 
             $new_name = time() . '.' . $ext;
             $path = $upload_location . $new_name;

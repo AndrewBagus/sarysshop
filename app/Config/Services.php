@@ -18,6 +18,8 @@ use App\Services\KategoriProduk\IKategoriProdukService;
 use App\Services\KategoriProduk\KategoriProdukService;
 use App\Services\Kelurahan\IKelurahanService;
 use App\Services\Kelurahan\KelurahanService;
+use App\Services\Kurir\IKurirService;
+use App\Services\Kurir\KurirService;
 use App\Services\Login\ILoginService;
 use App\Services\Login\LoginService;
 use App\Services\Pelanggan\IPelangganService;
@@ -45,120 +47,129 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-  public static function kelurahanService($getShared = true): IKelurahanService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('kelurahanService');
+    public static function kelurahanService($getShared = true): IKelurahanService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('kelurahanService');
+        }
+
+        return new KelurahanService;
     }
 
-    return new KelurahanService;
-  }
+    public static function userService($getShared = true): IUserService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('userService');
+        }
 
-  public static function userService($getShared = true): IUserService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('userService');
+        return new UserService;
     }
 
-    return new UserService;
-  }
+    public static function loginService($getShared = true): ILoginService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('loginService');
+        }
 
-  public static function loginService($getShared = true): ILoginService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('loginService');
+        return new LoginService;
     }
 
-    return new LoginService;
-  }
+    public static function featureService($getShared = true): IFeatureService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('featureService');
+        }
 
-  public static function featureService($getShared = true): IFeatureService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('featureService');
+        return new FeatureService;
     }
 
-    return new FeatureService;
-  }
+    public static function jenisBankService($getShared = true): IJenisBankService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('jenisBankService');
+        }
 
-  public static function jenisBankService($getShared = true): IJenisBankService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('jenisBankService');
+        return new JenisBankService;
     }
 
-    return new JenisBankService;
-  }
+    public static function jenisProdukService($getShared = true): IJenisProdukService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('jenisProdukService');
+        }
 
-  public static function jenisProdukService($getShared = true): IJenisProdukService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('jenisProdukService');
+        return new JenisProdukService;
     }
 
-    return new JenisProdukService;
-  }
+    public static function kategoriProdukService($getShared = true): IKategoriProdukService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('kategoriProdukService');
+        }
 
-  public static function kategoriProdukService($getShared = true): IKategoriProdukService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('kategoriProdukService');
+        return new KategoriProdukService;
     }
 
-    return new KategoriProdukService;
-  }
+    public static function kategoriPelangganService($getShared = true): IKategoriPelangganService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('kategoriPelangganService');
+        }
 
-  public static function kategoriPelangganService($getShared = true): IKategoriPelangganService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('kategoriPelangganService');
+        return new KategoriPelangganService;
     }
 
-    return new KategoriPelangganService;
-  }
+    public static function bankService($getShared = true): IBankService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('bankService');
+        }
 
-  public static function bankService($getShared = true): IBankService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('bankService');
+        return new BankService;
     }
 
-    return new BankService;
-  }
+    public static function pelangganService($getShared = true): IPelangganService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('pelangganService');
+        }
 
-  public static function pelangganService($getShared = true): IPelangganService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('pelangganService');
+        return new PelangganService;
     }
 
-    return new PelangganService;
-  }
+    public static function supplierService($getShared = true): ISupplierService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('supplierService');
+        }
 
-  public static function supplierService($getShared = true): ISupplierService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('supplierService');
+        return new SupplierService;
     }
 
-    return new SupplierService;
-  }
+    public static function gudangService($getShared = true): IGudangService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('gudangService');
+        }
 
-  public static function gudangService($getShared = true): IGudangService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('gudangService');
+        return new GudangService;
     }
 
-    return new GudangService;
-  }
+    public static function produkService($getShared = true): IProdukService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('produkService');
+        }
 
-  public static function produkService($getShared = true): IProdukService
-  {
-    if ($getShared) {
-      return static::getSharedInstance('produkService');
+        return new ProdukService;
     }
 
-    return new ProdukService;
-  }
+    public static function kurirService($getShared = true): IKurirService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('kurirService');
+        }
+
+        return new KurirService;
+    }
 }
