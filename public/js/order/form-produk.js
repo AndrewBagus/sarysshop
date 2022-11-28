@@ -82,7 +82,7 @@ $(function () {
     $(this).val(value)
   })
 
-  $(document).on('click', '.produk-min', function (e) {
+  $(document).on('click', '.btn-produk-min', function (e) {
     e.preventDefault()
     e.stopPropagation()
     const inputFrom = $(this).next('input')
@@ -90,12 +90,17 @@ $(function () {
     counter(inputFrom, value, 'min')
   })
 
-  $(document).on('click', '.produk-plus', function (e) {
+  $(document).on('click', '.btn-produk-plus', function (e) {
     e.preventDefault()
     e.stopPropagation()
     const inputFrom = $(this).siblings('input')
     const value = inputFrom.val()
     counter(inputFrom, value, 'plus')
+  })
+
+  $(document).on('click', '.btn-produk-tambah', function (e) {
+    e.preventDefault()
+    console.log($(this).data('repo-id'))
   })
 
   function counter(inputFrom, value, param) {
@@ -135,13 +140,19 @@ $(function () {
       po = `<span class="label label-outline-primary">${repo.keterangan}</span>`
 
     let hargas = repo.hargas.filter(function (harga) {
-      return harga.is_default == '1'
+      return harga.is_default === '1'
     })[0]
+    const kategori_pelanggan = $('#kategori-pelanggan').val()
+    if (kategori_pelanggan !== '') {
+      hargas = repo.hargas.filter(function (harga) {
+        return harga.pelanggan_id === kategori_pelanggan
+      })[0]
+    }
     const harga = `<div style="font-weight: bold;">Rp.${thousandFormat(
       hargas.harga
     )}</div>`
 
-    const btn = `<button class="btn btn-primary btn-sm ms-3 sepek" data-repo-id="${repo.id}"><i class="fa fa-plus"></i> Tambah</button`
+    const btn = `<button class="btn btn-primary btn-sm btn-produk-tambah" data-repo-id="${repo.id}" style="margin-left: 2rem"><i class="fa fa-plus"></i> Tambah</button`
 
     const wrapper = $(
       `<div class="col-xs-12">
@@ -166,9 +177,9 @@ $(function () {
               <div>
                 <div class="form-group">
                   <div class="input-group mb-1" style="width: 60%">
-                    <button class="btn btn-outline-secondary btn-sm produk-min" type="button"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-outline-secondary btn-sm btn-produk-min" type="button"><i class="fa fa-minus"></i></button>
                     <input type="number" class="form-control produk-qty" min="1" max="1000" value="1">
-                    <button class="btn btn-outline-secondary btn-sm produk-plus" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-outline-secondary btn-sm btn-produk-plus" type="button"><i class="fa fa-plus"></i></button>
                   </div>
                   ${btn}
                 </div>
@@ -186,9 +197,4 @@ $(function () {
     produkQuery = repo.produk_nama
     return repo.text || repo.produk_nama
   }
-
-  $(document).on('click', '.sepek', function (e) {
-    e.preventDefault()
-    console.log($(this).data('repo'))
-  })
 })

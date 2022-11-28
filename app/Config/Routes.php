@@ -91,6 +91,7 @@ $routes->group(
         $routes->get('/pelanggan', 'PelangganController::index');
         $routes->post('/pelanggan/getDataTable', 'PelangganController::getDataTable');
         $routes->post('/pelanggan/getPelanggans', 'PelangganController::getPelanggans');
+        $routes->post('/pelanggan/findPelanggans', 'PelangganController::findPelanggans');
         $routes->post('/pelanggan/saveData', 'PelangganController::saveData');
         $routes->post('/pelanggan/removeData', 'PelangganController::removeData');
 

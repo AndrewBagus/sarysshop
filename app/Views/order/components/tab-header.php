@@ -12,33 +12,27 @@
     </a>
   </li>
   <li class="nav-item mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0" role="presentation">
-    <a href="<?php echo base_url('/order/belum-lunas') ?>" class="nav-link <?php echo $page === 'belum-lunas' ? 'active' : ''; ?>" role="tab" aria-selected="false">
+    <a href="<?php echo base_url('/order/sudah-dp') ?>" class="nav-link <?php echo $page === 'sudah-dp' ? 'active' : ''; ?>" role="tab" aria-selected="false">
       <i class="ti-credit-card fw-bolder"></i>
-      <span>Belum Lunas</span>
+      <span>Sudah Dp</span>
     </a>
   </li>
   <li class="nav-item mt-1 mt-md-0 mt-lg-0 mt-xl-0" role="presentation">
-    <a href="<?php echo base_url('/order/belum-proses') ?>" class="nav-link <?php echo $page === 'belum-proses' ? 'active' : ''; ?>" role="tab" aria-selected="false">
+    <a href="<?php echo base_url('/order/sudah-lunas') ?>" class="nav-link <?php echo $page === 'sudah-lunas' ? 'active' : ''; ?>" role="tab" aria-selected="false">
       <i class="ti-infinite fw-bolder"></i>
-      <span>Belum Diproses</span>
+      <span>Sudah Lunas</span>
     </a>
   </li>
   <li class="nav-item mt-1 mt-md-1 mt-lg-0 mt-xl-0" role="presentation">
-    <a href="<?php echo base_url('/order/belum-resi') ?>" class="nav-link <?php echo $page === 'belum-resi' ? 'active' : ''; ?>" role="tab" aria-selected="false">
-      <i class="ti-clipboard fw-bolder"></i>
-      <span>Belum Ada Resi</span>
-    </a>
-  </li>
-  <li class="nav-item mt-1 mt-md-1 mt-lg-1 mt-xl-0" role="presentation">
-    <a href="<?php echo base_url('/order/proses-pengiriman') ?>" class="nav-link <?php echo $page === 'proses-pengiriman' ? 'active' : ''; ?>" role="tab" aria-selected="false">
+    <a href="<?php echo base_url('/order/pengiriman') ?>" class="nav-link <?php echo $page === 'pengiriman' ? 'active' : ''; ?>" role="tab" aria-selected="false">
       <i class="ti-truck fw-bolder"></i>
-      <span>Proses Pengiriman</span>
+      <span>Pengiriman</span>
     </a>
   </li>
   <li class="nav-item mt-1 mt-md-1 mt-lg-1 mt-xl-0" role="presentation">
-    <a href="<?php echo base_url('/order/selesai') ?>" class="nav-link <?php echo $page === 'selesai' ? 'active' : ''; ?>" role="tab" aria-selected="false">
+    <a href="<?php echo base_url('/order/terkirim') ?>" class="nav-link <?php echo $page === 'terkirim' ? 'active' : ''; ?>" role="tab" aria-selected="false">
       <i class="ti-check fw-bolder"></i>
-      <span>Order Selesai</span>
+      <span>Terkirim</span>
     </a>
   </li>
 </ul>

@@ -9,7 +9,7 @@
 
           <div class="form-group">
             <label class="form-label" for="status-pembayaran">Status Pembayaran</label>
-            <select class="form-control select2bs5" id="status-pembayaran" name="status_pembayaran" data-placeholder="Status Pembayaran" style="width: 100%;">
+            <select class="form-control select2bs5-nonclear" id="status-pembayaran" name="status_pembayaran" data-placeholder="Status Pembayaran" style="width: 100%;">
               <option value="belum-bayar">Belum Dibayar</option>
               <option value="cicilan">Cicilan</option>
               <option value="lunas">Sudah Bayar (Lunas)</option>

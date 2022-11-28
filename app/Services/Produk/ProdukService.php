@@ -41,6 +41,8 @@ class ProdukService implements IProdukService
         $column_search = $this->column; //field yang diizin untuk pencarian
         $order_by = [$id => 'asc']; // default order
 
+        // dump_die($column_search);
+
         $query = $this->produkRepo->getActive();
 
         $query = datatableQuery($query, $search, $column_search, $column_order, $order, $order_by);
@@ -60,6 +62,7 @@ class ProdukService implements IProdukService
         if ($length != -1) {
             $query = $query->limit($length, $start);
         }
+
         $query = $query->get();
 
         $list = $query->getResult();
