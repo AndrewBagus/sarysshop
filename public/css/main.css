@@ -22,7 +22,21 @@ td.dropdown .dropdown-menu.show {
   justify-content: space-around;
 }
 
-#table-detail-order-list tfoot tr:first-child td,
+#sub-total-wrapper tr:first-child td:first-child,
+#diskon-wrapper tr:first-child td:first-child,
+#additional-wrapper tr:first-child td:first-child,
+#table-detail-order-list tfoot tr:last-child td {
+  padding-top: 10px;
+}
+
+#sub-total-wrapper tr:last-child td,
+#diskon-wrapper tr:last-child td {
+  padding-bottom: 10px;
+}
+
+#sub-total-wrapper tr:first-child td,
+#diskon-wrapper tr:first-child td,
+#additional-wrapper tr:first-child td,
 #table-detail-order-list tfoot tr:last-child td {
   border-top: 1px solid #ced4da;
 }

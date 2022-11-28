@@ -28,13 +28,13 @@ $(function () {
     if ($(this).hasClass('show')) {
       $(this).removeClass('show')
       $(this)
-        .parents('.dropdown, .dropstart')
+        .parents('.dropdown, .dropstart, .input-group')
         .find('ul.dropdown-menu')
         .removeClass('show')
     } else {
       $(this).addClass('show')
       $(this)
-        .parents('.dropdown, .dropstart')
+        .parents('.dropdown, .dropstart, .input-group')
         .find('ul.dropdown-menu')
         .addClass('show')
     }
