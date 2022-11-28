@@ -23,14 +23,20 @@ $(function () {
     $(this).tooltip('hide')
   })
 
-  $(document).on('click', '#dropdownMenuLink', function (e) {
+  $(document).on('click', '[data-bs-toggle="dropdown"]', function (e) {
     e.preventDefault()
     if ($(this).hasClass('show')) {
       $(this).removeClass('show')
-      $(this).parents('li').find('ul.dropdown-menu').removeClass('show')
+      $(this)
+        .parents('.dropdown, .dropstart')
+        .find('ul.dropdown-menu')
+        .removeClass('show')
     } else {
       $(this).addClass('show')
-      $(this).parents('li').find('ul.dropdown-menu').addClass('show')
+      $(this)
+        .parents('.dropdown, .dropstart')
+        .find('ul.dropdown-menu')
+        .addClass('show')
     }
   })
 })

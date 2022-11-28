@@ -10,6 +10,29 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+.dataTables_empty {
+  height: 10rem;
+  vertical-align: middle;
+  color: #878f95;
+}
+
+td.dropstart .dropdown-menu.show,
+td.dropdown .dropdown-menu.show {
+  display: flex;
+  justify-content: space-around;
+}
+
+#table-detail-order-list tfoot tr:first-child td {
+  border-top: 1px solid #ced4da;
+}
+
+#table-detail-order-list thead tr td {
+  font-size: 16px;
+}
+.dropstart .dropdown-toggle::before {
+  content: none;
+}
+
 .select2-container--bootstrap-5
   .select2-dropdown
   .select2-results__options
@@ -25,24 +48,28 @@ input[type='number'] {
   background: #fbfbfb;
 }
 
+.label.label-outline-primary,
 .label.label-outline-info {
-  font-size: 14px;
+  font-size: 11px;
+  max-width: 120px;
+  display: inline-block;
   line-height: 1.3;
   font-weight: bolder;
   border: 1px solid;
   padding: 1px 5px;
+  letter-spacing: 1px;
+}
+
+.label.label-outline-info {
   border-color: #00bcd4;
   color: #00bcd4;
 }
 
 .label.label-outline-primary {
-  font-size: 14px;
-  line-height: 1.3;
-  font-weight: bolder;
-  border: 1px solid;
-  padding: 1px 5px;
+  display: block;
   border-color: #2196f3;
   color: #2196f3;
+  margin-top: 0.25rem;
 }
 
 .card-body.order-content {

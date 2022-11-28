@@ -108,12 +108,13 @@ $(function () {
         })
         $('#penerima-alamat').html(alamat)
       }
+      refreshTableOrder()
     }
 
     const nama =
       repo.is_default === '1'
         ? repo.nama
-        : `${repo.nama} <span class="label label-outline-primary">${repo.kategori_pelanggan}</span>`
+        : `${repo.nama} <span class="label label-outline-primary" style="display: inline">${repo.kategori_pelanggan}</span>`
 
     return repo.text || nama
   }

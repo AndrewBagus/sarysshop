@@ -1,5 +1,6 @@
+let produks = []
 $(function () {
-  let produkQuery, produks
+  let produkQuery
   $('#produk')
     .select2({
       theme: 'bootstrap-5',
@@ -24,6 +25,8 @@ $(function () {
 
             return obj
           })
+
+          produks = data
           return {
             results: data,
           }
@@ -100,7 +103,33 @@ $(function () {
 
   $(document).on('click', '.btn-produk-tambah', function (e) {
     e.preventDefault()
-    console.log($(this).data('repo-id'))
+    const varian_id = $(this).data('repo-id')
+    const qty = parseInt($(this).parents('.form-group').find('input').val())
+    const produk = produks.find(function (obj) {
+      return parseInt(obj.id) === varian_id
+    })
+
+    const harga = getHarga(produk)
+    const subtotal = harga * parseInt(qty)
+
+    produk.harga = harga
+    produk.qty = parseInt(qty)
+    produk.subtotal = subtotal
+
+    const varians = tableOrderList.rows().data().toArray()
+    const check = varians.filter(function (obj) {
+      return parseInt(obj.id) === varian_id
+    })
+    if (check.length > 0) {
+      newalert('info', 'Produk telah ditambahkan sebelumnya', 'informasi')
+      return false
+    }
+
+    varians.push(produk)
+    refreshTable(tableOrderList, varians)
+    const grandSubtotal = countSubtotal(varians)
+    $('#sub-total').html(`${thousandFormat(grandSubtotal)}`)
+    notification('success', 'Informasi', 'Produk berhasil ditambahkan')
   })
 
   function counter(inputFrom, value, param) {
@@ -120,52 +149,57 @@ $(function () {
       return repo.text
     }
 
-    produks = repo
-    let imageUri = `${base_uri}/assets/images/product-default.png`
-    const pathProduk = `${base_uri}/uploads/produk/`
-    const pathVarian = `${base_uri}/uploads/varian/`
-    if (repo.image) imageUri = pathVarian + repo.image
-    else if (repo.produk_image) imageUri = pathProduk + repo.produk_image
+    const wrapper = createProduk(repo)
 
-    let deskirpsi = ''
-    if (repo.ukuran && !repo.warna) deskirpsi = repo.ukuran
-    else if (!repo.ukuran && repo.warna) deskirpsi = repo.warna
-    else if (repo.ukuran && repo.warna) deskirpsi = repo.deskirpsi
+    return $(wrapper)
+  }
 
-    if (deskirpsi !== '')
-      deskirpsi = `<span class="label label-outline-info">${deskirpsi}</span>`
+  function formatRepoSelection(repo) {
+    produkQuery = repo.produk_nama
+    return repo.text || repo.produk_nama
+  }
+})
 
-    let po = ''
-    if (parseInt(repo.jenis_produk_id) === 2)
-      po = `<span class="label label-outline-primary">${repo.keterangan}</span>`
-
-    let hargas = repo.hargas.filter(function (harga) {
-      return harga.is_default === '1'
+function getHarga(arrays) {
+  let hargas = arrays.hargas.filter(function (harga) {
+    return harga.is_default === '1'
+  })[0]
+  const kategori_pelanggan = $('#kategori-pelanggan').val()
+  if (kategori_pelanggan !== '') {
+    hargas = arrays.hargas.filter(function (harga) {
+      return harga.pelanggan_id === kategori_pelanggan
     })[0]
-    const kategori_pelanggan = $('#kategori-pelanggan').val()
-    if (kategori_pelanggan !== '') {
-      hargas = repo.hargas.filter(function (harga) {
-        return harga.pelanggan_id === kategori_pelanggan
-      })[0]
-    }
-    const harga = `<div style="font-weight: bold;">Rp.${thousandFormat(
-      hargas.harga
-    )}</div>`
+  }
 
-    const btn = `<button class="btn btn-primary btn-sm btn-produk-tambah" data-repo-id="${repo.id}" style="margin-left: 2rem"><i class="fa fa-plus"></i> Tambah</button`
+  return parseInt(hargas.harga)
+}
 
-    const wrapper = $(
-      `<div class="col-xs-12">
-        <div class="d-flex align-items-center justify-content-between position-relative">
-          <img src="${imageUri}" style="height: 65px; width: 65px;">
-          <div class="d-flex align-items-center justify-content-between w-100 ms-3">
-            <div style="font-size: 16px">
-              <div style="font-size: 17px;">${repo.produk_nama}</div>
-              ${deskirpsi}
-              ${po}
-              ${harga}
-            </div>
-            <div style="
+function createProduk(arrays, useBtn = true) {
+  let imageUri = `${base_uri}/assets/images/product-default.png`
+  const pathProduk = `${base_uri}/uploads/produk/`
+  const pathVarian = `${base_uri}/uploads/varian/`
+  if (arrays.image) imageUri = pathVarian + arrays.image
+  else if (arrays.produk_image) imageUri = pathProduk + arrays.produk_image
+
+  let po = ''
+  let harga = ''
+  let deskirpsi = ''
+
+  if (arrays.ukuran && !arrays.warna) deskirpsi = arrays.ukuran
+  else if (!arrays.ukuran && arrays.warna) deskirpsi = arrays.warna
+  else if (arrays.ukuran && arrays.warna) deskirpsi = arrays.deskirpsi
+
+  if (deskirpsi !== '')
+    deskirpsi = `<span class="label label-outline-info">${deskirpsi}</span>`
+
+  if (parseInt(arrays.jenis_produk_id) === 2)
+    po = `<span class="label label-outline-primary">${arrays.keterangan}</span>`
+
+  const btn = `<button class="btn btn-primary btn-sm btn-produk-tambah" data-repo-id="${arrays.id}" style="margin-left: 2rem"><i class="fa fa-plus"></i> Tambah</button`
+  let btnWrapper = ''
+  let addMb = 'mb-3'
+  if (useBtn) {
+    btnWrapper = `<div style="
               display: flex;
               align-self: center;
               justify-content: flex-end;
@@ -184,17 +218,35 @@ $(function () {
                   ${btn}
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-       </div>`
-    )
-
-    return wrapper
+            </div>`
+    addMb = ''
+    harga = `<div style="font-weight: bold;">Rp.${thousandFormat(
+      getHarga(arrays)
+    )}</div>`
   }
 
-  function formatRepoSelection(repo) {
-    produkQuery = repo.produk_nama
-    return repo.text || repo.produk_nama
+  const wrapper = `<div class="col-xs-12 ${addMb}">
+                    <div class="d-flex align-items-top justify-content-between position-relative">
+                      <img src="${imageUri}" style="height: 65px; width: 65px;">
+                      <div class="d-flex align-items-center justify-content-between w-100 ms-3">
+                        <div style="font-size: 16px">
+                          <div style="font-size: 17px;">${arrays.produk_nama}</div>
+                          ${deskirpsi}
+                          ${po}
+                          ${harga}
+                        </div>
+                        ${btnWrapper}
+                      </div>
+                    </div>
+                   </div>`
+
+  return wrapper
+}
+
+function countSubtotal(arrays) {
+  let sub = 0
+  for (const item of arrays) {
+    sub += parseInt(item.subtotal)
   }
-})
+  return sub
+}

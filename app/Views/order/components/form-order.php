@@ -7,26 +7,23 @@
       <table id="table-detail-order-list" class="" width="100%">
         <thead>
           <tr>
-            <td>Subtotal</td>
             <td>Nama</td>
+            <td>Harga</td>
             <td>QTY</td>
             <td>Subtotal</td>
-            <td></td>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            <td colspan="3">No</td>
-            <td>Rp <span id="sub-total">0</span></td>
-            <td></td>
+            <td colspan="3" style="font-weight: 400; font-size: 16px;">Subtotal</td>
+            <td style="font-weight: bold;">Rp <span id="sub-total">0</span></td>
           </tr>
           <tr>
             <td colspan="3">
-              <span style="display: inline;">Ongkas Kirim</span>
+              <span style="font-weight: 400; font-size: 16px; display: inline;">Ongkas Kirim</span>
               <button class="btn btn-outline-primary btn-sm" data-bs-toggle="tooltip" data-bs-title="Ubah Kurir"><i class="fa fa-edit"></i></button>
             </td>
-            <td>Rp <span id="ongkir">0</span></td>
-            <td></td>
+            <td style="font-weight: bold;">Rp <span id="ongkir">0</span></td>
           </tr>
         </tfoot>
       </table>
