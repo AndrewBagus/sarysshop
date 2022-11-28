@@ -1,4 +1,10 @@
 $(function () {
+  $('#tgl-bayar').datetimepicker('destroy')
+  $('#tgl-bayar').datetimepicker({
+    minDate: moment(),
+    format: date_format,
+  })
+
   $(document).on('change', '#status-pembayaran', function () {
     const value = $(this).val()
     if (value === 'belum-bayar') {

@@ -27,7 +27,7 @@
           <div class="form-group d-none belum-bayar-hide lunas-show">
             <label class="form-label" for="tgl-bayar">Tanggal Pembayaran</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="tgl-bayar" name="tanggal_pembayaran" placeholder="Tanggal Pembayaran" style="border-right: 0;">
+              <input type="text" class="form-control" id="tgl-bayar" name="tanggal_pembayaran" data-toggle="datetimepicker" data-target="#tgl-bayar" placeholder="Tanggal Pembayaran" style="border-right: 0;">
               <span class="input-group-text bg-transparent" style="border-left: 0;"><i class="ti-calendar text-muted"></i></span>
             </div>
           </div>
