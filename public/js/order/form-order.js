@@ -85,6 +85,5 @@ function refreshTableOrder() {
   }
 
   refreshTable(tableOrderList, varians)
-  const grandSubtotal = countSubtotal(varians)
-  $('#sub-total').html(`${thousandFormat(grandSubtotal)}`)
+  countSubTotalBerat(varians)
 }

@@ -109,8 +109,7 @@ $routes->group(
 
         $routes->get('/kurir', 'KurirController::index');
         $routes->post('/kurir/getDataTable', 'KurirController::getDataTable');
-        $routes->post('/kurir/getLayanans', 'KurirController::getLayanans');
-        $routes->post('/kurir/findLayanans', 'KurirController::findLayanans');
+        $routes->post('/kurir/getKurirs', 'KurirController::getKurirs');
         $routes->post('/kurir/saveData', 'KurirController::saveData');
         $routes->post('/kurir/removeData', 'KurirController::removeData');
 

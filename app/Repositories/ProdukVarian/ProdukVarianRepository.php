@@ -55,6 +55,7 @@ class ProdukVarianRepository implements IProdukVarianRepository
                 $tbl . '.id, ' .
                 $tbl . '.produk_id, ' .
                 $tbl . '.warna, ' .
+                $tbl . '.berat, ' .
                 $tbl . '.ukuran, ' .
                 $tbl . '.image, ' .
                 $tbl . '.stok, 

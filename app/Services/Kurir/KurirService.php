@@ -60,6 +60,16 @@ class KurirService implements IKurirService
         ];
 
 
+        return json_encode($response);
+    }
+
+    public function getKurirs()
+    {
+        $response = $this->kurirRepo
+            ->getActive()
+            ->get()
+            ->getResult();
+    
         return $response;
     }
 

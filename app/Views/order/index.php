@@ -14,6 +14,7 @@
 </div>
 
 <?php echo $this->include('order/form') ?>
+<?php echo $this->include('order/form-kurir') ?>
 <?php echo $this->endSection() ?>
 
 <?php echo $this->section('page-js') ?>
@@ -23,4 +24,5 @@
 <script src="<?php echo base_url() ?>/js/order/form-penerima.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-pembayaran.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-order.js?v=<?php echo rand() ?>"></script>
+<script src="<?php echo base_url() ?>/js/order/form-kurir.js?v=<?php echo rand() ?>"></script>
 <?php echo $this->endSection() ?>

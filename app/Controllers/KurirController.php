@@ -31,18 +31,9 @@ class KurirController extends BaseController
         echo json_encode($response);
     }
 
-    public function getLayanans(): void
+    public function getKurirs(): void
     {
-        $post = (object)$this->request->getVar();
-        $response = $this->kurirService->getLayanans($post);
-
-        echo json_encode($response);
-    }
-
-    public function findLayanans(): void
-    {
-        $post = (object)$this->request->getVar();
-        $response = $this->kurirService->findLayanans($post);
+        $response = $this->kurirService->getKurirs();
 
         echo json_encode($response);
     }

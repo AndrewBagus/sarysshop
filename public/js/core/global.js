@@ -1,13 +1,5 @@
 let base_uri = window.location.origin
 const date_format = 'DD/MM/YYYY'
-let diskons = {
-  type: '',
-  nominal: 0,
-}
-let pajaks = {
-  id: '',
-  nominal: 0,
-}
 
 function notification(tipe, title, message) {
   toastr.options = {

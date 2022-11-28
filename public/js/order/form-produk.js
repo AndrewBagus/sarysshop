@@ -127,9 +127,10 @@ $(function () {
 
     varians.push(produk)
     refreshTable(tableOrderList, varians)
-    const grandSubtotal = countSubtotal(varians)
-    $('#sub-total').html(`${thousandFormat(grandSubtotal)}`)
+    countSubTotalBerat(varians)
     notification('success', 'Informasi', 'Produk berhasil ditambahkan')
+
+    console.log(varians)
   })
 
   function counter(inputFrom, value, param) {
@@ -243,10 +244,23 @@ function createProduk(arrays, useBtn = true) {
   return wrapper
 }
 
-function countSubtotal(arrays) {
-  let sub = 0
-  for (const item of arrays) {
-    sub += parseInt(item.subtotal)
+function countSubTotalBerat(arrays) {
+  let grandSubtotal = 0
+  let berat = 0
+
+  if (arrays.length > 0) {
+    for (const item of arrays) {
+      grandSubtotal += parseInt(item.subtotal)
+      berat += parseInt(item.berat) * parseInt(item.qty)
+    }
+    berat = berat / 1000
   }
-  return sub
+
+  const grandBerat = berat > 0 ? berat : ''
+  grandSubtotal =
+    grandSubtotal === undefined ? 0 : thousandFormat(grandSubtotal)
+  $('#sub-total').html(grandSubtotal)
+  $('#berat-total').html(`(${grandBerat}Kg)`)
+
+  return grandSubtotal
 }
