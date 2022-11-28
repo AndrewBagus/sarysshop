@@ -91,7 +91,28 @@ class ProdukService implements IProdukService
 
     public function findProduks($post)
     {
-        return $this->produkVarianRepo->findByProduk($post->search);
+        $produks = $this->produkVarianRepo->findByProduk($post->search);
+        $hargas = [];
+
+        if (count($produks) > 0) {
+            $varians = array_column($produks, 'id');
+            $hargas = $this->produkVarianHargaRepo->getInVarians($varians)
+                ->get()
+                ->getResult();
+        }
+
+        $produks = array_map(
+            function ($produk) use ($hargas) {
+                $hargaVarians  = array_filter(
+                    $hargas, function ($harga) use ($produk) {
+                        return $harga->produk_varian_id === $produk->id;
+                    }
+                );
+                $produk->hargas = array_values($hargaVarians);
+                return $produk;
+            }, $produks
+        );
+        return $produks;
     }
 
     public function saveData($post)

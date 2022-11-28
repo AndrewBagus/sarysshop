@@ -43,6 +43,7 @@ class ProdukVarianRepository implements IProdukVarianRepository
         $tbl = 'm_produk_varian';
         return $this->model
             ->join('m_produk p', 'p.id = ' . $tbl . '.produk_id')
+            ->join('m_jenis_produk jp', 'p.jenis_produk_id = jp.id')
             ->where($tbl . '.is_active', true)
             ->where('p.is_active', true)
             ->groupStart()
@@ -50,6 +51,19 @@ class ProdukVarianRepository implements IProdukVarianRepository
             ->orLike($tbl . '.warna', $search)
             ->orLike($tbl . '.ukuran', $search)
             ->orLike('CONCAT(p.nama, " ", ' . $tbl . '.ukuran, " ", ' . $tbl . '.warna)', $search)
+            ->select(
+                $tbl . '.id, ' .
+                $tbl . '.produk_id, ' .
+                $tbl . '.warna, ' .
+                $tbl . '.ukuran, ' .
+                $tbl . '.image, ' .
+                $tbl . '.stok, 
+                p.nama as produk_nama,
+                p.image as produk_image,
+                jp.id as jenis_produk_id,
+                CONCAT(' . $tbl . '.ukuran, " ", ' . $tbl . '.warna) as deskripsi,
+                CONCAT(jp.nama, " ", p.tempo_kedatangan, " hari") as keterangan'
+            )
             ->groupEnd()
             ->get()
             ->getResult();

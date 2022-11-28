@@ -10,6 +10,41 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+.select2-container--bootstrap-5
+  .select2-dropdown
+  .select2-results__options
+  .select2-results__option.select2-results__option--disabled:hover {
+  cursor: pointer;
+  color: inherit;
+}
+
+.select2-container--bootstrap-5
+  .select2-dropdown
+  .select2-results__options
+  .select2-results__option.select2-results__option--disabled:hover {
+  background: #fbfbfb;
+}
+
+.label.label-outline-info {
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: bolder;
+  border: 1px solid;
+  padding: 2px 5px;
+  border-color: #00bcd4;
+  color: #00bcd4;
+}
+
+.label.label-outline-primary {
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: bolder;
+  border: 1px solid;
+  padding: 2px 5px;
+  border-color: #2196f3;
+  color: #2196f3;
+}
+
 .card-body.order-content {
   margin-top: 0.5rem;
   height: 77vh;
@@ -59,7 +94,11 @@ ul.nav-pills {
 }
 
 .btn {
-  font-size: 1.02rem !important;
+  font-size: 1.02rem;
+}
+
+.btn-sm {
+  font-size: var(--bs-btn-font-size);
 }
 
 .btn-danger,

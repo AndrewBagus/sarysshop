@@ -7,51 +7,59 @@ use Config\Services;
 
 class ProdukController extends BaseController
 {
-  private $produkService;
-  public function __construct()
-  {
-    $this->produkService = Services::produkService();
-  }
+    private $produkService;
+    public function __construct()
+    {
+        $this->produkService = Services::produkService();
+    }
 
-  public function index(): string
-  {
-    $data = [
-      'title' => 'Daftar Produk',
-      'parent' => 'Produk',
-    ];
+    public function index(): string
+    {
+        $data = [
+        'title' => 'Daftar Produk',
+        'parent' => 'Produk',
+        ];
 
-    return view('produk/index', $data);
-  }
+        return view('produk/index', $data);
+    }
 
-  public function getDataTable(): void
-  {
-    $post = (object)$this->request->getVar();
-    $response = $this->produkService->getDataTable($post);
+    public function getDataTable(): void
+    {
+        $post = (object)$this->request->getVar();
+        $response = $this->produkService->getDataTable($post);
 
-    echo json_encode($response);
-  }
+        echo json_encode($response);
+    }
 
-  public function getProdukVarians(): void
-  {
-    $post = (object)$this->request->getVar();
-    $response = $this->produkService->getProdukVarians($post);
+    public function getProdukVarians(): void
+    {
+        $post = (object)$this->request->getVar();
+        $response = $this->produkService->getProdukVarians($post);
 
-    echo json_encode($response);
-  }
+        echo json_encode($response);
+    }
 
-  public function saveData(): void
-  {
-    $post = $this->request->getVar();
-    $response = $this->produkService->saveData($post);
+    public function findProduks(): void
+    {
+        $post = (object)$this->request->getVar();
+        $response = $this->produkService->findProduks($post);
 
-    echo json_encode($response);
-  }
+        echo json_encode($response);
+    }
 
-  public function removeData(): void
-  {
-    $post = $this->request->getVar();
-    $response = $this->produkService->removeData($post);
+    public function saveData(): void
+    {
+        $post = $this->request->getVar();
+        $response = $this->produkService->saveData($post);
 
-    echo json_encode($response);
-  }
+        echo json_encode($response);
+    }
+
+    public function removeData(): void
+    {
+        $post = $this->request->getVar();
+        $response = $this->produkService->removeData($post);
+
+        echo json_encode($response);
+    }
 }

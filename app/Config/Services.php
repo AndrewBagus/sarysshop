@@ -161,7 +161,7 @@ class Services extends BaseService
             return static::getSharedInstance('produkService');
         }
 
-        return new ProdukService;
+        return new ProdukService();
     }
 
     public static function kurirService($getShared = true): IKurirService
