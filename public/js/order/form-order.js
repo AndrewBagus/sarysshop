@@ -85,5 +85,5 @@ function refreshTableOrder() {
   }
 
   refreshTable(tableOrderList, varians)
-  countSubTotalBerat(varians)
+  refreshGrandTotal()
 }
