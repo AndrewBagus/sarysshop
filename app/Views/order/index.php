@@ -21,4 +21,5 @@
 <script src="<?php echo base_url() ?>/js/order/form-produk.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-pelanggan.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-penerima.js?v=<?php echo rand() ?>"></script>
+<script src="<?php echo base_url() ?>/js/order/form-pembayaran.js?v=<?php echo rand() ?>"></script>
 <?php echo $this->endSection() ?>
