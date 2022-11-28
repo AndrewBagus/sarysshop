@@ -11,6 +11,9 @@ class KurirModel extends Model
     protected $allowedFields    = [
     'nama',
     'image',
+    'kategori',
+    'eta_awal',
+    'eta_akhir',
     'is_active',
     'created_by',
     'updated_at'

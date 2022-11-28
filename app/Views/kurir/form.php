@@ -14,34 +14,36 @@
           </div>
         </div>
         <div class="col-md-9">
-          <div class="form-group">
-            <label class="form-label" for="nama">Nama Kurir</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Kurir">
-          </div>
-        </div>
-        <div class="col-md-12 mt-3">
-          <div class="card" id="card-table">
-            <div class="card-header">
-              <h1>Layanan Pengiriman</h1>
-              <div class="card-tools">
-                <button type="button" class="btn btn-outline-primary" id="btn-new-layanan" data-bs-toggle="tooltip" data-bs-title="Tambah Layanan">
-                  <i class="fa fa-plus"></i> Tambah Layanan
-                </button>
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label" for="nama">Nama Kurir</label>
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Kurir">
               </div>
             </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table id="table-layanan-list" class="table table-bordered table-hover" cellspacing="0" width="100%">
-                  <thead>
-                    <tr>
-                      <th> No </th>
-                      <th> Nama </th>
-                      <th data-priority="1"> Aksi </th>
-                    </tr>
-                  </thead>
-                </table>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label" for="kategori">Kategori Layanan</label>
+                <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Kategori Layanan">
               </div>
             </div>
+
+            <div class="col-md-12 mt-3">
+              <div class="form-group">
+                <label class="form-label" for="eta-awal">Estimasi Pengiriman (Hari)</label>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="eta-awal" name="eta_awal" placeholder="Estimasi Awal" onkeypress="return isNumber(event)">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="eta-akhir" name="eta_akhir" placeholder="Estimasi Akhir" onkeypress="return isNumber(event)">
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

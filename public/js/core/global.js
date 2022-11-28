@@ -388,7 +388,6 @@ function getKelurahanDesa(usage) {
   })
 
   $(document).on('select2:open', usage, function () {
-    // $(this).parents('.form-group').find
     document.querySelector('.select2-search__field').focus()
   })
 }

@@ -19,13 +19,37 @@ $(function () {
         data: 'nama',
       },
       {
-        data: 'layanan',
+        data: 'kategori',
         render: function (data) {
-          return (
-            '<button type="button" class="btn btn-outline-secondary btn-sm btn-view" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Lihat Layanan"><i class="fw-bolder ti-truck"></i> ' +
-            data +
-            ' Layanans</button>'
+          if (data === null) data = '-'
+          return data
+        },
+      },
+      {
+        data: null,
+        render: function (_, _, full) {
+          let content = ''
+
+          if (full.eta_awal !== null && full.eta_awal !== '0')
+            content = full.eta_awal
+
+          if (
+            full.eta_akhir !== null &&
+            full.eta_akhir !== '0' &&
+            content !== ''
           )
+            content += ' - ' + full.eta_akhir
+          else if (
+            full.eta_akhir !== null &&
+            full.eta_akhir !== '0' &&
+            content === ''
+          )
+            content = full.eta_akhir
+
+          if (content !== '') content += ' (Hari)'
+          else content = '-'
+
+          return content
         },
       },
       {
@@ -77,44 +101,19 @@ $(function () {
   $(document).on('click', '.btn-edit', function (e) {
     e.preventDefault()
     const data = tableList.row($(this).parents('tr')).data()
-    f_ajax(
-      base_uri + '/kurir/getLayanans',
-      {
-        kurir_id: data.id,
-      },
-      function (response) {
-        $('#id').val(data.id)
-        $('#nama').val(data.nama)
-        if (data.image)
-          $('#image-display').prop(
-            'src',
-            `${base_uri}/uploads/kurir/${data.image}`
-          )
+    $('#id').val(data.id)
+    $('#nama').val(data.nama)
+    $('#kategori').val(data.kategori)
+    $('#eta-awal').val(data.eta_awal)
+    $('#eta-akhir').val(data.eta_akhir)
+    if (data.image)
+      $('#image-display').prop('src', `${base_uri}/uploads/kurir/${data.image}`)
 
-        $('.tooltip').tooltip('hide')
-        $('#title-form').html('Ubah')
+    $('.tooltip').tooltip('hide')
+    $('#title-form').html('Ubah')
 
-        refreshTable(tableLayananList, response)
-
-        toggleShow('#card-form', '#card-table', '#nama')
-        $('#nama').focus()
-      }
-    )
-  })
-
-  $(document).on('click', '.btn-view', function (e) {
-    e.preventDefault()
-    const data = tableList.row($(this).parents('tr')).data()
-    f_ajax(
-      base_uri + '/kurir/getLayanans',
-      {
-        kurir_id: data.id,
-      },
-      function (response) {
-        refreshTable(tableLayananListView, response)
-        $('#modal-table-layanan').modal('show')
-      }
-    )
+    toggleShow('#card-form', '#card-table', '#nama')
+    $('#nama').focus()
   })
 
   $(document).on('click', '.btn-delete', function (e) {

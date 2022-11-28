@@ -15,7 +15,7 @@ class KurirRepository implements IKurirRepository
     private function getKurir()
     {
         return $this->model
-            ->select('id, nama, image, (select count(p.id) from m_pengiriman p where p.kurir_id = m_kurir.id and p.is_active = true) as layanan')
+            ->select('id, nama, image, kategori, eta_awal, eta_akhir')
             ->where('is_active', true);
     }
 

@@ -17,7 +17,8 @@
           <tr>
             <th> No </th>
             <th> Nama </th>
-            <th> Layanan Pengiriman </th>
+            <th> Kategori </th>
+            <th> Estimasi (Hari)</th>
             <th data-priority="1"> Aksi </th>
           </tr>
         </thead>
@@ -27,13 +28,9 @@
 </div>
 
 <?php echo $this->include('kurir/form') ?>
-<?php echo $this->include('kurir/form-layanan') ?>
-<?php echo $this->include('kurir/table-layanan') ?>
 <?php echo $this->endSection() ?>
 
 <?php echo $this->section('page-js') ?>
 <script src="<?php echo base_url() ?>/js/kurir/index.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/kurir/form.js?v=<?php echo rand() ?>"></script>
-<script src="<?php echo base_url() ?>/js/kurir/form-layanan.js?v=<?php echo rand() ?>"></script>
-<script src="<?php echo base_url() ?>/js/kurir/table-layanan.js?v=<?php echo rand() ?>"></script>
 <?php echo $this->endSection() ?>
