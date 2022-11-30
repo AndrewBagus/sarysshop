@@ -18,13 +18,13 @@
 
           <div class="form-group mt-3 d-none belum-bayar-hide lunas-show">
             <label class="form-label" for="bank">Bank</label>
-            <select class="form-control select2bs5" id="bank" name="bank_id" data-placeholder="Pilih Bank" style="width: 100%;"></select>
+            <select class="form-control" id="bank" name="bank_id" data-placeholder="Pilih Bank" style="width: 100%;"></select>
           </div>
         </div>
 
         <div class="col-md-6">
 
-          <div class="form-group d-none belum-bayar-hide lunas-show">
+          <div class="form-group mt-3 mt-md-0 mt-lg-0 mt-xl-0 d-none belum-bayar-hide lunas-show">
             <label class="form-label" for="tgl-bayar">Tanggal Pembayaran</label>
             <div class="input-group">
               <input type="text" class="form-control" id="tgl-bayar" name="tanggal_pembayaran" data-toggle="datetimepicker" data-target="#tgl-bayar" placeholder="Tanggal Pembayaran" style="border-right: 0;">
@@ -33,7 +33,7 @@
           </div>
 
           <div class="form-group mt-3 d-none belum-bayar-hide">
-            <label class="form-label" for="nominal">Tempo Kedatangan</label>
+            <label class="form-label" for="nominal">Nominal</label>
             <input type="text" class="form-control thousand" id="nominal" name="nominal" placeholder="0" onkeypress="return isNumber(event)">
           </div>
 
