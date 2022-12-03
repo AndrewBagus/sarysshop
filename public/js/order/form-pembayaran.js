@@ -49,7 +49,7 @@ $(function () {
       },
       {
         data: null,
-        render: function (data, type, full, meta) {
+        render: function (_) {
           const btnDelete =
             '<button type="button" class="btn btn-outline-danger btn-sm btn-remove-pembayaran" data-bs-toggle="tooltip" data-bs-title="Hapus Pembayaran"><i class="fa fa-trash"></i></button>'
           const btnEdit =

@@ -70,7 +70,6 @@ $(function () {
 
   $(document).on('shown.bs.modal', '#modal-wrapper', function () {
     $('#wrapper-name').focus()
-    $('#wrapper-nominal').val(0)
   })
 
   initValidateForm(
