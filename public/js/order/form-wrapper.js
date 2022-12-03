@@ -1,6 +1,6 @@
 $(function () {
-  $(document).on('change', '#nominal-type', function (e) {
-    const value = $('#nominal-type').val()
+  $(document).on('change', '#nominal-type', function () {
+    const value = $(this).val()
     if (value === 'percen') {
       $('#wrapper-percen').removeClass('d-none')
       $('#wrapper-percen').rules('add', {
@@ -44,6 +44,19 @@ $(function () {
     let value = $(this).val()
     value = value === '0' ? '' : value
     $(this).val(value)
+  })
+
+  $(document).on('keyup', '#wrapper-nominal', function () {
+    let value = $(this).val()
+    value = value === '0' ? '' : value
+
+    if (value !== '') {
+      value = parseInt(thousandUnFormat(value))
+      if (subtotal > 0) {
+        value = value > subtotal ? subtotal : value
+      }
+      $(this).val(thousandFormat(value))
+    }
   })
 
   $(document).on('hide.bs.modal', '#modal-wrapper', function () {

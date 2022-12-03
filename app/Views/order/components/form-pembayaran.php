@@ -18,7 +18,7 @@
 
           <div class="form-group mt-3 d-none belum-bayar-hide lunas-show">
             <label class="form-label" for="bank">Bank</label>
-            <select class="form-control" id="bank" name="bank_id" data-placeholder="Pilih Bank" style="width: 100%;"></select>
+            <select class="form-control bank-pembayran" id="bank" name="bank_id" data-placeholder="Pilih Bank" style="width: 100%;"></select>
           </div>
         </div>
 

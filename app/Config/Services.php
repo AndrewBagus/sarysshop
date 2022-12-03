@@ -22,6 +22,8 @@ use App\Services\Kurir\IKurirService;
 use App\Services\Kurir\KurirService;
 use App\Services\Login\ILoginService;
 use App\Services\Login\LoginService;
+use App\Services\Order\IOrderService;
+use App\Services\Order\OrderService;
 use App\Services\Pelanggan\IPelangganService;
 use App\Services\Pelanggan\PelangganService;
 use App\Services\Produk\IProdukService;
@@ -171,5 +173,14 @@ class Services extends BaseService
         }
 
         return new KurirService;
+    }
+
+    public static function orderService($getShared = true): IOrderService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('orderService');
+        }
+
+        return new OrderService;
     }
 }

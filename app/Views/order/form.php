@@ -3,27 +3,15 @@
     <h1>Form Order</h1>
   </div>
 
-  <div class="row" style="padding-left: 0; padding-right: 0;">
-    <?php echo $this->include('order/components/form-left') ?>
-    <?php echo $this->include('order/components/form-right') ?>
-
-    <div class="col-md-12 mt-3">
-      <div class="row">
-        <div class="col-12 col-md-4 mt-1 mt-md-0 mt-lg-0 mt-xl-0 order-2 order-md-1 order-lg-1 order-xl-1">
-          <button type="button" class="btn btn-danger" id="btn-back"><i class="fa fa-arrow-left"></i> Back</button>
-        </div>
-        <div class="col-md-8 order-1 order-md-2 order-lg-2 order-xl-2">
-          <div class="row">
-            <div class="col-md-6 mt-1 mt-md-0 mt-lg-0 mt-xl-0">
-              <button type="submit" class="btn btn-info" style="width: 100%;"><i class="fa fa-refresh"></i> Simpan & tambah order baru</button>
-            </div>
-            <div class="col-md-6 mt-1 mt-md-0 mt-lg-0 mt-xl-0">
-              <button type="submit" class="btn btn-outline-primary" style="width: 100%;"><i class="fa fa-save"></i> Simpan</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <form id="form-data">
+    <div class="row" style="padding-left: 0; padding-right: 0;">
+      <input type="hidden" class="form-control" id="id" name="id" value="0" readonly>
+      <input type="hidden" class="form-control" value="mode" value="" readonly>
+      <input type="hidden" class="form-control" id="sub-total" name="subtotal_pembelian" value="0" readonly>
+      <input type="hidden" class="form-control" id="grand-total" name="grandtotal" value="0" readonly>
+      <?php echo $this->include('order/components/form-left') ?>
+      <?php echo $this->include('order/components/form-right') ?>
+      <?php echo $this->include('order/components/form-button') ?>
     </div>
-  </div>
+  </form>
 </div>

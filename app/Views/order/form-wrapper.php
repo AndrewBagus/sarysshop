@@ -19,7 +19,7 @@
               <div class="form-group">
                 <label class="form-label" for="wrapper-nominal">Biaya</label>
                 <div class="input-group">
-                  <select class="form-select" id="nominal-type">
+                  <select class="form-select" id="nominal-type" style="flex-grow: 0; width: 5rem;">
                     <option value="nominal" selected>Rp.</option>
                     <option value="percen">%</option>
                   </select>

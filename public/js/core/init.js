@@ -17,6 +17,7 @@ $(function () {
 
   $('input[data-toggle=datetimepicker]').datetimepicker({
     format: date_format,
+    defaultDate: moment().format(),
   })
 
   $(document).on('click', '*[data-bs-toggle="tooltip"]', function () {

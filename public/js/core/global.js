@@ -174,7 +174,10 @@ function thousandFormat(value) {
 }
 
 function thousandUnFormat(value) {
-  return value.replace(/,/g, '')
+  if (typeof value === 'number') value = value.toString()
+  value = value.replace(/,/g, '')
+  value = value === '' ? value : parseInt(value)
+  return value
 }
 
 function strToUpperCase(str) {

@@ -14,6 +14,10 @@ $(function () {
       $('#bank').rules('remove', 'required')
       $('#tgl-bayar').rules('remove', 'required')
       $('#nominal').rules('remove', 'required')
+
+      $('#bank').val('').trigger('change')
+      $('#tgl-bayar').val('')
+      $('#nominal').val('')
     } else if (value === 'cicilan') {
       $('.belum-bayar-hide').removeClass('d-none')
       $('#bank').rules('add', {
@@ -25,6 +29,9 @@ $(function () {
       $('#nominal').rules('add', {
         required: true,
       })
+      const tgl = $('#tgl-bayar')
+      tgl_value = tgl.val()
+      if (tgl_value === '') tgl.val(moment().format(date_format))
     } else if (value === 'lunas') {
       $('.belum-bayar-hide').addClass('d-none')
       $('.lunas-show').removeClass('d-none')
@@ -39,6 +46,9 @@ $(function () {
       $('#nominal').rules('add', {
         required: true,
       })
+      const tgl = $('#tgl-bayar')
+      tgl_value = tgl.val()
+      if (tgl_value === '') tgl.val(moment().format(date_format))
     }
   })
 

@@ -1,7 +1,7 @@
 <?php echo $this->extend('layouts/layout'); ?>
 
 <?php echo $this->section('page-content') ?>
-<div class="card bg-transparent" id="card-table">
+<div class="card bg-transparent d-none" id="card-table">
   <div class="card-header bg-transparent">
     <h1>Order</h1>
     <div class="card-tools">
@@ -16,9 +16,12 @@
 <?php echo $this->include('order/form') ?>
 <?php echo $this->include('order/form-kurir') ?>
 <?php echo $this->include('order/form-wrapper') ?>
+<?php echo $this->include('order/form-diskon-varian') ?>
+<?php echo $this->include('order/form-edit-varian') ?>
 <?php echo $this->endSection() ?>
 
 <?php echo $this->section('page-js') ?>
+<script src="<?php echo base_url() ?>/js/order/index.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-produk.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-pelanggan.js?v=<?php echo rand() ?>"></script>
@@ -28,4 +31,5 @@
 <script src="<?php echo base_url() ?>/js/order/form-kurir.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-wrapper.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-grand.js?v=<?php echo rand() ?>"></script>
+<script src="<?php echo base_url() ?>/js/order/form-diskon-varian.js?v=<?php echo rand() ?>"></script>
 <?php echo $this->endSection() ?>

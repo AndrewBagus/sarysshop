@@ -77,12 +77,25 @@ $(function () {
       .focus()
   })
 
-  $(document).on('keyup', '.produk-qty', function () {
+  $(document).on('keyup', '.produk-qty', function (e) {
     let value = $(this).val()
-    value = parseInt(value)
-    if (isNaN(value) || value < 1) value = 1
-    else if (value > 1000) value = 1000
-    $(this).val(value)
+    if (value !== '') {
+      value = parseInt(value)
+      if (isNaN(value) || value < 1) value = 1
+      else if (value > 1000) value = 1000
+      $(this).val(value)
+    }
+
+    if (e.keyCode === 13) {
+      $(this).parents('.form-group').find('.btn-produk-tambah').click()
+    }
+  })
+
+  $(document).on('blur', '.produk-qty', function () {
+    let value = $(this).val()
+    if (value === '') {
+      $(this).val(1)
+    }
   })
 
   $(document).on('click', '.btn-produk-min', function (e) {
@@ -111,24 +124,46 @@ $(function () {
 
     const harga = getHarga(produk)
     const subtotal = harga * parseInt(qty)
+    const subBerat = parseInt(produk.berat) * parseInt(qty)
 
-    produk.harga = harga
-    produk.qty = parseInt(qty)
-    produk.subtotal = subtotal
+    produkOrder = {
+      id: 0,
+      produk_id: produk.id,
+      produk_nama: produk.produk_nama,
+      produk_varian_id: varian_id,
+      jenis_produk_id: produk.jenis_produk_id,
+      qty: qty,
+      harga: harga,
+      ukuran: produk.ukuran,
+      image: produk.image,
+      pruduk_image: produk.pruduk_image,
+      keterangan: produk.keterangan,
+      subBerat: subBerat,
+      harga: harga,
+      qty: qty,
+      subBerat: subBerat,
+      subtotal: subtotal,
+      diskon_tipe: 'nominal',
+      diskon_persen: 0,
+      diskon_nominal: 0,
+      hargas: produk.hargas,
+    }
 
     const varians = tableOrderList.rows().data().toArray()
     const check = varians.filter(function (obj) {
-      return parseInt(obj.id) === varian_id
+      return parseInt(obj.produk_varian_id) === varian_id
     })
     if (check.length > 0) {
       newalert('info', 'Produk telah ditambahkan sebelumnya', 'informasi')
       return false
     }
 
-    varians.push(produk)
+    varians.push(produkOrder)
     refreshTable(tableOrderList, varians)
     refreshGrandTotal()
     notification('success', 'Informasi', 'Produk berhasil ditambahkan')
+
+    $(this).parents('.form-group').find('.produk-qty').focus()
   })
 
   function counter(inputFrom, value, param) {
