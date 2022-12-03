@@ -11,6 +11,7 @@
       <input type="hidden" class="form-control" id="grand-total" name="grandtotal" value="0" readonly>
       <?php echo $this->include('order/components/form-left') ?>
       <?php echo $this->include('order/components/form-right') ?>
+      <?php echo $this->include('order/components/table-pembayaran') ?>
       <?php echo $this->include('order/components/form-button') ?>
     </div>
   </form>

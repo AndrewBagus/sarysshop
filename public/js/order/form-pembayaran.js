@@ -1,3 +1,4 @@
+let tablePembayaranList
 $(function () {
   getBank()
 
@@ -7,50 +8,194 @@ $(function () {
     format: date_format,
   })
 
-  $(document).on('change', '#status-pembayaran', function () {
-    const value = $(this).val()
-    if (value === 'belum-bayar') {
-      $('.belum-bayar-hide').addClass('d-none')
-      $('#bank').rules('remove', 'required')
-      $('#tgl-bayar').rules('remove', 'required')
-      $('#nominal').rules('remove', 'required')
+  tablePembayaranList = $('#table-pembayaran-list').DataTable({
+    responsive: true,
+    searching: false,
+    info: false,
+    paging: false,
+    columnDefs: [
+      {
+        targets: 0,
+        orderable: false,
+      },
+    ],
+    columns: [
+      {
+        data: null,
+        render: function (_, _, _, meta) {
+          return meta.row + 1
+        },
+      },
+      {
+        data: 'name',
+      },
+      {
+        data: 'tanggal_pembayaran',
+        render: function (data) {
+          return formateDateFromDb(data)
+        },
+      },
+      {
+        data: 'keterangan',
+        render: function (data) {
+          return `<p style="word-break: break-word; white-space: pre-wrap;">${data}<p>`
+        },
+      },
+      {
+        data: 'nominal',
+        render: function (data) {
+          return `Rp. ${thousandFormat(data)}`
+        },
+      },
+      {
+        data: null,
+        render: function (data, type, full, meta) {
+          const btnDelete =
+            '<button type="button" class="btn btn-outline-danger btn-sm btn-remove-pembayaran" data-bs-toggle="tooltip" data-bs-title="Hapus Pembayaran"><i class="fa fa-trash"></i></button>'
+          const btnEdit =
+            '<button type="button" class="btn btn-outline-primary btn-sm btn-edit-pembayaran" data-bs-toggle="tooltip" data-bs-title="Edit Pembayaran"><i class="fa fa-edit"></i></button>'
 
-      $('#bank').val('').trigger('change')
-      $('#tgl-bayar').val('')
-      $('#nominal').val('')
-    } else if (value === 'cicilan') {
-      $('.belum-bayar-hide').removeClass('d-none')
-      $('#bank').rules('add', {
-        required: true,
-      })
-      $('#tgl-bayar').rules('add', {
-        required: true,
-      })
-      $('#nominal').rules('add', {
-        required: true,
-      })
-      const tgl = $('#tgl-bayar')
-      tgl_value = tgl.val()
-      if (tgl_value === '') tgl.val(moment().format(date_format))
-    } else if (value === 'lunas') {
-      $('.belum-bayar-hide').addClass('d-none')
-      $('.lunas-show').removeClass('d-none')
-      $('#nominal').rules('remove', 'required')
+          const btn = '<center>' + btnEdit + ' ' + btnDelete + '</center>'
 
-      $('#bank').rules('add', {
-        required: true,
-      })
-      $('#tgl-bayar').rules('add', {
-        required: true,
-      })
-      $('#nominal').rules('add', {
-        required: true,
-      })
-      const tgl = $('#tgl-bayar')
-      tgl_value = tgl.val()
-      if (tgl_value === '') tgl.val(moment().format(date_format))
+          return btn
+        },
+      },
+    ],
+    language: {
+      oPaginate: {
+        sNext: '<i class="fa fa-angle-right"></i>',
+        sPrevious: '<i class="fa fa-angle-left"></i>',
+      },
+      sEmptyTable: 'Data tidak tersedia',
+    },
+    drawCallback: function (_) {
+      const api = this.api()
+      const data = api.rows().data()
+      const total = data.reduce((accumulator, object) => {
+        return accumulator + parseInt(object.nominal)
+      }, 0)
+      $('#total-pembayaran').html(thousandFormat(total))
+      $('[data-bs-toggle="tooltip"]').tooltip()
+    },
+  })
+
+  $(document).on('click', '#btn-pembayaran-new', function (e) {
+    e.preventDefault()
+    const totalBayar = parseInt($('#total-pembayaran').html())
+    const sisa = grandTotal - totalBayar
+    if (sisa === 0) {
+      newalert('info', 'Pembayaran telah lunas', 'informasi')
+      return false
+    }
+    $('#tgl-bayar').val(moment().format(date_format))
+    $('#modal-pembayaran').modal('show')
+  })
+
+  $(document).on('hide.bs.modal', '#modal-pembayaran', function () {
+    $('#bank').val(null).trigger('change')
+    $('#tgl-bayar').val('')
+    $('#nominal').val('')
+    $('#pembayaran-keterangan').val('')
+    $('#pembayaran-id').val(0)
+    $('#pembayaran-index').val('')
+  })
+
+  $(document).on('keyup', '#nominal', function () {
+    let value = $(this).val()
+    value = value === '0' ? '' : value
+
+    if (value !== '') {
+      value = parseInt(thousandUnFormat(value))
+      const totalBayar = parseInt($('#total-pembayaran').html())
+      const sisa = grandTotal - totalBayar
+      if (value > sisa) $(this).val(thousandFormat(sisa))
     }
   })
+
+  $(document).on('click', '.btn-edit-pembayaran', function (e) {
+    e.preventDefault()
+    const row = tablePembayaranList.row($(this).parents('tr'))
+    const data = row.data()
+    const index = row.index()
+
+    $('#pembayaran-id').val(data.id)
+    $('#pembayaran-index').val(index)
+    $('#tgl-bayar').val(data.tanggal_pembayaran)
+    $('#nominal').val(thousandFormat(data.nominal))
+    $('#pembayaran-keterangan').val(data.keterangan)
+    $('#bank').val(data.bank_id).trigger('change')
+
+    $('#modal-pembayaran').modal('show')
+  })
+
+  $(document).on('click', '.btn-remove-pembayaran', function (e) {
+    e.preventDefault()
+    const row = tablePembayaranList.row($(this).parents('tr'))
+    const index = row.index()
+    const pembayarans = tablePembayaranList.rows().data().toArray()
+
+    confirmation(function () {
+      pembayarans.splice(index, 1)
+      notification('success', 'Informasi', 'Data Pembayaran berhasil di hapus')
+
+      refreshTable(tablePembayaranList, pembayarans)
+    })
+  })
+
+  initValidateForm(
+    '#form-pembayaran',
+    {
+      bank_id: {
+        required: true,
+      },
+      tanggal_pembayaran: {
+        required: true,
+      },
+      nominal: {
+        required: true,
+      },
+    },
+    {
+      bank_id: {
+        required: 'Bank harus di isi',
+      },
+      tanggal_pembayaran: {
+        required: 'Tanggal Pembayaran harus di isi',
+      },
+      nominal: {
+        required: 'Nominal harus di isi',
+      },
+    },
+    function () {
+      const data = getFormData($('#form-pembayaran'))
+      const index = $('#pembayaran-index').val()
+      const pembayarans = tablePembayaranList.rows().data().toArray()
+      const bank = $('#bank option:selected').select2().text()
+
+      const nominal = $('#nominal').val()
+      const id = $('#pembayaran-id').val()
+      const tgl = $('#tgl-bayar').val()
+
+      let message = 'Data Qty berhasil di simpan'
+
+      data.id = id
+      data.tanggal_pembayaran = formateDateDb(tgl)
+      data.name = bank
+      data.nominal = thousandUnFormat(nominal)
+
+      if (index == '') {
+        pembayarans.push(data)
+      } else {
+        pembayarans[index] = data
+        message = 'Data Qty berhasil di ubah'
+      }
+
+      notification('success', 'Informasi', message)
+
+      refreshTable(tablePembayaranList, pembayarans)
+      $('#modal-pembayaran').modal('hide')
+    }
+  )
 
   function getBank() {
     f_ajax(`${base_uri}/bank/getBanks`, {}, function (response) {

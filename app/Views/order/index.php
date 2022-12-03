@@ -15,6 +15,7 @@
 
 <?php echo $this->include('order/form') ?>
 <?php echo $this->include('order/form-kurir') ?>
+<?php echo $this->include('order/form-pembayaran') ?>
 <?php echo $this->include('order/form-wrapper') ?>
 <?php echo $this->include('order/form-diskon-varian') ?>
 <?php echo $this->include('order/form-edit-varian') ?>

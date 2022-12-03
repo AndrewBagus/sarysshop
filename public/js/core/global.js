@@ -255,13 +255,12 @@ function initValidateForm(usage, rules, messages, callback) {
       error.addClass('invalid-feedback')
       if (
         element.hasClass('select2bs5') ||
-        element.hasClass('select2bs5-nonclear')
+        element.hasClass('select2bs5-nonclear') ||
+        element.parent('.input-group').length === 0
       ) {
         element.parents('.form-group').append(error)
       } else if (element.hasClass('summernote')) {
         $(error).insertAfter(element.siblings('.note-editor'))
-      } else if (element.parent('.input-group').length === 0) {
-        $(error).insertAfter(element)
       } else {
         element.closest('.input-group').append(error)
       }

@@ -70,7 +70,7 @@ $(function () {
       if (
         element.hasClass('select2bs5') ||
         element.hasClass('select2bs5-nonclear') ||
-        element.hasClass('bank-pembayran')
+        element.hasClass('bank-pembayaran')
       ) {
         element.parents('.form-group').append(error)
       } else if (element.hasClass('summernote')) {
@@ -107,6 +107,18 @@ $(function () {
         return false
       }
 
+      const totalBayar = parseInt($('#total-pembayaran').html())
+      if (totalBayar > grandTotal) {
+        newalert(
+          'info',
+          `Total Pembayaran tidak boleh melebih Rp. ${thousandFormat(
+            grandTotal
+          )} , silahkan cek kembali`,
+          'informasi'
+        )
+        return false
+      }
+
       const order = getFormData($('#form-data'))
       const produks = tableOrderList.rows().data().toArray()
       order['subtotal_pembelian'] = subtotal
@@ -130,8 +142,8 @@ $(function () {
       f_ajax(`${base_uri}/order/saveOrder`, data, function (response) {
         const mode = $('#mode').val()
         if (mode === 'stay') {
-          notification('success', 'Information', response.message)
           // tableList.ajax.reload(null, false)
+          notification('success', 'Information', response.message)
           resetForm()
         } else {
           $('#btn-back').click
@@ -148,7 +160,6 @@ $(function () {
     $('#pemesan-alamat').empty()
     $('#penerima').val(null).trigger('change')
     $('#penerima-alamat').empty()
-    $('#status-pembayran').val('belum-bayar').trigger('change')
     $('#bank').val(null).trigger('change')
     $('.additional-order-detail').empty()
     $('#sub-total-display').html(0)

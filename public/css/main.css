@@ -22,7 +22,7 @@ p.form-control {
   height: auto;
 }
 
-.dataTables_empty {
+#table-detail-order-list .dataTables_empty {
   height: 10rem;
   vertical-align: middle;
   color: #878f95;

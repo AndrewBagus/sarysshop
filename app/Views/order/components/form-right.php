@@ -3,7 +3,6 @@
 
     <?php echo $this->include('order/components/form-produk') ?>
     <?php echo $this->include('order/components/form-order') ?>
-    <?php echo $this->include('order/components/form-pembayaran') ?>
 
   </div>
 </div>
