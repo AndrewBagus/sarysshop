@@ -32,4 +32,5 @@
 <script src="<?php echo base_url() ?>/js/order/form-wrapper.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-grand.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-diskon-varian.js?v=<?php echo rand() ?>"></script>
+<script src="<?php echo base_url() ?>/js/order/form-edit-varian.js?v=<?php echo rand() ?>"></script>
 <?php echo $this->endSection() ?>

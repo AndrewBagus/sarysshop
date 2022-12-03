@@ -166,18 +166,6 @@ $(function () {
     $(this).parents('.form-group').find('.produk-qty').focus()
   })
 
-  function counter(inputFrom, value, param) {
-    value = parseInt(value)
-    if (param === 'min') {
-      value = value <= 1 ? 1 : value - 1
-    } else if (param === 'plus') {
-      value = value >= 1000 ? 1000 : value + 1
-    }
-
-    inputFrom.val(value)
-    inputFrom.focus()
-  }
-
   function formatRepo(repo) {
     if (repo.loading) {
       return repo.text
@@ -275,4 +263,16 @@ function createProduk(arrays, useBtn = true) {
                    </div>`
 
   return wrapper
+}
+
+function counter(inputFrom, value, param) {
+  value = parseInt(value)
+  if (param === 'min') {
+    value = value <= 1 ? 1 : value - 1
+  } else if (param === 'plus') {
+    value = value >= 1000 ? 1000 : value + 1
+  }
+
+  inputFrom.val(value)
+  inputFrom.focus()
 }

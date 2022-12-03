@@ -82,6 +82,11 @@ $(function () {
     const row = tableOrderList.row($(this).parents('tr'))
     const data = row.data()
     const index = row.index()
+
+    $('#edit-varian-index').val(index)
+    $('#edit-varian-qty').val(data.qty)
+    $('#edit-varian-nama').html(data.produk_nama)
+    $('#modal-edit-varian').modal('show')
   })
 
   $(document).on('click', '.btn-order-item-diskon', function (e) {
