@@ -24,6 +24,14 @@ class OrderController extends BaseController
         return view('order/index', $data);
     }
 
+    public function getDataTable(): void
+    {
+        $post = (object)$this->request->getVar();
+        $response = $this->orderService->getDataTable($post);
+
+        echo json_encode($response);
+    }
+
     public function saveOrder(): void
     {
         $post = $this->request->getVar();

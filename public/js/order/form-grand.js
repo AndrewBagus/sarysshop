@@ -25,7 +25,6 @@ $(function () {
       arrays = additionals[index]
       $('#wrapper-title').html('Biaya Lain')
     }
-    console.log(arrays)
 
     $('#wrapper-type').val(tipe)
     $('#wrapper-index').val(index)

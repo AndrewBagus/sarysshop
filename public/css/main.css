@@ -100,13 +100,12 @@ td.dropdown .dropdown-menu.show {
 }
 
 .card-body.order-content {
-  margin-top: 0.5rem;
-  height: 77vh;
+  min-height: 77vh;
 }
 
 ul.nav-pills {
   padding-bottom: 1rem;
-  /* border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color); */
+  border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
 
 .card.bg-transparent {

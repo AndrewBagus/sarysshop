@@ -122,6 +122,7 @@ $routes->group(
         $routes->post('/produk/removeData', 'ProdukController::removeData');
 
         $routes->get('/order', 'OrderController::index');
+        $routes->post('/order/getDataTable', 'OrderController::getDataTable');
         $routes->post('/order/saveOrder', 'OrderController::saveOrder');
         $routes->get('/order/(:segment)', 'OrderController::index/$1');
     }

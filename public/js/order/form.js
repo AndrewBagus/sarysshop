@@ -121,15 +121,10 @@ $(function () {
 
       const order = getFormData($('#form-data'))
       const produks = tableOrderList.rows().data().toArray()
+      const pembayarans = tablePembayaranList.rows().data().toArray()
       order['subtotal_pembelian'] = subtotal
       order['grandtotal'] = grandTotal
       order['tgl_order'] = formateDateDb(order['tgl_order'])
-      order['tanggal_pembayaran'] =
-        order['tanggal_pembayaran'] === ''
-          ? ''
-          : formateDateDb(order['tanggal_pembayaran'])
-      order['nominal'] =
-        order['nominal'] === '' ? '' : thousandUnFormat(order['nominal'])
 
       const data = {
         order: JSON.stringify(order),
@@ -137,16 +132,17 @@ $(function () {
         kurir: JSON.stringify(kurir),
         diskons: JSON.stringify(diskons),
         additionals: JSON.stringify(additionals),
+        pembayarans: JSON.stringify(pembayarans),
       }
 
       f_ajax(`${base_uri}/order/saveOrder`, data, function (response) {
         const mode = $('#mode').val()
         if (mode === 'stay') {
-          // tableList.ajax.reload(null, false)
+          tableList.ajax.reload(null, false)
           notification('success', 'Information', response.message)
           resetForm()
         } else {
-          $('#btn-back').click
+          $('#btn-back').click()
         }
       })
     },
@@ -156,17 +152,40 @@ $(function () {
     $('#form-data')[0].reset()
     $('#id').val(0)
     $('#mode').val('')
-    $('#pemensan').val(null).trigger('change')
+    $('#pemesan').val(null).trigger('change')
     $('#pemesan-alamat').empty()
     $('#penerima').val(null).trigger('change')
     $('#penerima-alamat').empty()
-    $('#bank').val(null).trigger('change')
-    $('.additional-order-detail').empty()
     $('#sub-total-display').html(0)
     $('#grand-total-display').html(0)
+    $('#ongkir').html(0)
+    $('#tgl-order').val(moment().format(date_format))
 
     $('#sub-total').val(0)
     $('#grand-total').val(0)
+    $('#berat-total').empty()
+    $('#kurir-nama').empty()
+    $('#diskon-wrapper').empty()
+    $('#additional-wrapper').empty()
+
+    subtotal = 0
+    grandTotal = 0
+    kurir = {
+      id: 0,
+      nama: null,
+      biaya: 0,
+      berat: 0,
+    }
+    diskons = []
+    additionals = []
+    tableOrderList.clear().draw()
+    tablePembayaranList.clear().draw()
+
+    produkQuery = ''
+    $('input.select2-search__field').val('')
+    $('#select2-produk-container').html(
+      `<span class="select2-selection__placeholder">Cari Produk</span>`
+    )
   }
 
   function checkForm() {

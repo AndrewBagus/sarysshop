@@ -1,6 +1,6 @@
 let produks = []
+let produkQuery
 $(function () {
-  let produkQuery
   $('#produk')
     .select2({
       theme: 'bootstrap-5',

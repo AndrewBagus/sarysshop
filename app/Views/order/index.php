@@ -1,7 +1,7 @@
 <?php echo $this->extend('layouts/layout'); ?>
 
 <?php echo $this->section('page-content') ?>
-<div class="card bg-transparent d-none" id="card-table">
+<div class="card bg-transparent" id="card-table">
   <div class="card-header bg-transparent">
     <h1>Order</h1>
     <div class="card-tools">
@@ -9,6 +9,7 @@
     </div>
   </div>
 
+  <input type="hidden" class="form-control" id="table-status" value="<?php echo $page ?>" readonly>
   <?php echo $this->include('order/components/tab-header') ?>
   <?php echo $this->include('order/components/tab-content') ?>
 </div>

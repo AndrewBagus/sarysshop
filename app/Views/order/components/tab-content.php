@@ -1,4 +1,4 @@
-<div class="card-body order-content">
+<div class="card-body order-content px-0">
   <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade <?php echo $page === 'order' ? 'show active' : ''; ?>" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab" tabindex="0">
       <?php echo $this->include('order/components/table-index') ?>
