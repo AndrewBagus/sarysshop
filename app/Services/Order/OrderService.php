@@ -7,6 +7,7 @@ use App\Repositories\OrderPembayaran\OrderPembayaranRepository;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\OrderBiayaLain\OrderBiayaLainRepository;
 use App\Repositories\OrderDetail\OrderDetailRepository;
+use App\Repositories\ProdukVarian\ProdukVarianRepository;
 use Config\Database;
 
 class OrderService implements IOrderService
@@ -16,6 +17,7 @@ class OrderService implements IOrderService
     private $orderDiskonRepo;
     private $orderBiayaLainRepo;
     private $orderPembayaranRepo;
+    private $proudukVarianRepo;
 
     public function __construct()
     {
@@ -24,23 +26,24 @@ class OrderService implements IOrderService
         $this->orderDiskonRepo = new OrderDiskonRepository();
         $this->orderBiayaLainRepo = new OrderBiayaLainRepository;
         $this->orderPembayaranRepo = new OrderPembayaranRepository();
+        $this->proudukVarianRepo = new ProdukVarianRepository();
     }
 
     private function _queryDataTable($search, $order)
     {
         $columns = [
-          't_order.id',
-          't_order.code',
-          't_order.tanggal_order',
-          't_order.tanggal_dikirim',
-          't_order.tanggal_diterima',
-          't_order.status_pembayaran',
-          't_order.grandtotal',
-          'mk.nama',
-          'mp1.nama',
-          'kp1.nama',
-          'mp2.nama',
-          'kp2.nama',
+        't_order.id',
+        't_order.code',
+        't_order.tanggal_order',
+        't_order.tanggal_dikirim',
+        't_order.tanggal_diterima',
+        't_order.status_pembayaran',
+        't_order.grandtotal',
+        'mk.nama',
+        'mp1.nama',
+        'kp1.nama',
+        'mp2.nama',
+        'kp2.nama',
         '(select count(tod.id) from t_order_detail tod where tod.order_id = t_order.id)'
         ];
         $column_order = $columns; //field yang ada di table user
@@ -68,16 +71,16 @@ class OrderService implements IOrderService
         if ($length != -1) {
             $query = $query->limit($length, $start);
         }
-        if($status === 'belum-bayar') {
+        if ($status === 'belum-bayar') {
             $query = $query->where('t_order.status_pembayaran', 'belum-bayar');
-        } else if($status === 'sudah-dp') {
+        } else if ($status === 'sudah-dp') {
             $query = $query->where('t_order.status_pembayaran', 'cicilan');
-        } else if($status === 'sudah-lunas') {
+        } else if ($status === 'sudah-lunas') {
             $query = $query->where('t_order.status_pembayaran', 'lunas');
-        } else if($status === 'pengiriman') {
+        } else if ($status === 'pengiriman') {
             $query = $query->where('t_order.tanggal_dikirim !=', null);
             $query = $query->where('t_order.tanggal_diterima', null);
-        } else if($status === 'terkirim') {
+        } else if ($status === 'terkirim') {
             $query = $query->where('t_order.tanggal_diterima !=', null);
         }
 
@@ -108,6 +111,22 @@ class OrderService implements IOrderService
     public function getOrders()
     {
         return $this->orderRepo->getActive()->get()->getResult();
+    }
+
+    public function getProudukByOrders($request)
+    {
+        $order_id = $request->order_id;
+        $produks = $this->proudukVarianRepo->getByOrder($order_id);
+        $diskons = $this->orderDiskonRepo->getByOrder($order_id);
+        $biayas = $this->orderBiayaLainRepo->getByOrder($order_id);
+
+        $response = [
+        'produks' => $produks,
+        'diskons' => $diskons,
+        'biayas' => $biayas
+        ];
+
+        return $response;
     }
 
     public function saveData($request)
@@ -180,7 +199,7 @@ class OrderService implements IOrderService
             $diskon_id = $this->orderDiskonRepo->save($diskon);
             $diskons[$i]->id = $diskon_id === 0 ? $diskon['id'] : $diskon_id;
         }
-        if(count($diskons) > 0) {
+        if (count($diskons) > 0) {
             $this->orderDiskonRepo->removeNotInOrder($order_id, array_column((array)$diskons, 'id'));
         } else {
             $this->orderDiskonRepo->removeByOrder($order_id);
@@ -192,7 +211,7 @@ class OrderService implements IOrderService
             $biaya_id = $this->orderBiayaLainRepo->save($biaya);
             $additionals[$i]->id = $biaya_id === 0 ? $biaya['id'] : $biaya_id;
         }
-        if(count($additionals) > 0) {
+        if (count($additionals) > 0) {
             $this->orderBiayaLainRepo->removeNotInOrder($order_id, array_column((array)$additionals, 'id'));
         } else {
             $this->orderBiayaLainRepo->removeByOrder($order_id);
@@ -206,7 +225,7 @@ class OrderService implements IOrderService
             $pembayarans[$i]->id = $pembayaran_id === 0 ? $pembayaran['id'] : $pembayaran_id;
             $totalBayar += (int) $pembayaran['nominal'];
         }
-        if(count($pembayarans) > 0) {
+        if (count($pembayarans) > 0) {
             $this->orderPembayaranRepo->removeNotInOrder($order_id, array_column((array)$pembayarans, 'id'));
         } else {
             $this->orderPembayaranRepo->removeByOrder($order_id);
@@ -216,7 +235,7 @@ class OrderService implements IOrderService
         $orderData['id'] = $order_id;
         if ($totalBayar === (int)$order->grandtotal) {
             $orderData['status_pembayaran'] = 'lunas';
-        } else if($totalBayar !== 0) {
+        } else if ($totalBayar !== 0) {
             $orderData['status_pembayaran'] = 'cicilan';
         }
         $this->orderRepo->save($orderData);

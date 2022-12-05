@@ -4,7 +4,7 @@
       <h3>Order</h3>
     </div>
     <div class="card-body">
-      <table id="table-detail-order-list" class="" width="100%">
+      <table id="table-detail-order-list" class="table-order" width="100%">
         <thead>
           <tr>
             <td>Nama</td>

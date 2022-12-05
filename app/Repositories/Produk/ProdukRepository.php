@@ -3,7 +3,6 @@
 namespace App\Repositories\Produk;
 
 use App\Models\ProdukModel;
-use Config\Database;
 
 class ProdukRepository implements IProdukRepository
 {

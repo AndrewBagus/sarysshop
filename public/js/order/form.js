@@ -248,7 +248,7 @@ function refreshGrandAdditional(index, data) {
   createDiskonAdditional('#additional-wrapper', additionals, false)
 }
 
-function createDiskonAdditional(usage, arrays, is_red) {
+function createDiskonAdditional(usage, arrays, is_red, use_btn = true) {
   let contents = ''
 
   let i = 0
@@ -276,9 +276,16 @@ function createDiskonAdditional(usage, arrays, is_red) {
                                   </ul>`
 
     const nominal = thousandFormat(item.nominal)
+    const isi = use_btn
+      ? is_red
+        ? `(${nominal}) ${btnWrapper}`
+        : `${nominal} ${btnWrapper}`
+      : is_red
+      ? `(${nominal})`
+      : nominal
     let nominalArea = is_red
-      ? `<td class="dropdown" style="color:#ff5f5f">Rp. (${nominal}) ${btnWrapper}</td>)`
-      : `<td class="dropdown">Rp. ${nominal} ${btnWrapper}</td>`
+      ? `<td class="dropdown" style="color:#ff5f5f">Rp. ${isi}</td>)`
+      : `<td class="dropdown">Rp. ${isi}</td>`
 
     content += `</td>${nominalArea}</tr>`
 

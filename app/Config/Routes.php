@@ -123,6 +123,9 @@ $routes->group(
 
         $routes->get('/order', 'OrderController::index');
         $routes->post('/order/getDataTable', 'OrderController::getDataTable');
+        $routes->post('/order/getOrderDetail', 'OrderController::getOrderDetail');
+        $routes->post('/order/getOrderProduk', 'OrderController::getOrderProduk');
+        $routes->post('/order/getOrderPembayaran', 'OrderController::getOrderPembayaran');
         $routes->post('/order/saveOrder', 'OrderController::saveOrder');
         $routes->get('/order/(:segment)', 'OrderController::index/$1');
     }

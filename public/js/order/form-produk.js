@@ -132,6 +132,7 @@ $(function () {
       produk_nama: produk.produk_nama,
       produk_varian_id: varian_id,
       jenis_produk_id: produk.jenis_produk_id,
+      kategori: produk.kategori,
       qty: qty,
       harga: harga,
       ukuran: produk.ukuran,
@@ -217,6 +218,8 @@ function createProduk(arrays, useBtn = true) {
   if (parseInt(arrays.jenis_produk_id) === 2)
     po = `<span class="label label-outline-primary">${arrays.keterangan}</span>`
 
+  const kategori = `<span class="label label-outline-secondary">${arrays.kategori}</span>`
+
   const btn = `<button class="btn btn-primary btn-sm btn-produk-tambah" data-repo-id="${arrays.id}" style="margin-left: 2rem"><i class="fa fa-plus"></i> Tambah</button`
   let btnWrapper = ''
   let addMb = 'mb-3'
@@ -255,6 +258,7 @@ function createProduk(arrays, useBtn = true) {
                           <div style="font-size: 17px;">${arrays.produk_nama}</div>
                           ${deskirpsi}
                           ${po}
+                          ${kategori}
                           ${harga}
                         </div>
                         ${btnWrapper}

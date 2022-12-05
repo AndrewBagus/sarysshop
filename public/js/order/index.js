@@ -33,7 +33,7 @@ $(function () {
       {
         data: 'produks',
         render: function (data) {
-          return `<button class="btn btn-outline-info produks">${data} Produk</button>`
+          return `<button class="btn btn-outline-info btn-produks">${data} Produk</button>`
         },
       },
       {
@@ -113,5 +113,46 @@ $(function () {
   $(document).on('click', '#btn-new', function (e) {
     e.preventDefault()
     toggleShow('#card-form', '#card-table')
+  })
+
+  $(document).on('click', '.btn-produks', function (e) {
+    e.preventDefault()
+    const data = tableList.row($(this).parents('tr')).data()
+    f_ajax(
+      `${base_uri}/order/getOrderProduk`,
+      { order_id: data.id },
+      function (response) {
+        const produks = response.produks
+        const diskons = response.diskons
+        const biayas = response.biayas
+        const subtotal = produks.reduce((accumulator, object) => {
+          return accumulator + parseInt(object.subtotal)
+        }, 0)
+        const berat =
+          produks.reduce((accumulator, object) => {
+            return accumulator + parseInt(object.berat)
+          }, 0) / 1000
+        $('#view-sub-total-display').html(thousandFormat(subtotal))
+        $('#view-berat-total').html(`${berat}Kg`)
+
+        const biayaKurir = parseInt(data.biaya_kurir)
+        const grandTotal = parseInt(data.grandtotal)
+        $('#view-kurir-nama').html(data.kurir)
+        $('#view-ongkir').html(thousandFormat(biayaKurir))
+        $('#view-grand-total-display').html(`Rp. ${thousandFormat(grandTotal)}`)
+
+        $('#view-produk-title').html(
+          `${data.code} - Tanggal Order: ${moment(data.tanggal_order).format(
+            date_format
+          )}`
+        )
+
+        createDiskonAdditional('#view-diskon-wrapper', diskons, true, false)
+        createDiskonAdditional('#view-additional-wrapper', biayas, false, false)
+
+        refreshTable(tableViewOrderList, produks)
+        $('#modal-view-produk').modal('show')
+      }
+    )
   })
 })
