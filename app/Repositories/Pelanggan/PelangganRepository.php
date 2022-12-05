@@ -28,7 +28,10 @@ class PelangganRepository implements IPelangganRepository
 
     public function getById($id)
     {
-        return $this->model->where('id', $id);
+        return $this->getPelanggan()
+            ->where('m_pelanggan.id', $id)
+            ->get()
+            ->getRow();
     }
 
     public function findPelanggans($search)

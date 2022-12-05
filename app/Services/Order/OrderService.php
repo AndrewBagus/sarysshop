@@ -7,6 +7,7 @@ use App\Repositories\OrderPembayaran\OrderPembayaranRepository;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\OrderBiayaLain\OrderBiayaLainRepository;
 use App\Repositories\OrderDetail\OrderDetailRepository;
+use App\Repositories\Pelanggan\PelangganRepository;
 use App\Repositories\ProdukVarian\ProdukVarianRepository;
 use Config\Database;
 
@@ -18,6 +19,7 @@ class OrderService implements IOrderService
     private $orderBiayaLainRepo;
     private $orderPembayaranRepo;
     private $proudukVarianRepo;
+    private $pelangganRepo;
 
     public function __construct()
     {
@@ -27,6 +29,7 @@ class OrderService implements IOrderService
         $this->orderBiayaLainRepo = new OrderBiayaLainRepository;
         $this->orderPembayaranRepo = new OrderPembayaranRepository();
         $this->proudukVarianRepo = new ProdukVarianRepository();
+        $this->pelangganRepo = new PelangganRepository();
     }
 
     private function _queryDataTable($search, $order)
@@ -108,9 +111,28 @@ class OrderService implements IOrderService
         return $response;
     }
 
-    public function getOrders()
+    public function getOrderDetail($request)
     {
-        return $this->orderRepo->getActive()->get()->getResult();
+        $order_id = $request->order_id;
+        $order = $this->orderRepo->getById($order_id);
+        $pelanggan = $this->pelangganRepo->getById($order->pelanggan_id);
+        $kirim = $this->pelangganRepo->getById($order->pelanggan_kirim);
+        $produks = $this->proudukVarianRepo->getByOrder($order_id);
+        $diskons = $this->orderDiskonRepo->getByOrder($order_id);
+        $biayas = $this->orderBiayaLainRepo->getByOrder($order_id);
+        $pembayarans = $this->orderPembayaranRepo->getByOrder($order_id);
+
+        $response = [
+        'pelanggan' => $pelanggan,
+        'kirim' => $kirim,
+        'produks' => $produks,
+        'produks' => $produks,
+        'diskons' => $diskons,
+        'biayas' => $biayas,
+        'pembayarans' => $pembayarans,
+        ];
+
+        return $response;
     }
 
     public function getProudukByOrders($request)

@@ -32,13 +32,13 @@ class OrderController extends BaseController
         echo json_encode($response);
     }
 
-    // public function getOrderDetail()
-    // {
-    //     $post = (object) $this->request->getVar();
-    //     $response = $this->orderService->getOrderDetail($post);
-    //
-    //     echo json_encode($response);
-    // }
+    public function getOrderDetail()
+    {
+        $post = (object) $this->request->getVar();
+        $response = $this->orderService->getOrderDetail($post);
+
+        echo json_encode($response);
+    }
 
     public function getOrderProduk()
     {

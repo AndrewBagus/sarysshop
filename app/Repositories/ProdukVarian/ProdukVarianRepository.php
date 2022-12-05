@@ -50,16 +50,17 @@ class ProdukVarianRepository implements IProdukVarianRepository
             ->where('p.is_active', true)
             ->where('od.order_id', $order_id)
             ->select(
-                $tbl . '.id, ' .
+                $tbl . '.id as produk_varian_id, ' .
                 $tbl . '.produk_id, ' .
                 $tbl . '.warna, ' .
                 $tbl . '.berat, ' .
                 $tbl . '.ukuran, ' .
                 $tbl . '.image, ' .
                 $tbl . '.stok, 
+                od.id,
                 od.harga,
                 od.qty,
-                od.berat,
+                od.berat as subBerat,
                 od.diskon_tipe,
                 od.diskon_persen,
                 od.diskon_nominal,

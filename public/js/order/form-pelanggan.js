@@ -85,17 +85,7 @@ $(function () {
     if (repo.nama !== undefined) {
       $('#kategori-pelanggan').val(repo.kategori_pelanggan_id)
       const newOpt = new Option(repo.nama, repo.id, true, true)
-      const alamat = `<div class="col-xs-12 mt-2">
-        <div class="d-flex align-items-center justify-content-between position-relative">
-          <div class="d-flex align-items-center justify-content-between w-100">
-            <div style="font-size: 16px">
-              <div style="font-size: 16px; font-weight: bolder">Alamat: </div>
-              <small class="d-block">${repo.alamat}</small>
-              <small class="d-block">Kec. ${repo.kecamatan}, ${repo.kode_pos}</small>
-            </div>
-          </div>
-        </div>
-       </div>`
+      const alamat = alamat(repo)
 
       $('#pemesan-alamat').html(alamat)
       if ($('#penerima-alamat').html() === '') {
@@ -119,3 +109,18 @@ $(function () {
     return repo.text || nama
   }
 })
+
+function alamat(repo) {
+  const content = `<div class="col-xs-12 mt-2">
+        <div class="d-flex align-items-center justify-content-between position-relative">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <div style="font-size: 16px">
+              <div style="font-size: 16px; font-weight: bolder">Alamat: </div>
+              <small class="d-block">${repo.alamat}</small>
+              <small class="d-block">Kec. ${repo.kecamatan}, ${repo.kode_pos}</small>
+            </div>
+          </div>
+        </div>
+       </div>`
+  return content
+}

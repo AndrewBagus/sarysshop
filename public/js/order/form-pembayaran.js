@@ -38,7 +38,9 @@ $(function () {
       {
         data: 'keterangan',
         render: function (data) {
-          return `<p style="word-break: break-word; white-space: pre-wrap;">${data}<p>`
+          return data === null
+            ? ''
+            : `<p style="word-break: break-word; white-space: pre-wrap;">${data}<p>`
         },
       },
       {

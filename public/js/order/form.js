@@ -137,9 +137,9 @@ $(function () {
 
       f_ajax(`${base_uri}/order/saveOrder`, data, function (response) {
         const mode = $('#mode').val()
+        tableList.ajax.reload(null, false)
+        notification('success', 'Information', response.message)
         if (mode === 'stay') {
-          tableList.ajax.reload(null, false)
-          notification('success', 'Information', response.message)
           resetForm()
         } else {
           $('#btn-back').click()
@@ -151,6 +151,8 @@ $(function () {
   function resetForm() {
     $('#form-data')[0].reset()
     $('#id').val(0)
+    $('#sub-total').val(0)
+    $('#grand-total').val(0)
     $('#mode').val('')
     $('#pemesan').val(null).trigger('change')
     $('#pemesan-alamat').empty()
@@ -161,8 +163,6 @@ $(function () {
     $('#ongkir').html(0)
     $('#tgl-order').val(moment().format(date_format))
 
-    $('#sub-total').val(0)
-    $('#grand-total').val(0)
     $('#berat-total').empty()
     $('#kurir-nama').empty()
     $('#diskon-wrapper').empty()

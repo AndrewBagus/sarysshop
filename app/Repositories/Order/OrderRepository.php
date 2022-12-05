@@ -24,12 +24,14 @@ class OrderRepository implements IOrderRepository
             ->select(
                 [
                 't_order.id',
+                't_order.kurir_id',
                 't_order.code',
                 't_order.tanggal_order',
                 't_order.tanggal_dikirim',
                 't_order.status_pembayaran',
                 't_order.tanggal_diterima',
                 't_order.grandtotal',
+                't_order.biaya_kurir',
                 'mk.nama as kurir',
                 'mp1.nama as pelanggan',
                 'kp1.nama as jenis_pelanggan',
@@ -49,7 +51,10 @@ class OrderRepository implements IOrderRepository
 
     public function getById($id)
     {
-        return $this->model->where('id', $id);
+        return $this->model
+            ->where('id', $id)
+            ->get()
+            ->getRow();
     }
 
     public function save($data)
@@ -58,4 +63,7 @@ class OrderRepository implements IOrderRepository
         return $this->model->getInsertID();
     }
 
+    public function getOrderDetail($order_id)
+    {
+    }
 }
