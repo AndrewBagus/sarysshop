@@ -22,26 +22,31 @@ class ProdukService implements IProdukService
         $this->produkVarianRepo = new ProdukVarianRepository();
         $this->produkVarianHargaRepo = new ProdukVarianHargaRepository();
         $this->kategoriPelangganRepo = new KategoriPelangganRepository();
-
-        $column = $this->produkRepo->produkSelect;
-        foreach ($column as $i => $item) {
-            $split = explode(' as ', $item);
-            $column[$i] = $item;
-            if (count($split) > 0) {
-                $column[$i] = $split[0];
-            }
-        }
-        $this->column = $column;
     }
 
     private function _queryDataTable($search, $order)
     {
-        $id = $this->produkRepo->produkSelect[0];
-        $column_order = $this->column; //field yang ada di table user
-        $column_search = $this->column; //field yang diizin untuk pencarian
-        $order_by = [$id => 'asc']; // default order
-
-        // dump_die($column_search);
+        $columns = [
+        'm_produk.id',
+        'm_produk.kategori_produk_id',
+        'm_produk.jenis_produk_id',
+        'm_produk.gudang_id',
+        'm_produk.supplier_id',
+        'm_produk.nama',
+        'm_produk.image',
+        'm_produk.tempo_kedatangan',
+        'm_produk.keterangan',
+        'm_produk.is_active',
+        'su.nama',
+        'su.alamat',
+        'kp.nama',
+        'jp.nama',
+        'gu.nama',
+        'gu.alamat',
+        ];
+        $column_order = $columns; //field yang ada di table user
+        $column_search = $columns; //field yang diizin untuk pencarian
+        $order_by = ['m_produk.id' => 'asc']; // default order
 
         $query = $this->produkRepo->getActive();
 
@@ -107,13 +112,15 @@ class ProdukService implements IProdukService
         $produks = array_map(
             function ($produk) use ($hargas) {
                 $hargaVarians  = array_filter(
-                    $hargas, function ($harga) use ($produk) {
+                    $hargas,
+                    function ($harga) use ($produk) {
                         return $harga->produk_varian_id === $produk->id;
                     }
                 );
                 $produk->hargas = array_values($hargaVarians);
                 return $produk;
-            }, $produks
+            },
+            $produks
         );
         return $produks;
     }
