@@ -129,6 +129,14 @@ class OrderService implements IOrderService
         return $response;
     }
 
+    public function getPembayaranByOrders($request)
+    {
+        $order_id = $request->order_id;
+        $pembayarans = $this->orderPembayaranRepo->getByOrder($order_id);
+
+        return $pembayarans;
+    }
+
     public function saveData($request)
     {
         $message = 'Data berhasil disimpan';

@@ -14,7 +14,17 @@ class OrderPembayaranRepository implements IOrderPembayaranRepository
 
     public function getByOrder($order_id)
     {
+        $tbl = 't_order_pembayaran';
         return $this->model->where('order_id', $order_id)
+            ->join('m_bank mb', $tbl . '.bank_id = mb.id')
+            ->join('m_jenis_bank jb', 'mb.jenis_bank_id = jb.id')
+            ->select(
+                $tbl . '.*,
+                mb.rekening,
+                mb.atas_nama,
+                mb.cabang,
+                jb.nama as jenis_bank'
+            )
             ->get()
             ->getResult();
     }

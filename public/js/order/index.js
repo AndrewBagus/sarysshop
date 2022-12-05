@@ -65,9 +65,8 @@ $(function () {
           if (data === 'belum-bayar') {
             btnInfo = 'danger'
             status = 'belum bayar'
-          }
-          if (data === 'cicilan') btnInfo = 'secondary'
-          return `<button class="btn btn-outline-${btnInfo} produks">${strToUpperCase(
+          } else if (data === 'cicilan') btnInfo = 'secondary'
+          return `<button class="btn btn-outline-${btnInfo} btn-pembayarans">${strToUpperCase(
             status
           )}</button>`
         },
@@ -142,9 +141,9 @@ $(function () {
         $('#view-grand-total-display').html(`Rp. ${thousandFormat(grandTotal)}`)
 
         $('#view-produk-title').html(
-          `${data.code} - Tanggal Order: ${moment(data.tanggal_order).format(
-            date_format
-          )}`
+          `<b>${data.code}</b> - Tanggal Order: <b>${moment(
+            data.tanggal_order
+          ).format(date_format)}</b>`
         )
 
         createDiskonAdditional('#view-diskon-wrapper', diskons, true, false)
@@ -152,6 +151,27 @@ $(function () {
 
         refreshTable(tableViewOrderList, produks)
         $('#modal-view-produk').modal('show')
+      }
+    )
+  })
+
+  $(document).on('click', '.btn-pembayarans', function (e) {
+    e.preventDefault()
+    const data = tableList.row($(this).parents('tr')).data()
+
+    f_ajax(
+      `${base_uri}/order/getOrderPembayaran`,
+      { order_id: data.id },
+      function (response) {
+        $('#view-pembayaran-title').html(
+          `<b>${data.code}</b> - Tanggal Order: <b>${moment(
+            data.tanggal_order
+          ).format(date_format)}</b> - GrandTotal: <b>Rp.${thousandFormat(
+            data.grandtotal
+          )}</b>`
+        )
+        refreshTable(tableViewPembayaranList, response)
+        $('#modal-view-pembayaran').modal('show')
       }
     )
   })
