@@ -109,5 +109,6 @@ $(function () {
       newalert('info', 'Varian produk minimal harus 1', 'Informasi')
       return false
     }
+    return true
   }
 })

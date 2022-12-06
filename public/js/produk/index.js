@@ -132,6 +132,7 @@ $(function () {
       function (response) {
         tableVarian.clear().draw()
         tableVarian.rows.add(response.varians).draw()
+        tableVarian.columns.adjust()
       }
     )
 
@@ -150,7 +151,6 @@ $(function () {
     $('#title-form').html('Ubah')
 
     toggleShow('#card-form', '#card-table', '#nama')
-    tableVarian.columns.adjust()
     $('#nama').focus()
   })
 
