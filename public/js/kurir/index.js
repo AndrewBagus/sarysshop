@@ -54,13 +54,15 @@ $(function () {
       },
       {
         data: null,
-        render: function (data, type, full, meta) {
+        render: function (_, _, full) {
           const btnEdit =
             '<button type="button" class="btn btn-outline-primary btn-sm btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Ubah"><i class="fa fa-edit"></i></button>'
           const btnDelete =
             '<button type="button" class="btn btn-outline-danger mt-1 mt-lg-0 btn-sm btn-delete" data-bs-toggle="tooltip" data-bs-title="Hapus"><i class="fa fa-trash"></i></button>'
 
-          const btn = '<center>' + btnEdit + ' ' + btnDelete + '</center>'
+          let btn = '<center>' + btnEdit + ' ' + btnDelete + '</center>'
+
+          if (full.is_default === '1') btn = ''
 
           return btn
         },
