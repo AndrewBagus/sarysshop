@@ -60,7 +60,7 @@ class KurirService implements IKurirService
         ];
 
 
-        return json_encode($response);
+        return $response;
     }
 
     public function getKurirs()
@@ -69,7 +69,7 @@ class KurirService implements IKurirService
             ->getActive()
             ->get()
             ->getResult();
-    
+
         return $response;
     }
 
