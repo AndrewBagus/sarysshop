@@ -56,6 +56,15 @@ $(function () {
       },
       {
         data: 'kurir',
+        render: function (data, _, full) {
+          if (
+            full.status_pembayaran === 'lunas' &&
+            full.tanggal_dikirim !== null &&
+            full.tanggal_diterima !== null
+          )
+            data = `<button type="button" class="btn btn-outline-secondary btn-kurir" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Detail Pengiriman">${data}</button>`
+          return data
+        },
       },
       {
         data: 'status_pembayaran',
@@ -101,6 +110,10 @@ $(function () {
             full.tanggal_diterima !== null
           )
             btn = `${btnEdit} ${btnDelete}`
+
+          console.log(full.kurir_default)
+          if (full.kurir_default && full.tanggal_diterima === null)
+            btn = `${btnEdit} ${btnTerima} ${btnDelete}`
 
           return `<center>${btn}</center>`
         },
@@ -297,6 +310,73 @@ $(function () {
         $('#modal-pembayaran').modal('show')
       }
     )
+  })
+
+  $(document).on('click', '.btn-kirim', function (e) {
+    e.preventDefault()
+    const data = tableList.row($(this).parents('tr')).data()
+
+    if (data.kurir_default) {
+      $('#pengiriman-resi').rules('remove', 'required')
+      $('#pengiriman-resi').prop('readonly', true)
+    }
+
+    $('#pengiriman-title').html(data.code)
+    $('#pengiriman-kurir').html(data.kurir)
+    $('#pengiriman-id').val(data.id)
+
+    $('#pengiriman-tgl').datetimepicker('destroy')
+    $('#pengiriman-tgl').datetimepicker({
+      minDate: data.tanggal_order,
+      format: date_format,
+    })
+
+    $('#modal-pengiriman').modal('show')
+  })
+
+  $(document).on('click', '.btn-terima', function (e) {
+    e.preventDefault()
+    const data = tableList.row($(this).parents('tr')).data()
+    $('#penerimaan-title').html(data.code)
+    $('#penerimaan-kurir').html(data.kurir)
+    $('#penerimaan-resi').html(data.no_resi)
+    const tgl_kirim =
+      data.tanggal_dikirim === null
+        ? ''
+        : formateDateFromDb(data.tanggal_dikirim)
+    $('#penerimaan-pengiriman').html(tgl_kirim)
+    $('#penerimaan-id').val(data.id)
+
+    $('#penerimaan-tgl').datetimepicker('destroy')
+    $('#penerimaan-tgl').datetimepicker({
+      minDate: data.tanggal_dikirim,
+      format: date_format,
+    })
+
+    $('#modal-penerimaan').modal('show')
+  })
+
+  $(document).on('click', '.btn-kurir', function (e) {
+    e.preventDefault()
+    const data = tableList.row($(this).parents('tr')).data()
+    $('#detail-pengiriman-title').html(data.code)
+    $('#detail-pengiriman-kurir').html(data.kurir)
+    $('#detail-pengiriman-resi').html(data.no_resi)
+    $('#detail-pengiriman-pengiriman').html(
+      formateDateFromDb(data.tanggal_dikirim)
+    )
+    $('#detail-pengiriman-penerimaan').html(
+      formateDateFromDb(data.tanggal_diterima)
+    )
+    $('#modal-detail-pengiriman').modal('show')
+  })
+
+  $(document).on('hide.bs.modal', '#modal-detail-pengiriman', function () {
+    $('#detail-pengiriman-title').empty()
+    $('#detail-pengiriman-kurir').empty()
+    $('#detail-pengiriman-resi').empty()
+    $('#detail-pengiriman-pengiriman').empty()
+    $('#detail-pengiriman-penerimaan').empty()
   })
 })
 

@@ -6,9 +6,9 @@ use CodeIgniter\Model;
 
 class OrderModel extends Model
 {
-  protected $table            = 't_order';
-  protected $primaryKey       = 'id';
-  protected $allowedFields    = [
+    protected $table            = 't_order';
+    protected $primaryKey       = 'id';
+    protected $allowedFields    = [
     'pelanggan_id',
     'pelanggan_kirim',
     'order_status_id',
@@ -16,7 +16,8 @@ class OrderModel extends Model
     'kurir_id',
     'code',
     'tanggal_order',
-    'tanggal_kirim',
+    'tanggal_dikirim',
+    'tanggal_diterima',
     'estimasi_pengiriman',
     'note',
     'subtotal_pembelian',
@@ -33,5 +34,5 @@ class OrderModel extends Model
     'created_by',
     'updated_at',
     'updated_by',
-  ];
+    ];
 }

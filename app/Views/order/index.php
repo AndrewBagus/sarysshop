@@ -20,8 +20,11 @@
 <?php echo $this->include('order/form-wrapper') ?>
 <?php echo $this->include('order/form-diskon-varian') ?>
 <?php echo $this->include('order/form-edit-varian') ?>
+<?php echo $this->include('order/form-pengiriman') ?>
+<?php echo $this->include('order/form-penerimaan') ?>
 <?php echo $this->include('order/view-produk') ?>
 <?php echo $this->include('order/view-pembayaran') ?>
+<?php echo $this->include('order/view-pengiriman') ?>
 <?php echo $this->endSection() ?>
 
 <?php echo $this->section('page-js') ?>
@@ -37,6 +40,8 @@
 <script src="<?php echo base_url() ?>/js/order/form-grand.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-diskon-varian.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/form-edit-varian.js?v=<?php echo rand() ?>"></script>
+<script src="<?php echo base_url() ?>/js/order/form-pengiriman.js?v=<?php echo rand() ?>"></script>
+<script src="<?php echo base_url() ?>/js/order/form-penerimaan.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/view-produk.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo base_url() ?>/js/order/view-pembayaran.js?v=<?php echo rand() ?>"></script>
 <?php echo $this->endSection() ?>

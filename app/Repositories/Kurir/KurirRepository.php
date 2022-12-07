@@ -15,7 +15,7 @@ class KurirRepository implements IKurirRepository
     private function getKurir()
     {
         return $this->model
-            ->select('id, nama, image, kategori, eta_awal, eta_akhir')
+            ->select('id, nama, image, kategori, eta_awal, eta_akhir, is_default')
             ->where('is_active', true);
     }
 
@@ -26,7 +26,10 @@ class KurirRepository implements IKurirRepository
 
     public function getById($id)
     {
-        return $this->getKurir->where('id', $id);
+        return $this->getKurir()
+            ->where('id', $id)
+            ->get()
+            ->getRow();
     }
 
     public function save($data)

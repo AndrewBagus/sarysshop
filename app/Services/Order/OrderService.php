@@ -2,6 +2,7 @@
 
 namespace App\Services\Order;
 
+use App\Repositories\Kurir\KurirRepository;
 use App\Repositories\OrderDiskon\OrderDiskonRepository;
 use App\Repositories\OrderPembayaran\OrderPembayaranRepository;
 use App\Repositories\Order\OrderRepository;
@@ -22,6 +23,7 @@ class OrderService implements IOrderService
     private $proudukVarianRepo;
     private $produkVarianHargaRepo;
     private $pelangganRepo;
+    private $kurirRepo;
 
     public function __construct()
     {
@@ -33,6 +35,7 @@ class OrderService implements IOrderService
         $this->proudukVarianRepo = new ProdukVarianRepository();
         $this->produkVarianHargaRepo = new ProdukVarianHargaRepository();
         $this->pelangganRepo = new PelangganRepository();
+        $this->kurirRepo = new KurirRepository();
     }
 
     private function _queryDataTable($search, $order)
@@ -332,6 +335,26 @@ class OrderService implements IOrderService
         $response = [
         'status' => true,
         'message' => 'Data Pembayaran berhasil di simpan'
+        ];
+
+        return $response;
+    }
+
+    public function saveOrderPengirimanPenerimaan($request, $tipe)
+    {
+        $db = Database::connect();
+        $db->transStart();
+        $order = $this->orderRepo->getById($request['id']);
+        $kurir = $this->kurirRepo->getById($order->kurir_id);
+        if ($kurir->is_default && $tipe === 'Penerimaan') {
+            $request['tanggal_dikirim'] = $request['tanggal_diterima'];
+        }
+        $this->orderRepo->save((array) $request);
+        $db->transComplete();
+
+        $response = [
+        'status' => true,
+        'message' => 'Data ' . $tipe . ' berhasil di simpan'
         ];
 
         return $response;

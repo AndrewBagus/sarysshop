@@ -13,7 +13,7 @@ class OrderRepository implements IOrderRepository
         $this->model = new OrderModel();
     }
 
-    public function getActive()
+    private function getOrder()
     {
         return $this->model
             ->join('m_pelanggan mp1', 't_order.pelanggan_id = mp1.id')
@@ -34,6 +34,7 @@ class OrderRepository implements IOrderRepository
                 't_order.biaya_kurir',
                 't_order.no_resi',
                 'mk.nama as kurir',
+                'mk.is_default as kurir_default',
                 'mp1.nama as pelanggan',
                 'kp1.nama as jenis_pelanggan',
                 'mp2.nama as kepada',
@@ -41,7 +42,12 @@ class OrderRepository implements IOrderRepository
                 '(select count(tod.id) from t_order_detail tod where tod.order_id = t_order.id) as produks'
                 ]
             )
-            ->where('t_order.is_active', true)
+            ->where('t_order.is_active', true);;
+    }
+
+    public function getActive()
+    {
+        return $this->getOrder()
             ->orderBy('t_order.id', 'desc');
     }
 
@@ -52,8 +58,8 @@ class OrderRepository implements IOrderRepository
 
     public function getById($id)
     {
-        return $this->model
-            ->where('id', $id)
+        return $this->getOrder() 
+            ->where('t_order.id', $id)
             ->get()
             ->getRow();
     }

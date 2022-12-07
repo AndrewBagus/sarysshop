@@ -9,6 +9,7 @@ interface IOrderService
     public function getProudukByOrders($request);
     public function getPembayaranByOrders($request);
     public function saveOrderPembayaran($request);
+    public function saveOrderPengirimanPenerimaan($request, $tipe);
     public function saveData($request);
     public function removeData($request);
 }
