@@ -9,6 +9,7 @@ use App\Repositories\OrderBiayaLain\OrderBiayaLainRepository;
 use App\Repositories\OrderDetail\OrderDetailRepository;
 use App\Repositories\Pelanggan\PelangganRepository;
 use App\Repositories\ProdukVarian\ProdukVarianRepository;
+use App\Repositories\ProdukVarianHarga\ProdukVarianHargaRepository;
 use Config\Database;
 
 class OrderService implements IOrderService
@@ -19,6 +20,7 @@ class OrderService implements IOrderService
     private $orderBiayaLainRepo;
     private $orderPembayaranRepo;
     private $proudukVarianRepo;
+    private $produkVarianHargaRepo;
     private $pelangganRepo;
 
     public function __construct()
@@ -29,6 +31,7 @@ class OrderService implements IOrderService
         $this->orderBiayaLainRepo = new OrderBiayaLainRepository;
         $this->orderPembayaranRepo = new OrderPembayaranRepository();
         $this->proudukVarianRepo = new ProdukVarianRepository();
+        $this->produkVarianHargaRepo = new ProdukVarianHargaRepository();
         $this->pelangganRepo = new PelangganRepository();
     }
 
@@ -118,6 +121,24 @@ class OrderService implements IOrderService
         $pelanggan = $this->pelangganRepo->getById($order->pelanggan_id);
         $kirim = $this->pelangganRepo->getById($order->pelanggan_kirim);
         $produks = $this->proudukVarianRepo->getByOrder($order_id);
+        $hargas = $this->produkVarianHargaRepo->getInVarians(array_column((array)$produks, 'produk_varian_id'))
+            ->get()
+            ->getResult();
+
+        $produks = array_map(
+            function ($produk) use ($hargas) {
+                $hargaVarians  = array_filter(
+                    $hargas,
+                    function ($harga) use ($produk) {
+                        return $harga->produk_varian_id === $produk->id;
+                    }
+                );
+                $produk->hargas = array_values($hargaVarians);
+                return $produk;
+            },
+            $produks
+        );
+
         $diskons = $this->orderDiskonRepo->getByOrder($order_id);
         $biayas = $this->orderBiayaLainRepo->getByOrder($order_id);
         $pembayarans = $this->orderPembayaranRepo->getByOrder($order_id);
