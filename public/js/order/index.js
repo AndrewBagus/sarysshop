@@ -111,8 +111,11 @@ $(function () {
           )
             btn = `${btnEdit} ${btnDelete}`
 
-          console.log(full.kurir_default)
-          if (full.kurir_default && full.tanggal_diterima === null)
+          if (
+            data === 'lunas' &&
+            full.kurir_default === '1' &&
+            full.tanggal_diterima === null
+          )
             btn = `${btnEdit} ${btnTerima} ${btnDelete}`
 
           return `<center>${btn}</center>`
@@ -316,7 +319,7 @@ $(function () {
     e.preventDefault()
     const data = tableList.row($(this).parents('tr')).data()
 
-    if (data.kurir_default) {
+    if (data.kurir_default === '1') {
       $('#pengiriman-resi').rules('remove', 'required')
       $('#pengiriman-resi').prop('readonly', true)
     }
@@ -332,6 +335,7 @@ $(function () {
     })
 
     $('#modal-pengiriman').modal('show')
+    $('#pengiriman-tgl').val('')
   })
 
   $(document).on('click', '.btn-terima', function (e) {
@@ -354,6 +358,7 @@ $(function () {
     })
 
     $('#modal-penerimaan').modal('show')
+    $('#penerimaan-tgl').val('')
   })
 
   $(document).on('click', '.btn-kurir', function (e) {

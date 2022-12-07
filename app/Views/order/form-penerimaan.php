@@ -26,7 +26,7 @@
           <div class="form-group mt-3">
             <label class="form-label" for="penerimaan-tgl">Tanggal Penerimaan</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="penerimaan-tgl" name="penerimaan_tgl" data-toggle="datetimepicker" data-target="#penerimaan-tgl" placeholder="Tanggal Pengiriman" style="border-right: 0;">
+              <input type="text" class="form-control" id="penerimaan-tgl" name="penerimaan_tgl" data-toggle="datetimepicker" data-target="#penerimaan-tgl" placeholder="Tanggal Penerimaan" style="border-right: 0;">
               <span class="input-group-text bg-transparent" style="border-left: 0;"><i class="ti-calendar text-muted"></i></span>
             </div>
           </div>
