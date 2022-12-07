@@ -17,6 +17,11 @@ p.form-control {
   word-break: break-word;
 }
 
+p:empty:not(:focus)::before {
+  content: attr(data-placeholder);
+  color: #6c757d;
+}
+
 .select2-container--bootstrap-5 .select2-selection--single,
 .select2-container--bootstrap-5.select2-container--focus .select2-selection {
   height: auto;
