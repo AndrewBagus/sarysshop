@@ -63,9 +63,6 @@ $(function () {
       berat: {
         required: true,
       },
-      stok: {
-        required: true,
-      },
     },
     {
       code: {

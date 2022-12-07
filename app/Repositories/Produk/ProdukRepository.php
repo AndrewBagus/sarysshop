@@ -47,12 +47,14 @@ class ProdukRepository implements IProdukRepository
                 . $minPriceQuery . ','
                 . $maxPriceQuery
             )
-            ->where('m_produk.is_active', true);
+            ->where('m_produk.is_active', true)
+            ->orderBy('id', 'desc');
     }
 
     public function getById($id)
     {
-        return $this->model->where('id', $id);
+        return $this->model
+            ->where('id', $id);
     }
 
     public function save($data)
