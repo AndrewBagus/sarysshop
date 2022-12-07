@@ -25,6 +25,9 @@ class OrderRepository implements IOrderRepository
                 [
                 't_order.id',
                 't_order.kurir_id',
+                't_order.pelanggan_id',
+                't_order.pelanggan_kirim',
+                't_order.kurir_id',
                 't_order.code',
                 't_order.tanggal_order',
                 't_order.tanggal_dikirim',
