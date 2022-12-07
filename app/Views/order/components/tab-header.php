@@ -7,7 +7,7 @@
   </li>
   <li class="nav-item" role="presentation">
     <a href="<?php echo base_url('/order/belum-bayar') ?>" class="nav-link <?php echo $page === 'belum-bayar' ? 'active' : ''; ?>" role="tab" aria-selected="false">
-      <i class="ti-money fw-bolder"></i>
+      <i class="fa fa-money fw-bolder"></i>
       <span>Belum Bayar</span>
     </a>
   </li>

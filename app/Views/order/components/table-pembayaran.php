@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 mt-2">
   <div class="card">
     <div class="card-header">
       <h3>Pembayaran</h3>

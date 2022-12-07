@@ -58,6 +58,7 @@ td.dropdown .dropdown-menu.show {
 #additional-wrapper tr:first-child td,
 #view-sub-total-wrapper tr:first-child td,
 #view-diskon-wrapper tr:first-child td,
+#table-detail-order-list tfoot tr:last-child td,
 #view-additional-wrapper tr:first-child td {
   border-top: 1px solid #ced4da;
 }

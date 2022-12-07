@@ -9,6 +9,34 @@
         <input type="hidden" id="pembayaran-index" readonly>
         <div class="modal-body">
 
+          <table class="mb-2 d-none" id="pembayaran-wrapper" style="width: 100%;">
+            <tr>
+              <td colspan="2" style="border-bottom: 1px solid #ced4da;">Histori Pembayaran Transaksi: <b id="no-transaksi"></b></td>
+            </tr>
+            <tr>
+              <td>Grand Total</td>
+              <td class="text-right">Rp <b class="pembayaran" id="pembayaran-grandtotal">0</b></td>
+            </tr>
+            <tr>
+              <td>Total Pembayaran Terakhir</td>
+              <td class="text-right" style="position: relative;">
+                <input type="hidden" class="form-control" id="pembayaran-transaksi" value="">
+                Rp <b class="pembayaran" id="pembayaran-total">0</b>
+                <span style="
+                  position: absolute; 
+                  bottom: 5px;
+                  right: 0;
+                  border-bottom: 1px solid black;
+                  width: 10px;
+                  "></span>
+              </td>
+            </tr>
+            <tr>
+              <td style="border-top: 1px solid #ced4da;">Sisa</td>
+              <td class="text-right" style="border-top: 1px solid #ced4da;">Rp <b class="pembayaran" id="pembayaran-sisa">0</b></td>
+            </tr>
+          </table>
+
           <div class="form-group">
             <label class="form-label" for="bank">Bank</label>
             <select class="form-control bank-pembayaran" id="bank" name="bank_id" data-placeholder="Pilih Bank" style="width: 100%;"></select>

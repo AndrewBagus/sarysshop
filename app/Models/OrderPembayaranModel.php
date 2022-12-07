@@ -6,13 +6,14 @@ use CodeIgniter\Model;
 
 class OrderPembayaranModel extends Model
 {
-  protected $table            = 't_order_pembayaran';
-  protected $primaryKey       = 'id';
-  protected $allowedFields    = [
+    protected $table            = 't_order_pembayaran';
+    protected $primaryKey       = 'id';
+    protected $allowedFields    = [
     'order_id',
     'bank_id',
     'jenis_pembayaran',
     'tanggal_pembayaran',
-    'nominal'
-  ];
+    'nominal',
+    'keterangan',
+    ];
 }

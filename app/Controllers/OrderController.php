@@ -63,4 +63,12 @@ class OrderController extends BaseController
 
         echo json_encode($response);
     }
+
+    public function saveOrderPembayaran(): void
+    {
+        $post = $this->request->getVar();
+        $response = $this->orderService->saveOrderPembayaran($post);
+
+        echo json_encode($response);
+    }
 }

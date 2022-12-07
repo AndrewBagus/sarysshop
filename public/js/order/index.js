@@ -72,16 +72,37 @@ $(function () {
         },
       },
       {
-        data: null,
-        render: function (data, type, full, meta) {
+        data: 'status_pembayaran',
+        render: function (data, _, full) {
           const btnEdit =
             '<button type="button" class="btn btn-outline-primary btn-sm btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Ubah"><i class="fa fa-edit"></i></button>'
+          const btnBayar =
+            '<button type="button" class="btn btn-outline-info mt-1 mt-lg-0 btn-sm btn-bayar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Bayar"><i class="fa fa-money"></i></button>'
+          const btnKirim =
+            '<button type="button" class="btn btn-outline-info mt-1 mt-lg-0 btn-sm btn-kirim" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Kirim"><i class="ti-truck"></i></button>'
+          const btnTerima =
+            '<button type="button" class="btn btn-outline-info mt-1 mt-lg-0 btn-sm btn-terima" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Terima"><i class="ti-dropbox"></i></button>'
           const btnDelete =
             '<button type="button" class="btn btn-outline-danger mt-1 mt-lg-0 btn-sm btn-cancel" data-bs-toggle="tooltip" data-bs-title="Cancel"><i class="fa fa-times"></i></button>'
 
-          const btn = '<center>' + btnEdit + ' ' + btnDelete + '</center>'
+          let btn = `${btnEdit} ${btnBayar} ${btnDelete}`
 
-          return btn
+          if (data === 'lunas' && full.tanggal_dikirim === null)
+            btn = `${btnEdit} ${btnKirim} ${btnDelete}`
+          else if (
+            data === 'lunas' &&
+            full.tanggal_dikirim !== null &&
+            full.tanggal_diterima === null
+          )
+            btn = `${btnEdit} ${btnTerima} ${btnDelete}`
+          else if (
+            data === 'lunas' &&
+            full.tanggal_dikirim !== null &&
+            full.tanggal_diterima !== null
+          )
+            btn = `${btnEdit} ${btnDelete}`
+
+          return `<center>${btn}</center>`
         },
       },
     ],
@@ -103,12 +124,13 @@ $(function () {
         e.status = $('#table-status').val()
       },
     },
-    drawCallback: function (settings) {
+    drawCallback: function (_) {
       $(this)
         .parents('.dataTables_wrapper ')
         .find('.form-select')
         .removeClass('form-select')
       $('[data-bs-toggle="tooltip"]').tooltip()
+      tableList.columns.adjust()
     },
   })
 
@@ -197,7 +219,8 @@ $(function () {
         })
 
         const pelanggan = response.pelanggan
-        const pelangganAlamat = alamat(pelanggan)
+        const pelangganAlamat = createAlamat(pelanggan)
+
         const pelangganOpt = new Option(
           pelanggan.nama,
           pelanggan.id,
@@ -214,7 +237,7 @@ $(function () {
         $('#pemesan-alamat').html(pelangganAlamat)
 
         const kirim = response.kirim
-        const kirimAlamat = alamat(kirim)
+        const kirimAlamat = createAlamat(kirim)
         const kirimOpt = new Option(kirim.nama, kirim.id, true, true)
         $('#penerima').append(kirimOpt)
         $('#penerima').trigger({
@@ -246,4 +269,47 @@ $(function () {
       }
     )
   })
+
+  $(document).on('click', '.btn-bayar', function (e) {
+    e.preventDefault()
+    const data = tableList.row($(this).parents('tr')).data()
+    $('#pembayaran-wrapper').removeClass('d-none')
+    $('#no-transaksi').html(data.code)
+
+    f_ajax(
+      `${base_uri}/order/getOrderPembayaran`,
+      { order_id: data.id },
+      function (response) {
+        const pembayaran =
+          response.length === 0
+            ? 0
+            : response.reduce((accumulator, object) => {
+                return accumulator + parseInt(object.nominal)
+              }, 0)
+        const grandtotal = data.grandtotal
+        const sisa = grandtotal - pembayaran
+
+        $('#pembayaran-transaksi').val(data.id)
+        $('#pembayaran-grandtotal').html(thousandFormat(grandtotal))
+        $('#pembayaran-total').html(thousandFormat(pembayaran))
+        $('#pembayaran-sisa').html(thousandFormat(sisa))
+
+        $('#modal-pembayaran').modal('show')
+      }
+    )
+  })
 })
+
+function createAlamat(repo) {
+  return `<div class="col-xs-12 mt-2">
+            <div class="d-flex align-items-center justify-content-between position-relative">
+              <div class="d-flex align-items-center justify-content-between w-100">
+                <div style="font-size: 16px">
+                  <div style="font-size: 16px; font-weight: bolder">Alamat: </div>
+                  <small class="d-block">${repo.alamat}</small>
+                  <small class="d-block">Kec. ${repo.kecamatan}, ${repo.kode_pos}</small>
+                </div>
+              </div>
+            </div>
+         </div>`
+}

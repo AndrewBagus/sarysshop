@@ -8,6 +8,7 @@ interface IOrderService
     public function getOrderDetail($request);
     public function getProudukByOrders($request);
     public function getPembayaranByOrders($request);
+    public function saveOrderPembayaran($request);
     public function saveData($request);
     public function removeData($request);
 }

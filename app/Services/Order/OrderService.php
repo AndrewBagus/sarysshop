@@ -312,4 +312,28 @@ class OrderService implements IOrderService
 
         return $response;
     }
+
+    public function saveOrderPembayaran($request)
+    {
+        $db = Database::connect();
+        $db->transStart();
+        $this->orderPembayaranRepo->save($request);
+        $order = $this->orderRepo->getById($request['order_id']);
+        $pembayarans = $this->orderPembayaranRepo->getByOrder($request['order_id']);
+        $totalBayar = array_sum(array_column((array) $pembayarans, 'nominal'));
+        if ((int)$totalBayar === (int)$order->grandtotal) {
+            $order->status_pembayaran = 'lunas';
+        } else if ($totalBayar !== 0) {
+            $order->status_pembayaran = 'cicilan';
+        }
+        $this->orderRepo->save((array) $order);
+        $db->transComplete();
+
+        $response = [
+        'status' => true,
+        'message' => 'Data Pembayaran berhasil di simpan'
+        ];
+
+        return $response;
+    }
 }

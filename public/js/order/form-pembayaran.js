@@ -83,6 +83,7 @@ $(function () {
 
   $(document).on('click', '#btn-pembayaran-new', function (e) {
     e.preventDefault()
+
     const totalBayar = parseInt($('#total-pembayaran').html())
     const sisa = grandTotal - totalBayar
     if (sisa === 0) {
@@ -100,6 +101,10 @@ $(function () {
     $('#pembayaran-keterangan').val('')
     $('#pembayaran-id').val(0)
     $('#pembayaran-index').val('')
+    $('.pembayaran').html(0)
+    $('#no-transaksi').empty()
+    $('#pembayaran-transaksi').val('')
+    $('#pembayaran-wrapper').addClass('d-none')
   })
 
   $(document).on('keyup', '#nominal', function () {
@@ -108,8 +113,13 @@ $(function () {
 
     if (value !== '') {
       value = parseInt(thousandUnFormat(value))
-      const totalBayar = parseInt($('#total-pembayaran').html())
-      const sisa = grandTotal - totalBayar
+      const totalBayar = $('#table-pembayaran-list').is(':visible')
+        ? parseInt(thousandUnFormat($('#total-pembayaran').html()))
+        : parseInt(thousandUnFormat($('#pembayaran-total').html()))
+      const grandtotal = $('#table-pembayaran-list').is(':visible')
+        ? grandTotal
+        : parseInt(thousandUnFormat($('#pembayaran-grandtotal').html()))
+      const sisa = grandtotal - totalBayar
       if (value > sisa) $(this).val(thousandFormat(sisa))
     }
   })
@@ -170,32 +180,48 @@ $(function () {
     },
     function () {
       const data = getFormData($('#form-pembayaran'))
-      const index = $('#pembayaran-index').val()
-      const pembayarans = tablePembayaranList.rows().data().toArray()
-      const bank = $('#bank option:selected').select2().text()
-
       const nominal = $('#nominal').val()
-      const id = $('#pembayaran-id').val()
       const tgl = $('#tgl-bayar').val()
 
-      let message = 'Data Qty berhasil di simpan'
-
-      data.id = id
       data.tanggal_pembayaran = formateDateDb(tgl)
-      data.name = bank
       data.nominal = thousandUnFormat(nominal)
 
-      if (index == '') {
-        pembayarans.push(data)
+      if ($('#table-pembayaran-list').is(':visible')) {
+        const index = $('#pembayaran-index').val()
+        const pembayarans = tablePembayaranList.rows().data().toArray()
+        const bank = $('#bank option:selected').select2().text()
+        const id = $('#pembayaran-id').val()
+
+        let message = 'Data Pembayaran berhasil di simpan'
+
+        data.id = id
+        data.name = bank
+
+        if (index == '') {
+          pembayarans.push(data)
+        } else {
+          pembayarans[index] = data
+          message = 'Data Pembayaran berhasil di ubah'
+        }
+
+        notification('success', 'Informasi', message)
+
+        refreshTable(tablePembayaranList, pembayarans)
+        $('#modal-pembayaran').modal('hide')
       } else {
-        pembayarans[index] = data
-        message = 'Data Qty berhasil di ubah'
+        data.order_id = $('#pembayaran-transaksi').val()
+        confirmation(function () {
+          f_ajax(
+            `${base_uri}/order/saveOrderPembayaran`,
+            data,
+            function (response) {
+              tableList.ajax.reload(null, false)
+              notification('success', 'Informasi', response.message)
+              $('#modal-pembayaran').modal('hide')
+            }
+          )
+        })
       }
-
-      notification('success', 'Informasi', message)
-
-      refreshTable(tablePembayaranList, pembayarans)
-      $('#modal-pembayaran').modal('hide')
     }
   )
 

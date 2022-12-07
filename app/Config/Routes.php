@@ -127,6 +127,9 @@ $routes->group(
         $routes->post('/order/getOrderProduk', 'OrderController::getOrderProduk');
         $routes->post('/order/getOrderPembayaran', 'OrderController::getOrderPembayaran');
         $routes->post('/order/saveOrder', 'OrderController::saveOrder');
+        $routes->post('/order/saveOrderPembayaran', 'OrderController::saveOrderPembayaran');
+        $routes->post('/order/saveOrderPengiriman', 'OrderController::saveOrderPengiriman');
+        $routes->post('/order/saveOrderPenerimaan', 'OrderController::saveOrderPenerimaan');
         $routes->get('/order/(:segment)', 'OrderController::index/$1');
     }
 );
