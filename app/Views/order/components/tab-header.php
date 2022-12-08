@@ -14,7 +14,7 @@
   <li class="nav-item mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0" role="presentation">
     <a href="<?php echo base_url('/order/sudah-dp') ?>" class="nav-link <?php echo $page === 'sudah-dp' ? 'active' : ''; ?>" role="tab" aria-selected="false">
       <i class="ti-credit-card fw-bolder"></i>
-      <span>Sudah Dp</span>
+      <span>Sudah DP</span>
     </a>
   </li>
   <li class="nav-item mt-1 mt-md-0 mt-lg-0 mt-xl-0" role="presentation">
