@@ -1,5 +1,6 @@
 <div class="card bg-transparent d-none" id="card-form">
-  <div class="card-header bg-transparent mb-5">
+  <div class="card-header bg-transparent mb-5" style="justify-content: flex-start; gap: 10px;">
+    <button type="button" class="btn btn-danger" id="btn-back"><i class="fa fa-arrow-left"></i> Back</button>
     <h1>Form Order</h1>
   </div>
 
