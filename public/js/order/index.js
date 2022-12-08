@@ -310,6 +310,12 @@ $(function () {
         $('#pembayaran-total').html(thousandFormat(pembayaran))
         $('#pembayaran-sisa').html(thousandFormat(sisa))
 
+        $('#tgl-bayar').datetimepicker('destroy')
+        $('#tgl-bayar').datetimepicker({
+          minDate: data.tanggal_order,
+          format: date_format,
+        })
+
         $('#modal-pembayaran').modal('show')
       }
     )

@@ -91,6 +91,17 @@ $(function () {
       return false
     }
     $('#tgl-bayar').val(moment().format(date_format))
+    let tglOrder = $('#tgl-order').val()
+    if (tglOrder !== '') {
+      $('#tgl-bayar').val(tglOrder)
+      tglOrder = moment(tglOrder, date_format)
+      $('#tgl-bayar').datetimepicker('destroy')
+      $('#tgl-bayar').datetimepicker({
+        minDate: tglOrder,
+        format: date_format,
+      })
+    }
+
     $('#modal-pembayaran').modal('show')
   })
 
@@ -105,6 +116,12 @@ $(function () {
     $('#no-transaksi').empty()
     $('#pembayaran-transaksi').val('')
     $('#pembayaran-wrapper').addClass('d-none')
+
+    $('#tgl-bayar').datetimepicker('destroy')
+    $('#tgl-bayar').datetimepicker({
+      minDate: moment(),
+      format: date_format,
+    })
   })
 
   $(document).on('keyup', '#nominal', function () {
