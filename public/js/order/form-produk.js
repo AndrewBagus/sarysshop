@@ -220,24 +220,19 @@ function createProduk(arrays, useBtn = true) {
 
   const kategori = `<span class="label label-outline-secondary">${arrays.kategori}</span>`
 
-  const btn = `<button class="btn btn-primary btn-sm btn-produk-tambah" data-repo-id="${arrays.id}" style="margin-left: 2rem"><i class="fa fa-plus"></i> Tambah</button`
+  const btn = `<button class="btn btn-primary btn-sm btn-produk-tambah" data-repo-id="${arrays.id}" style="margin-left: 1.4rem"><i class="fa fa-plus"></i> Tambah</button`
   let btnWrapper = ''
   let addMb = 'mb-3'
   if (useBtn) {
     btnWrapper = `<div style="
-              display: flex;
-              align-self: center;
-              justify-content: flex-end;
               min-width: 220px;
               width: 220px;
-              flex-wrap: wrap;
-              gap: 8px;
             ">
               <div>
-                <div class="form-group">
-                  <div class="input-group mb-1" style="width: 60%">
+                <div class="form-group" style="display: flex; flex-wrap: wrap">
+                  <div class="input-group mb-1">
                     <button class="btn btn-outline-secondary btn-sm btn-produk-min" type="button"><i class="fa fa-minus"></i></button>
-                    <input type="number" class="form-control produk-qty" min="1" max="1000" value="1">
+                    <input type="number" class="form-control produk-qty" min="1" max="1000" value="1" style="flex-grow: 0; width: 60px;">
                     <button class="btn btn-outline-secondary btn-sm btn-produk-plus" type="button"><i class="fa fa-plus"></i></button>
                   </div>
                   ${btn}
