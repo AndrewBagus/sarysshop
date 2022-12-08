@@ -133,13 +133,10 @@ $(function () {
       produk_varian_id: varian_id,
       jenis_produk_id: produk.jenis_produk_id,
       kategori: produk.kategori,
-      qty: qty,
-      harga: harga,
       ukuran: produk.ukuran,
       image: produk.image,
       pruduk_image: produk.pruduk_image,
       keterangan: produk.keterangan,
-      subBerat: subBerat,
       harga: harga,
       qty: qty,
       subBerat: subBerat,
@@ -151,15 +148,17 @@ $(function () {
     }
 
     const varians = tableOrderList.rows().data().toArray()
-    const check = varians.filter(function (obj) {
+    const index = varians.findIndex(function (obj) {
       return parseInt(obj.produk_varian_id) === varian_id
     })
-    if (check.length > 0) {
-      newalert('info', 'Produk telah ditambahkan sebelumnya', 'informasi')
-      return false
+    if (index > -1) {
+      varians[index].qty = qty
+      varians[index].subBerat = subBerat
+      varians[index].subtotal = subtotal
+    } else {
+      varians.push(produkOrder)
     }
 
-    varians.push(produkOrder)
     refreshTable(tableOrderList, varians)
     refreshGrandTotal()
     notification('success', 'Informasi', 'Produk berhasil ditambahkan')
@@ -224,6 +223,12 @@ function createProduk(arrays, useBtn = true) {
   let btnWrapper = ''
   let addMb = 'mb-3'
   if (useBtn) {
+    let qty = 1
+    const varians = tableOrderList.rows().data().toArray()
+    const varian = varians.find(function (obj) {
+      return parseInt(obj.produk_varian_id) === parseInt(arrays.id)
+    })
+    if (varian !== undefined) qty = parseInt(varian.qty)
     btnWrapper = `<div style="
               min-width: 220px;
               width: 220px;
@@ -232,7 +237,7 @@ function createProduk(arrays, useBtn = true) {
                 <div class="form-group" style="display: flex; flex-wrap: wrap">
                   <div class="input-group mb-1">
                     <button class="btn btn-outline-secondary btn-sm btn-produk-min" type="button"><i class="fa fa-minus"></i></button>
-                    <input type="number" class="form-control produk-qty" min="1" max="1000" value="1" style="flex-grow: 0; width: 60px;">
+                    <input type="number" class="form-control produk-qty" min="1" max="1000" value="${qty}" style="flex-grow: 0; width: 60px;">
                     <button class="btn btn-outline-secondary btn-sm btn-produk-plus" type="button"><i class="fa fa-plus"></i></button>
                   </div>
                   ${btn}
